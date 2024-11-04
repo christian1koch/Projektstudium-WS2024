@@ -1,32 +1,32 @@
 # Projektstudium-WS2024
 Musik App
 
-
-## How to start the project
+## So starten Sie das Projekt
 
 ### Requirements
 
-- XCode
-- Mac?
+- Xcode
+- Ein Mac ist erforderlich
 
-### Steps
+### Schritte
 
-- clone the repository
-- open Xcode
-- Click on "Open Existing Project"
-- the `MusikApp.xcodeproj`file
-- Click on Product -> Run
+- Klonen Sie das Repository
+- Öffnen Sie Xcode
+- Klicken Sie auf „Bestehendes Projekt öffnen“
+- Wählen Sie die Datei `MusikApp.xcodeproj`
+- Klicken Sie auf Product -> Run
 
 ### Troubleshooting
-- When running the app for the first time you might need to select a Run Destination (Simulator)
-- Follow the steps on Xcode to download a Run Simulator
+
+- Beim ersten Ausführen der App müssen Sie möglicherweise ein Run Destination (Simulator) auswählen.
+- Folgen Sie den Schritten in Xcode, um einen Simulator herunterzuladen.
 
 ## Über die Architektur
 
-Diese App benutzt die MVVM Architectur, das heißt datein werden in 3 verschiedene Verzeichnisse gelegt:
+Diese App benutzt die MVVM-Architektur, das heißt, Dateien werden in 3 verschiedene Verzeichnisse gelegt:
 
 - Views
 - Models
 - ViewModels
 
-Mehr info auf [mvvm swiftUI](https://matteomanferdini.com/mvvm-swiftui/)
+Mehr Info auf [MVVM SwiftUI](https://matteomanferdini.com/mvvm-swiftui/)
