@@ -10,10 +10,19 @@ import SwiftUI
 struct MainView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button("Click to get Spotify Auth Token") {
+                
+                Task {
+                    do {
+                        print("requesting...")
+                        let clientAuthController = SpotifyClientAuthController()
+                        let authToken = try await clientAuthController.requestAccessToken()
+                        print("access token", authToken)
+                    }
+                }
+              
+                
+            }.buttonStyle(.bordered)
         }
         .padding()
     }
