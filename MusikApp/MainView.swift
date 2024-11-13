@@ -9,20 +9,10 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
+        
+        
         VStack {
-            Button("Click to get Spotify Auth Token") {
-                
-                Task {
-                    do {
-                        print("requesting...")
-                        let clientAuthController = SpotifyClientAuthController()
-                        let authToken = try await clientAuthController.requestAccessToken()
-                        print("access token", authToken)
-                    }
-                }
-              
-                
-            }.buttonStyle(.bordered)
+           TempAuthTokenView()
         }
         .padding()
     }
