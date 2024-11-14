@@ -18,7 +18,6 @@ struct TempAuthTokenView: View {
                 authTokenText = "requesting..."
                 Task {
                     do {
-                        
                         let clientAuthController = SpotifyClientAuthController()
                         let authToken = try await clientAuthController.requestAccessToken()
                         authTokenText = authToken
