@@ -16,6 +16,11 @@ Musik App
 - Wählen Sie die Datei `MusikApp.xcodeproj`
 - Klicken Sie auf Product -> Run
 
+## MusikApp Spotify Credentials
+Credentials, die benötigt werden um eine App mit Spotify zu verbinden:
+Email: projektstudiummusikapp@gmail.com
+Password: htw-berlin2024
+
 ### Troubleshooting
 
 - Beim ersten Ausführen der App müssen Sie möglicherweise ein Run Destination (Simulator) auswählen.
