@@ -1,10 +1,11 @@
 let controller = SpotifyClientAuthController()
+let apiController = SpotifyApiController()
 
 Task {
     let token = try await controller.requestAccessToken()
     //print(token)
     
-    apiCall(token: token)
+    apiController.apiCallTest(token: token)
 }
 
 
