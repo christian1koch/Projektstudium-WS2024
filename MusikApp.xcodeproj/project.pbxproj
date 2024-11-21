@@ -16,6 +16,7 @@
 		2D97061F2CD97CA600946FF3 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D97061E2CD97CA600946FF3 /* MainViewModel.swift */; };
 		2D9706212CD97CC800946FF3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9706202CD97CC800946FF3 /* User.swift */; };
 		2DC7ED002CEFB4CC00776DAE /* RadarDiagrammView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7ECFF2CEFB4CB00776DAE /* RadarDiagrammView.swift */; };
+		2DC7ED032CEFBF5300776DAE /* DDSpiderChart in Frameworks */ = {isa = PBXBuildFile; productRef = 2DC7ED022CEFBF5300776DAE /* DDSpiderChart */; };
 		7C7A7B702CDCE7600090F0D7 /* SpotifyApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A7B6F2CDCE7600090F0D7 /* SpotifyApiTest.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DC7ED032CEFBF5300776DAE /* DDSpiderChart in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +161,9 @@
 			dependencies = (
 			);
 			name = MusikApp;
+			packageProductDependencies = (
+				2DC7ED022CEFBF5300776DAE /* DDSpiderChart */,
+			);
 			productName = MusikApp;
 			productReference = 2D9706052CD977EC00946FF3 /* MusikApp.app */;
 			productType = "com.apple.product-type.application";
@@ -187,6 +192,9 @@
 				Base,
 			);
 			mainGroup = 2D9705FC2CD977EC00946FF3;
+			packageReferences = (
+				2DC7ED012CEFBF5300776DAE /* XCRemoteSwiftPackageReference "DDSpiderChart" */,
+			);
 			productRefGroup = 2D9706062CD977EC00946FF3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -426,6 +434,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2DC7ED012CEFBF5300776DAE /* XCRemoteSwiftPackageReference "DDSpiderChart" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dadalar/DDSpiderChart";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2DC7ED022CEFBF5300776DAE /* DDSpiderChart */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DC7ED012CEFBF5300776DAE /* XCRemoteSwiftPackageReference "DDSpiderChart" */;
+			productName = DDSpiderChart;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2D9705FD2CD977EC00946FF3 /* Project object */;
 }
