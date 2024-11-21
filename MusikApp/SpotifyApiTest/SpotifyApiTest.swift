@@ -8,16 +8,16 @@
 import Foundation
 
 
-func apiCall() {
+func apiCall(token: String) {
     // Die Basis-URL der API
-    let baseURL = "https://api.spotify.com/v1/recommendations"
+    var baseURL = "https://api.spotify.com/v1/recommendations"
+    baseURL = "https://api.spotify.com/v1/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry&seed_tracks=0c6xIDDpzE81m2q797ordA"
     
     guard let url = URL(string: baseURL) else { return }
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
     
     // Beispiel-Header (wie Autorisierungstoken)
-    let token = ""
     request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
     
