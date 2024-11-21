@@ -22,13 +22,13 @@ class SpotifyApiController {
     */
     func searchForTrackId(name: String, artist: String) {
         if name.isEmpty || artist.isEmpty {
-            throw new Error("Name und Künstler müssen angegeben werden")
+            // TODO: defensive logic
         }
         // replace spaces with %2520
-        name = name.replacingOccurrences(of: " ", with: "%2520")
-        artist = artist.replacingOccurrences(of: " ", with: "%2520")
+        let name_ = name.replacingOccurrences(of: " ", with: "+")
+        let artist_ = artist.replacingOccurrences(of: " ", with: "+")
 
-        let query = "https://api.spotify.com/v1/search?q=track%3A\(name)%252520artist%3A\(artist)&type=track"
+        let query = "https://api.spotify.com/v1/search?q=track:\(name_)+artist:\(artist_)&type=track"
         guard let url = URL(string: query) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
