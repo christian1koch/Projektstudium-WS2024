@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D2DB4632CEFC61700F1E790 /* RadarDiagrammPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2DB4622CEFC61700F1E790 /* RadarDiagrammPreviewView.swift */; };
 		2D57B69D2CE4B0E5005F1408 /* ClientAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D57B69C2CE4B0E5005F1408 /* ClientAuthController.swift */; };
 		2D57B6A02CE52597005F1408 /* TempAuthTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D57B69F2CE52597005F1408 /* TempAuthTokenView.swift */; };
 		2D9706092CD977EC00946FF3 /* MusikAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9706082CD977EC00946FF3 /* MusikAppApp.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D2DB4622CEFC61700F1E790 /* RadarDiagrammPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarDiagrammPreviewView.swift; sourceTree = "<group>"; };
 		2D57B69C2CE4B0E5005F1408 /* ClientAuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientAuthController.swift; sourceTree = "<group>"; };
 		2D57B69F2CE52597005F1408 /* TempAuthTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempAuthTokenView.swift; sourceTree = "<group>"; };
 		2D9706052CD977EC00946FF3 /* MusikApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusikApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +49,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D2DB4612CEFC5DA00F1E790 /* RadarDiagramm */ = {
+			isa = PBXGroup;
+			children = (
+				2DC7ECFF2CEFB4CB00776DAE /* RadarDiagrammView.swift */,
+				2D2DB4622CEFC61700F1E790 /* RadarDiagrammPreviewView.swift */,
+			);
+			path = RadarDiagramm;
+			sourceTree = "<group>";
+		};
 		2D57B69B2CE4B034005F1408 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,8 +116,8 @@
 		2D9706162CD9783000946FF3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2D2DB4612CEFC5DA00F1E790 /* RadarDiagramm */,
 				2D57B69F2CE52597005F1408 /* TempAuthTokenView.swift */,
-				2DC7ECFF2CEFB4CB00776DAE /* RadarDiagrammView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -229,6 +240,7 @@
 				2D57B6A02CE52597005F1408 /* TempAuthTokenView.swift in Sources */,
 				2D9706092CD977EC00946FF3 /* MusikAppApp.swift in Sources */,
 				2D97061F2CD97CA600946FF3 /* MainViewModel.swift in Sources */,
+				2D2DB4632CEFC61700F1E790 /* RadarDiagrammPreviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

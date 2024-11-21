@@ -12,7 +12,7 @@ import DDSpiderChart
 struct NamedValue: Hashable {
     let id: Int;
     let label: String;
-    let value: Int
+    let value: Double
 }
 
 struct RadarDiagrammView: View {
@@ -27,9 +27,6 @@ struct RadarDiagrammView: View {
     var body: some View {
 
         VStack {
-            List(namedValuesArray, id: \.id) { namedValue in
-                    Text("\(namedValue.label), \(namedValue.value)")
-            }
             DDSpiderChart(
                 axes: axesLabels,
                 values: [
