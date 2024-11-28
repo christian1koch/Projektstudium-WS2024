@@ -21,7 +21,7 @@ class SpotifyApiController {
         Führt über die Spotify API eine Suche nach einem Track durch, 
         wenn der Name und der Künstler des Tracks bekannt sind
     */
-    func searchForTrackId(name: String, artist: String) {
+    func searchForTrackId(name: String, artist: String, completion: @escaping (String?) -> Void) {
         if name.isEmpty || artist.isEmpty {
             print("Track name or artist name is empty!")
             return
@@ -66,6 +66,7 @@ class SpotifyApiController {
                         // Extract the first track ID
                         if let trackId = items[0]["id"] as? String {
                             print("Track ID: \(trackId)")
+                            completion(trackId)
                         } else {
                             print("Track ID not found in response")
                         }
