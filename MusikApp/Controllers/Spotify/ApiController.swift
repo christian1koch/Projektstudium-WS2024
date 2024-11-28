@@ -82,10 +82,40 @@ class SpotifyApiController {
     
 
     func fetchParametersOfTrack(trackId: String) {
-        // TODO: implement
-        /*
-        https://api.spotify.com/v1/audio-features/{id}
-        */
+        if trackId.isEmpty {
+            print("Track ID is empty!")
+            return
+        }
+        let query = baseUrl + "/audio-features/\(trackId)"
+
+        guard let url = URL(string: query) else {
+            print("Invalid URL")
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        // Set authorization headers
+        request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            // Check the response status code
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
+                print("HTTP Error: \(httpResponse.statusCode)")
+                return
+            }
+            // Parse the response data
+            if let data = data {
+                print(data)
+            }
+        }
+        task.resume()
     }
 
     struct Parameters {
