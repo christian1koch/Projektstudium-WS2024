@@ -23,37 +23,63 @@ class SpotifyApiController {
     */
     func searchForTrackId(name: String, artist: String) {
         if name.isEmpty || artist.isEmpty {
-            // TODO: defensive logic
+            print("Track name or artist name is empty!")
+            return
         }
-        // replace spaces with %2520
         let name_ = name.replacingOccurrences(of: " ", with: "+")
         let artist_ = artist.replacingOccurrences(of: " ", with: "+")
-
+        
+        // Construct the search query
         let query = baseUrl + "/search?q=track:\(name_)+artist:\(artist_)&type=track"
-        guard let url = URL(string: query) else { return }
+        
+        guard let url = URL(string: query) else {
+            print("Invalid URL")
+            return
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        // Setze die Header
+        // Set authorization headers
         request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        
         let session = URLSession.shared
         let task = session.dataTask(with: request) { (data, response, error) in
             if let error = error {
-                print("Fehler: \(error.localizedDescription)")
+                print("Error: \(error.localizedDescription)")
                 return
             }
-            
-            // TODO: extract track id from response
+            // Check the response status code
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
+                print("HTTP Error: \(httpResponse.statusCode)")
+                return
+            }
+            // Parse the response data
             if let data = data {
-                if let dataString = String(data: data, encoding: .utf8) {
-                    print("Antwort: \(dataString)")
+                do {
+                    // Decode the JSON response
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    
+                    if let jsonDict = json as? [String: Any],
+                       let tracks = jsonDict["tracks"] as? [String: Any],
+                       let items = tracks["items"] as? [[String: Any]], !items.isEmpty {
+                        // Extract the first track ID
+                        if let trackId = items[0]["id"] as? String {
+                            print("Track ID: \(trackId)")
+                        } else {
+                            print("Track ID not found in response")
+                        }
+                    } else {
+                        print("No tracks found for \(name) by \(artist)")
+                    }
+                } catch {
+                    print("Failed to decode JSON: \(error.localizedDescription)")
                 }
             }
         }
         task.resume()
     }
+    
 
     func fetchParametersOfTrack(trackId: String) {
         // TODO: implement
@@ -122,7 +148,7 @@ class SpotifyApiController {
      */
     func apiCallTest() {
         // Die Basis-URL der API
-        var url = baseUrl + "/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry&seed_tracks=0c6xIDDpzE81m2q797ordA"
+        let url = baseUrl + "/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry&seed_tracks=0c6xIDDpzE81m2q797ordA"
         
         guard let url = URL(string: url) else { return }
         var request = URLRequest(url: url)
@@ -145,10 +171,7 @@ class SpotifyApiController {
             
             // Verarbeite die Antwort
             if let data = data {
-                // Die Antwortdaten als String anzeigen
-                if let dataString = String(data: data, encoding: .utf8) {
-                    print("Antwort: \(dataString)")
-                }
+                print(data[0])
             }
         }
         // Starte die Aufgabe
