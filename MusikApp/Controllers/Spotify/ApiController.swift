@@ -11,7 +11,7 @@ import Foundation
 class SpotifyApiController {
 
     var token: String = ""
-    val baseUrl: String = "https://api.spotify.com/v1"
+    let baseUrl: String = "https://api.spotify.com/v1"
 
     func setToken(token: String) {
         self.token = token
@@ -29,7 +29,7 @@ class SpotifyApiController {
         let name_ = name.replacingOccurrences(of: " ", with: "+")
         let artist_ = artist.replacingOccurrences(of: " ", with: "+")
 
-        let query = baseURL + "/search?q=track:\(name_)+artist:\(artist_)&type=track"
+        let query = baseUrl + "/search?q=track:\(name_)+artist:\(artist_)&type=track"
         guard let url = URL(string: query) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -122,9 +122,9 @@ class SpotifyApiController {
      */
     func apiCallTest() {
         // Die Basis-URL der API
-        baseURL = baseURL + "/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry&seed_tracks=0c6xIDDpzE81m2q797ordA"
+        var url = baseUrl + "/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry&seed_tracks=0c6xIDDpzE81m2q797ordA"
         
-        guard let url = URL(string: baseURL) else { return }
+        guard let url = URL(string: url) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
 
