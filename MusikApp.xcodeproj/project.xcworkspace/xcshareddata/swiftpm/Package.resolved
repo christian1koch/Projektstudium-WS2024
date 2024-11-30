@@ -1,0 +1,15 @@
+{
+  "originHash" : "1870229e415bdc9beefbebd5da8b2e987bbb8184a708f373de0cd1467e4be1bf",
+  "pins" : [
+    {
+      "identity" : "ddspiderchart",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dadalar/DDSpiderChart",
+      "state" : {
+        "revision" : "9bc65be4415068bff3c65622a9690902a866411a",
+        "version" : "0.6.0"
+      }
+    }
+  ],
+  "version" : 3
+}

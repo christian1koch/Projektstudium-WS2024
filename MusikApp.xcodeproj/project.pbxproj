@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D2DB4632CEFC61700F1E790 /* RadarDiagrammPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2DB4622CEFC61700F1E790 /* RadarDiagrammPreviewView.swift */; };
 		2D57B69D2CE4B0E5005F1408 /* ClientAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D57B69C2CE4B0E5005F1408 /* ClientAuthController.swift */; };
 		2D57B6A02CE52597005F1408 /* TempAuthTokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D57B69F2CE52597005F1408 /* TempAuthTokenView.swift */; };
 		2D9706092CD977EC00946FF3 /* MusikAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9706082CD977EC00946FF3 /* MusikAppApp.swift */; };
@@ -15,10 +16,13 @@
 		2D9706102CD977EF00946FF3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D97060F2CD977EF00946FF3 /* Preview Assets.xcassets */; };
 		2D97061F2CD97CA600946FF3 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D97061E2CD97CA600946FF3 /* MainViewModel.swift */; };
 		2D9706212CD97CC800946FF3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9706202CD97CC800946FF3 /* User.swift */; };
+		2DC7ED002CEFB4CC00776DAE /* RadarDiagrammView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7ECFF2CEFB4CB00776DAE /* RadarDiagrammView.swift */; };
+		2DC7ED032CEFBF5300776DAE /* DDSpiderChart in Frameworks */ = {isa = PBXBuildFile; productRef = 2DC7ED022CEFBF5300776DAE /* DDSpiderChart */; };
 		7C7A7B702CDCE7600090F0D7 /* SpotifyApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7A7B6F2CDCE7600090F0D7 /* SpotifyApiTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D2DB4622CEFC61700F1E790 /* RadarDiagrammPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarDiagrammPreviewView.swift; sourceTree = "<group>"; };
 		2D57B69C2CE4B0E5005F1408 /* ClientAuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientAuthController.swift; sourceTree = "<group>"; };
 		2D57B69F2CE52597005F1408 /* TempAuthTokenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempAuthTokenView.swift; sourceTree = "<group>"; };
 		2D9706052CD977EC00946FF3 /* MusikApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusikApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -28,6 +32,7 @@
 		2D97060F2CD977EF00946FF3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2D97061E2CD97CA600946FF3 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		2D9706202CD97CC800946FF3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		2DC7ECFF2CEFB4CB00776DAE /* RadarDiagrammView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarDiagrammView.swift; sourceTree = "<group>"; };
 		7C7A7B6F2CDCE7600090F0D7 /* SpotifyApiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyApiTest.swift; sourceTree = "<group>"; };
 		7C7A7B742CDCF1EC0090F0D7 /* ApiPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ApiPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
@@ -37,12 +42,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DC7ED032CEFBF5300776DAE /* DDSpiderChart in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D2DB4612CEFC5DA00F1E790 /* RadarDiagramm */ = {
+			isa = PBXGroup;
+			children = (
+				2DC7ECFF2CEFB4CB00776DAE /* RadarDiagrammView.swift */,
+				2D2DB4622CEFC61700F1E790 /* RadarDiagrammPreviewView.swift */,
+			);
+			path = RadarDiagramm;
+			sourceTree = "<group>";
+		};
 		2D57B69B2CE4B034005F1408 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +116,7 @@
 		2D9706162CD9783000946FF3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2D2DB4612CEFC5DA00F1E790 /* RadarDiagramm */,
 				2D57B69F2CE52597005F1408 /* TempAuthTokenView.swift */,
 			);
 			path = Views;
@@ -156,6 +172,9 @@
 			dependencies = (
 			);
 			name = MusikApp;
+			packageProductDependencies = (
+				2DC7ED022CEFBF5300776DAE /* DDSpiderChart */,
+			);
 			productName = MusikApp;
 			productReference = 2D9706052CD977EC00946FF3 /* MusikApp.app */;
 			productType = "com.apple.product-type.application";
@@ -184,6 +203,9 @@
 				Base,
 			);
 			mainGroup = 2D9705FC2CD977EC00946FF3;
+			packageReferences = (
+				2DC7ED012CEFBF5300776DAE /* XCRemoteSwiftPackageReference "DDSpiderChart" */,
+			);
 			productRefGroup = 2D9706062CD977EC00946FF3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -211,12 +233,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D9706212CD97CC800946FF3 /* User.swift in Sources */,
+				2DC7ED002CEFB4CC00776DAE /* RadarDiagrammView.swift in Sources */,
 				7C7A7B702CDCE7600090F0D7 /* SpotifyApiTest.swift in Sources */,
 				2D97060B2CD977EC00946FF3 /* MainView.swift in Sources */,
 				2D57B69D2CE4B0E5005F1408 /* ClientAuthController.swift in Sources */,
 				2D57B6A02CE52597005F1408 /* TempAuthTokenView.swift in Sources */,
 				2D9706092CD977EC00946FF3 /* MusikAppApp.swift in Sources */,
 				2D97061F2CD97CA600946FF3 /* MainViewModel.swift in Sources */,
+				2D2DB4632CEFC61700F1E790 /* RadarDiagrammPreviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +446,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2DC7ED012CEFBF5300776DAE /* XCRemoteSwiftPackageReference "DDSpiderChart" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dadalar/DDSpiderChart";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2DC7ED022CEFBF5300776DAE /* DDSpiderChart */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DC7ED012CEFBF5300776DAE /* XCRemoteSwiftPackageReference "DDSpiderChart" */;
+			productName = DDSpiderChart;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2D9705FD2CD977EC00946FF3 /* Project object */;
 }

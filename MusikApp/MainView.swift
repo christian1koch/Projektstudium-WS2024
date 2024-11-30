@@ -12,7 +12,7 @@ struct MainView: View {
         
         
         VStack {
-           TempAuthTokenView()
+           RadarDiagrammPreviewView()
         }
         .padding()
     }
