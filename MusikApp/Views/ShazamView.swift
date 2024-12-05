@@ -19,7 +19,7 @@ struct ShazamView: View {
         }
         .padding()
         .onAppear {
-            requestMicrophonePermission { granted in
+            viewModel.requestMicrophonePermission { granted in
                 if granted {
                     print("Microphone access granted")
                     // Proceed with microphone usage, such as recording audio
