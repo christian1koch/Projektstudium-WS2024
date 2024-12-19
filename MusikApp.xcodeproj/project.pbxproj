@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,8 +15,28 @@
 		2D9706102CD977EF00946FF3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D97060F2CD977EF00946FF3 /* Preview Assets.xcassets */; };
 		2D97061F2CD97CA600946FF3 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D97061E2CD97CA600946FF3 /* MainViewModel.swift */; };
 		2D9706212CD97CC800946FF3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9706202CD97CC800946FF3 /* User.swift */; };
+		51126FFA2D01EFE500BBFFD0 /* SpotifyiOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 512DAED42D01AE89008D0715 /* SpotifyiOS.xcframework */; };
+		51126FFB2D01EFE500BBFFD0 /* SpotifyiOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 512DAED42D01AE89008D0715 /* SpotifyiOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		512DAEDE2D01C4F9008D0715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DAEDD2D01C4F4008D0715 /* Constants.swift */; };
+		512DAEE02D01CE05008D0715 /* SpotifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DAEDF2D01CE01008D0715 /* SpotifyController.swift */; };
+		512DAEE22D01CE3C008D0715 /* SpotifyQuickStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DAEE12D01CE36008D0715 /* SpotifyQuickStart.swift */; };
+		512DAEE42D01CE5C008D0715 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DAEE32D01CE58008D0715 /* ContentView.swift */; };
 		5130AF6C2CEF51E30028DB47 /* ApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5130AF6B2CEF51DA0028DB47 /* ApiController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		51126FFC2D01EFE500BBFFD0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				51126FFB2D01EFE500BBFFD0 /* SpotifyiOS.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2D57B69C2CE4B0E5005F1408 /* ClientAuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientAuthController.swift; sourceTree = "<group>"; };
@@ -28,6 +48,13 @@
 		2D97060F2CD977EF00946FF3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2D97061E2CD97CA600946FF3 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		2D9706202CD97CC800946FF3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		512DAED42D01AE89008D0715 /* SpotifyiOS.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:2FNC3A47ZF:Spotify"; lastKnownFileType = wrapper.xcframework; path = SpotifyiOS.xcframework; sourceTree = "<group>"; };
+		512DAED62D01B063008D0715 /* MusikApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MusikApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		512DAEDC2D01B781008D0715 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		512DAEDD2D01C4F4008D0715 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		512DAEDF2D01CE01008D0715 /* SpotifyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyController.swift; sourceTree = "<group>"; };
+		512DAEE12D01CE36008D0715 /* SpotifyQuickStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyQuickStart.swift; sourceTree = "<group>"; };
+		512DAEE32D01CE58008D0715 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5130AF6B2CEF51DA0028DB47 /* ApiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiController.swift; sourceTree = "<group>"; };
 		7C7A7B742CDCF1EC0090F0D7 /* ApiPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ApiPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
@@ -37,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51126FFA2D01EFE500BBFFD0 /* SpotifyiOS.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +82,7 @@
 		2D57B69E2CE4B0F1005F1408 /* Spotify */ = {
 			isa = PBXGroup;
 			children = (
+				512DAEDF2D01CE01008D0715 /* SpotifyController.swift */,
 				5130AF6B2CEF51DA0028DB47 /* ApiController.swift */,
 				2D57B69C2CE4B0E5005F1408 /* ClientAuthController.swift */,
 			);
@@ -65,6 +94,7 @@
 			children = (
 				2D9706072CD977EC00946FF3 /* MusikApp */,
 				2D9706062CD977EC00946FF3 /* Products */,
+				512DAED62D01B063008D0715 /* MusikApp-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,6 +109,8 @@
 		2D9706072CD977EC00946FF3 /* MusikApp */ = {
 			isa = PBXGroup;
 			children = (
+				512DAEDC2D01B781008D0715 /* Info.plist */,
+				512DAEDD2D01C4F4008D0715 /* Constants.swift */,
 				2D57B69B2CE4B034005F1408 /* Controllers */,
 				7C7A7B6E2CDCE7240090F0D7 /* SpotifyApiTest */,
 				2D9706192CD9787600946FF3 /* Common */,
@@ -87,6 +119,7 @@
 				2D9706162CD9783000946FF3 /* Views */,
 				2D97060A2CD977EC00946FF3 /* MainView.swift */,
 				2D97060E2CD977EF00946FF3 /* Preview Content */,
+				512DAED42D01AE89008D0715 /* SpotifyiOS.xcframework */,
 			);
 			path = MusikApp;
 			sourceTree = "<group>";
@@ -102,6 +135,8 @@
 		2D9706162CD9783000946FF3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				512DAEE32D01CE58008D0715 /* ContentView.swift */,
+				512DAEE12D01CE36008D0715 /* SpotifyQuickStart.swift */,
 				2D57B69F2CE52597005F1408 /* TempAuthTokenView.swift */,
 			);
 			path = Views;
@@ -150,6 +185,7 @@
 				2D9706012CD977EC00946FF3 /* Sources */,
 				2D9706022CD977EC00946FF3 /* Frameworks */,
 				2D9706032CD977EC00946FF3 /* Resources */,
+				51126FFC2D01EFE500BBFFD0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -172,6 +208,7 @@
 				TargetAttributes = {
 					2D9706042CD977EC00946FF3 = {
 						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1610;
 					};
 				};
 			};
@@ -211,12 +248,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D9706212CD97CC800946FF3 /* User.swift in Sources */,
+				512DAEE42D01CE5C008D0715 /* ContentView.swift in Sources */,
 				2D97060B2CD977EC00946FF3 /* MainView.swift in Sources */,
 				2D57B69D2CE4B0E5005F1408 /* ClientAuthController.swift in Sources */,
 				5130AF6C2CEF51E30028DB47 /* ApiController.swift in Sources */,
+				512DAEE02D01CE05008D0715 /* SpotifyController.swift in Sources */,
+				512DAEE22D01CE3C008D0715 /* SpotifyQuickStart.swift in Sources */,
 				2D57B6A02CE52597005F1408 /* TempAuthTokenView.swift in Sources */,
 				2D9706092CD977EC00946FF3 /* MusikAppApp.swift in Sources */,
 				2D97061F2CD97CA600946FF3 /* MainViewModel.swift in Sources */,
+				512DAEDE2D01C4F9008D0715 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,7 +316,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -332,7 +373,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -347,25 +388,31 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MusikApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 79KTTT76RY;
+				DEVELOPMENT_TEAM = XW3UPQNSB7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MusikApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "projektstudium-ws2024.MusikApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MusikApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -376,25 +423,30 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MusikApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 79KTTT76RY;
+				DEVELOPMENT_TEAM = XW3UPQNSB7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MusikApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "projektstudium-ws2024.MusikApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MusikApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
