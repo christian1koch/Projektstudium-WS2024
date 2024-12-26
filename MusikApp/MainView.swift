@@ -12,7 +12,7 @@ struct MainView: View {
         
         
         VStack {
-           RadarDiagrammPreviewView()
+           Text("Welcome to Music App")
         }
         .padding()
     }

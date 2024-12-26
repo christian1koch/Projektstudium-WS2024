@@ -51,6 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D191DAB2D1D6319009B410F /* MusikApp_Depricated */ = {
+			isa = PBXGroup;
+			children = (
+				2D57B69F2CE52597005F1408 /* TempAuthTokenView.swift */,
+				2D2DB4612CEFC5DA00F1E790 /* RadarDiagramm */,
+			);
+			path = MusikApp_Depricated;
+			sourceTree = "<group>";
+		};
 		2D2DB4612CEFC5DA00F1E790 /* RadarDiagramm */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +96,7 @@
 		2D9705FC2CD977EC00946FF3 = {
 			isa = PBXGroup;
 			children = (
+				2D191DAB2D1D6319009B410F /* MusikApp_Depricated */,
 				2D9706072CD977EC00946FF3 /* MusikApp */,
 				2D9706062CD977EC00946FF3 /* Products */,
 			);
@@ -127,8 +137,6 @@
 		2D9706162CD9783000946FF3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2D2DB4612CEFC5DA00F1E790 /* RadarDiagramm */,
-				2D57B69F2CE52597005F1408 /* TempAuthTokenView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
