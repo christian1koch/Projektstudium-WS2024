@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D191DAD2D1D654B009B410F /* JoinStageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D191DAC2D1D654B009B410F /* JoinStageView.swift */; };
 		2D2DB4632CEFC61700F1E790 /* RadarDiagrammPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2DB4622CEFC61700F1E790 /* RadarDiagrammPreviewView.swift */; };
 		2D3900D02D0B03F4007FF2AB /* HTWContainerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3900CF2D0B03F4007FF2AB /* HTWContainerModifier.swift */; };
 		2D57B69D2CE4B0E5005F1408 /* ClientAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D57B69C2CE4B0E5005F1408 /* ClientAuthController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D191DAC2D1D654B009B410F /* JoinStageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinStageView.swift; sourceTree = "<group>"; };
 		2D2DB4622CEFC61700F1E790 /* RadarDiagrammPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarDiagrammPreviewView.swift; sourceTree = "<group>"; };
 		2D3900CF2D0B03F4007FF2AB /* HTWContainerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTWContainerModifier.swift; sourceTree = "<group>"; };
 		2D57B69C2CE4B0E5005F1408 /* ClientAuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientAuthController.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 		2D9706162CD9783000946FF3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2D191DAC2D1D654B009B410F /* JoinStageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				2D57B69D2CE4B0E5005F1408 /* ClientAuthController.swift in Sources */,
 				2D3900D02D0B03F4007FF2AB /* HTWContainerModifier.swift in Sources */,
 				2D57B6A02CE52597005F1408 /* TempAuthTokenView.swift in Sources */,
+				2D191DAD2D1D654B009B410F /* JoinStageView.swift in Sources */,
 				2D9706092CD977EC00946FF3 /* MusikAppApp.swift in Sources */,
 				2D97061F2CD97CA600946FF3 /* MainViewModel.swift in Sources */,
 				2D2DB4632CEFC61700F1E790 /* RadarDiagrammPreviewView.swift in Sources */,
