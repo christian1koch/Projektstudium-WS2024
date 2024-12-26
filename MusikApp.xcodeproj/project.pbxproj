@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D191DAD2D1D654B009B410F /* PublicJoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D191DAC2D1D654B009B410F /* PublicJoinView.swift */; };
+		2D191DAF2D1DEC67009B410F /* PrivateJoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D191DAE2D1DEC67009B410F /* PrivateJoinView.swift */; };
 		2D2DB4632CEFC61700F1E790 /* RadarDiagrammPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2DB4622CEFC61700F1E790 /* RadarDiagrammPreviewView.swift */; };
 		2D3900D02D0B03F4007FF2AB /* HTWContainerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3900CF2D0B03F4007FF2AB /* HTWContainerModifier.swift */; };
 		2D57B69D2CE4B0E5005F1408 /* ClientAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D57B69C2CE4B0E5005F1408 /* ClientAuthController.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		2D191DAC2D1D654B009B410F /* PublicJoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicJoinView.swift; sourceTree = "<group>"; };
+		2D191DAE2D1DEC67009B410F /* PrivateJoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateJoinView.swift; sourceTree = "<group>"; };
 		2D2DB4622CEFC61700F1E790 /* RadarDiagrammPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarDiagrammPreviewView.swift; sourceTree = "<group>"; };
 		2D3900CF2D0B03F4007FF2AB /* HTWContainerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTWContainerModifier.swift; sourceTree = "<group>"; };
 		2D57B69C2CE4B0E5005F1408 /* ClientAuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientAuthController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				2D191DAC2D1D654B009B410F /* PublicJoinView.swift */,
+				2D191DAE2D1DEC67009B410F /* PrivateJoinView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				2D97060B2CD977EC00946FF3 /* MainView.swift in Sources */,
 				2D57B69D2CE4B0E5005F1408 /* ClientAuthController.swift in Sources */,
 				2D3900D02D0B03F4007FF2AB /* HTWContainerModifier.swift in Sources */,
+				2D191DAF2D1DEC67009B410F /* PrivateJoinView.swift in Sources */,
 				2D57B6A02CE52597005F1408 /* TempAuthTokenView.swift in Sources */,
 				2D191DAD2D1D654B009B410F /* PublicJoinView.swift in Sources */,
 				2D9706092CD977EC00946FF3 /* MusikAppApp.swift in Sources */,
