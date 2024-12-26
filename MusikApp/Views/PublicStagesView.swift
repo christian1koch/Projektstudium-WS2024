@@ -13,7 +13,7 @@ struct Stage: Identifiable, Hashable {
 }
 
 
-private var stages = [
+private var stagesMock = [
     Stage(id: "ABCD"),
     Stage(id: "APTR"),
     Stage(id: "REJD"),
@@ -21,20 +21,18 @@ private var stages = [
     Stage(id: "KDLW"),
 ]
 
-struct JoinStageView: View {
-    
-    
-    
+struct PublicStagesView: View {
+    let stages: [Stage]
     @State private var selectedStage: String?;
     
     var body: some View {
         NavigationStack() {
             List(stages, selection: $selectedStage) {
-                    Text($0.id)
+                Text($0.id)
             }.navigationTitle("Stages (public)").toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button("Join Stage") {
-                        print("Pressed")
+                        print("joining \(selectedStage ?? "NO_SELECTED_STAGE")...")
                     }.disabled(selectedStage == nil)
                 }
             }
@@ -43,6 +41,6 @@ struct JoinStageView: View {
 }
 
 #Preview {
-    JoinStageView()
+    PublicStagesView(stages: stagesMock)
 }
 
