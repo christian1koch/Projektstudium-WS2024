@@ -21,7 +21,7 @@ private var stagesMock = [
     Stage(id: "KDLW"),
 ]
 
-struct PublicStagesView: View {
+struct PublicJoinView: View {
     let stages: [Stage]
     @State private var selectedStage: String?;
     
@@ -41,6 +41,6 @@ struct PublicStagesView: View {
 }
 
 #Preview {
-    PublicStagesView(stages: stagesMock)
+    PublicJoinView(stages: stagesMock)
 }
 
