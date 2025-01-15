@@ -11,6 +11,17 @@ import Foundation
  */
 class GameController {
     
+    // MARK: - Singleton Instance
+    
+        static let shared = GameController()
+    
+        private init() {
+            // prevent external initialization making it a singleton
+        }
+
+    
+    // MARK: - Properties
+    
     /*
      The server communication controller to handle all communication with the server.
      */
@@ -46,6 +57,9 @@ class GameController {
      The player that is currently playing the game.
      */
     var player: Player = Player(name: nil, points: 0, ready: false)
+
+    
+    // MARK: - Methods
     
     /*
      Requests all rooms from the server continuously while not in a room and updates the joinableRooms list
