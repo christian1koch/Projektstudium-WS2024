@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/*
 struct TempAuthTokenView: View {
     @State var authTokenText = "";
     var body: some View {
@@ -29,3 +30,4 @@ struct TempAuthTokenView: View {
         .padding()
     }
 }
+*/

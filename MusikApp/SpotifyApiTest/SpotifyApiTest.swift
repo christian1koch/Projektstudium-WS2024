@@ -8,6 +8,7 @@
 import Foundation
 
 
+// deprecated, see SpotifyApiController
 func apiCall() {
     // Die Basis-URL der API
     let baseURL = "https://api.spotify.com/v1/recommendations"
