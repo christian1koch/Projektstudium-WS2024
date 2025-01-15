@@ -13,6 +13,9 @@ It provides methods to retrieve rooms, create rooms, update rooms, close rooms, 
 */
 class ServerComsController {
 
+    /*
+     URL of the server.
+     */
     private let baseUrl: String = "http://84.173.203.12:8888"
 
     /*
