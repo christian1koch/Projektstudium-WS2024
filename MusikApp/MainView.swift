@@ -13,6 +13,7 @@ struct MainView: View {
         
         VStack {
            Text("Welcome to Music App")
+            SpotifyControllerView()
         }
         .padding()
     }

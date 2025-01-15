@@ -24,7 +24,7 @@ struct PrivateJoinView: View {
     var body: some View {
         NavigationStack() {
             Form {
-                TextField("Stage Id", text: $stageId)
+                TextField("Stage Id", text: $stageId).autocorrectionDisabled()
             }.navigationTitle("Join Stage").toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button("Join Stage") {
