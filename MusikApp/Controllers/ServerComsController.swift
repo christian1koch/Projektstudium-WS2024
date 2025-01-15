@@ -6,54 +6,6 @@
 //
 import Foundation
 
-struct Guess: Codable {
-    let player : String
-    let guesses : [String]
-}
-
-struct Round: Codable {
-    let guesses : [Guess]
-    let song : SongData
-}
-
-struct SongData: Codable {
-    let title : String
-    let album : String
-    let id: String
-    let artists : [String]
-    let releaseYear : Int
-}
-
-struct Player: Codable, Hashable {
-    var name: String
-    var points: Int = 0
-}
-
-struct Status: Codable {
-        
-}
-
-struct Room: Codable {
-    var id: String?
-    var host: Player
-    var players: Set<Player>?
-    var rounds: [Round]?
-    var settings: Settings
-    var status: Status?
-    var activeRound: Int?
-}
-
-enum Mode: Codable {
-    case fastestStops
-    case fixedTime
-}
-
-struct Settings: Codable {
-    let mode: Mode
-    let maxPlayers : Int
-    let isPublic: Bool
-    // ... additional settings
-}
 
 /*
 The ServerComsController is responsible for handling all communication with the server.
@@ -94,12 +46,14 @@ class ServerComsController {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
+
             } else if let data = data {
                 do {
                     let room = try JSONDecoder().decode(Room.self, from: data)
                     completion(.success(room))
                 } catch {
                     completion(.failure(error))
+                    print("Server Response: \(String(data: data, encoding: .utf8) ?? "nil")")
                 }
             }
         }.resume()
@@ -134,6 +88,7 @@ class ServerComsController {
                     completion(.success(updatedRoom))
                 } catch {
                     completion(.failure(error))
+                    print("Server Response: \(String(data: data, encoding: .utf8) ?? "nil")")
                 }
             }
         }.resume()
@@ -143,14 +98,27 @@ class ServerComsController {
     Closes a room by performing a DELETE-Request and calls the completion handler with the result.
     The status of the room will change to CLOSED and hence the room will not be displayed in the list of rooms anymore.
     */
-    //func closeRoom(id: String, playerName: String, completion: @escaping () ) // TODO
+    func closeRoom(id: String, playerName: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let url = URL(string: "\(baseUrl)/room/\(id)/\(playerName)/close") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }.resume()
+    }
 
     /*
     Create a new room by performing a POST-Request and calls the completion handler with the result.
     The given room needs to contain at least the host player.
     The completion handler will return the created room with the id set, the status set to OPEN, and the list of players containing the host player.
     */
-    func createRoom(room: Room, settings: Settings, completion: @escaping (Result<Room, Error>) -> Void) {
+    func createRoom(room: Room, completion: @escaping (Result<Room, Error>) -> Void) {
         guard let url = URL(string: "\(baseUrl)/room") else { return }
         
         var request = URLRequest(url: url)
@@ -160,6 +128,8 @@ class ServerComsController {
         do {
             let jsonData = try JSONEncoder().encode(room)
             request.httpBody = jsonData
+            //print("Request: \(String(data: jsonData, encoding: .utf8) ?? "nil")")
+
         } catch {
             completion(.failure(error))
             return
@@ -174,6 +144,7 @@ class ServerComsController {
                     completion(.success(createdRoom))
                 } catch {
                     completion(.failure(error))
+                    //print("Server Response: \(String(data: data, encoding: .utf8) ?? "nil")")
                 }
             }
         }.resume()

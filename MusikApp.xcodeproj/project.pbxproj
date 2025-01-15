@@ -21,6 +21,8 @@
 		2D9706212CD97CC800946FF3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9706202CD97CC800946FF3 /* User.swift */; };
 		2DC7ED002CEFB4CC00776DAE /* RadarDiagrammView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC7ECFF2CEFB4CB00776DAE /* RadarDiagrammView.swift */; };
 		2DC7ED032CEFBF5300776DAE /* DDSpiderChart in Frameworks */ = {isa = PBXBuildFile; productRef = 2DC7ED022CEFBF5300776DAE /* DDSpiderChart */; };
+		514BA7092D38062000B0C5B7 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514BA7082D38061A00B0C5B7 /* GameController.swift */; };
+		514BA70B2D38072100B0C5B7 /* StructModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514BA70A2D38071800B0C5B7 /* StructModels.swift */; };
 		51F06C1C2D37C1B500C5A812 /* SpotifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F06C1B2D37C1B500C5A812 /* SpotifyController.swift */; };
 		51F06C1E2D37C1CD00C5A812 /* SpotifyApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F06C1D2D37C1CD00C5A812 /* SpotifyApiController.swift */; };
 		51F06C202D37C1DA00C5A812 /* ServerComsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F06C1F2D37C1DA00C5A812 /* ServerComsController.swift */; };
@@ -42,6 +44,8 @@
 		2D97061E2CD97CA600946FF3 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		2D9706202CD97CC800946FF3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2DC7ECFF2CEFB4CB00776DAE /* RadarDiagrammView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarDiagrammView.swift; sourceTree = "<group>"; };
+		514BA7082D38061A00B0C5B7 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
+		514BA70A2D38071800B0C5B7 /* StructModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructModels.swift; sourceTree = "<group>"; };
 		51F06C1B2D37C1B500C5A812 /* SpotifyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyController.swift; sourceTree = "<group>"; };
 		51F06C1D2D37C1CD00C5A812 /* SpotifyApiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyApiController.swift; sourceTree = "<group>"; };
 		51F06C1F2D37C1DA00C5A812 /* ServerComsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerComsController.swift; sourceTree = "<group>"; };
@@ -67,6 +71,7 @@
 			children = (
 				2D57B69F2CE52597005F1408 /* TempAuthTokenView.swift */,
 				2D2DB4612CEFC5DA00F1E790 /* RadarDiagramm */,
+				7C7A7B6E2CDCE7240090F0D7 /* SpotifyApiTest */,
 			);
 			path = MusikApp_Depricated;
 			sourceTree = "<group>";
@@ -91,6 +96,7 @@
 		2D57B69B2CE4B034005F1408 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				514BA7082D38061A00B0C5B7 /* GameController.swift */,
 				2D57B69E2CE4B0F1005F1408 /* Spotify */,
 				51F06C1F2D37C1DA00C5A812 /* ServerComsController.swift */,
 				51F06C212D37C4F400C5A812 /* ServerComsTest.playground */,
@@ -130,7 +136,6 @@
 			children = (
 				2D3900CE2D0B027A007FF2AB /* Modifiers */,
 				2D57B69B2CE4B034005F1408 /* Controllers */,
-				7C7A7B6E2CDCE7240090F0D7 /* SpotifyApiTest */,
 				2D9706192CD9787600946FF3 /* Common */,
 				2D9706182CD9784000946FF3 /* ViewModels */,
 				2D9706172CD9783B00946FF3 /* Models */,
@@ -161,6 +166,7 @@
 		2D9706172CD9783B00946FF3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				514BA70A2D38071800B0C5B7 /* StructModels.swift */,
 				2D9706202CD97CC800946FF3 /* User.swift */,
 			);
 			path = Models;
@@ -276,11 +282,13 @@
 				2D3900D02D0B03F4007FF2AB /* HTWContainerModifier.swift in Sources */,
 				51F06C202D37C1DA00C5A812 /* ServerComsController.swift in Sources */,
 				2D191DAF2D1DEC67009B410F /* PrivateJoinView.swift in Sources */,
+				514BA70B2D38072100B0C5B7 /* StructModels.swift in Sources */,
 				51F06C1E2D37C1CD00C5A812 /* SpotifyApiController.swift in Sources */,
 				2D57B6A02CE52597005F1408 /* TempAuthTokenView.swift in Sources */,
 				2D191DAD2D1D654B009B410F /* PublicJoinView.swift in Sources */,
 				2D9706092CD977EC00946FF3 /* MusikAppApp.swift in Sources */,
 				2D97061F2CD97CA600946FF3 /* MainViewModel.swift in Sources */,
+				514BA7092D38062000B0C5B7 /* GameController.swift in Sources */,
 				51F06C1C2D37C1B500C5A812 /* SpotifyController.swift in Sources */,
 				2D2DB4632CEFC61700F1E790 /* RadarDiagrammPreviewView.swift in Sources */,
 			);
