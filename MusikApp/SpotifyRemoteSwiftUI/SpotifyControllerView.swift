@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SpotifyControllerView: View {
-    @StateObject var sptConnector = SPTConnector()
+    @StateObject var spotifyController = SpotifyController()
     var body: some View {
         SpotifyTestView()
-            .environmentObject(sptConnector)
+            .environmentObject(spotifyController)
     }    }
 
