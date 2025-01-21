@@ -7,6 +7,8 @@
 
 import Foundation
 
+ 
+
 enum SpotifyClientAuthError: Error {
     case credentialsEncode
 }
@@ -55,4 +57,5 @@ class SpotifyClientAuthController {
     }
     
 }
+ 
 
