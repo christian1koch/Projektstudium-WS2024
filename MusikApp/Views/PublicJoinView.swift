@@ -8,39 +8,67 @@
 import Foundation
 import SwiftUI
 
-struct Stage: Identifiable, Hashable {
-    let id: String
-}
-
-
-private var stagesMock = [
-    Stage(id: "ABCD"),
-    Stage(id: "APTR"),
-    Stage(id: "REJD"),
-    Stage(id: "SDMQ"),
-    Stage(id: "KDLW"),
-]
-
 struct PublicJoinView: View {
-    let stages: [Stage]
-    @State private var selectedStage: String?;
-    
+    @State private var rooms: [Room] = []
+    @State private var selectedRoomId: String?
+    @State private var timer: Timer?
+    let apiService = ServerComsController()
     var body: some View {
-        NavigationStack() {
-            List(stages, selection: $selectedStage) {
-                Text($0.id)
-            }.navigationTitle("Stages (public)").toolbar {
+        NavigationStack {
+            List(rooms, id: \.id, selection: $selectedRoomId) { room in
+                VStack(alignment: .leading) {
+                    Text(room.id ?? "Unknown Room")
+                    Text("Host: \(room.host.name)")
+                    Text("Players: \(room.players?.count ?? 0)")
+                    if let status = room.status {
+                        Text("Status: \(status.rawValue)")
+                    }
+                }
+            }
+            .navigationTitle("Rooms (public)")
+            .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    Button("Join Stage") {
-                        print("joining \(selectedStage ?? "NO_SELECTED_STAGE")...")
-                    }.disabled(selectedStage == nil)
+                    Button("Join Room") {
+                        print("joining \(selectedRoomId ?? "NO_SELECTED_ROOM")...")
+                    }
+                    .disabled(selectedRoomId == nil)
+                }
+            }
+        }
+        .onAppear {
+            startPeriodicFetching()
+        }
+        .onDisappear {
+            stopPeriodicFetching()
+        }
+    }
+    
+    private func startPeriodicFetching() {
+        fetchRooms()
+        timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
+            fetchRooms()
+        }
+    }
+    
+    private func stopPeriodicFetching() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    private func fetchRooms() {
+        apiService.getAllRooms { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let fetchedRooms):
+                    rooms = fetchedRooms
+                case .failure(let error):
+                    print("Rooms fetch error: \(error.localizedDescription)")
                 }
             }
         }
     }
 }
-
 #Preview {
-    PublicJoinView(stages: stagesMock)
+    PublicJoinView()
 }
 

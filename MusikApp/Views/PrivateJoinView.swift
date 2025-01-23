@@ -9,27 +9,57 @@ import Foundation
 import SwiftUI
 
 
-private var stagesMock = [
-    Stage(id: "ABCD"),
-    Stage(id: "APTR"),
-    Stage(id: "REJD"),
-    Stage(id: "SDMQ"),
-    Stage(id: "KDLW"),
-]
-
 struct PrivateJoinView: View {
-    let stages: [Stage]
-    @State private var stageId: String = "";
+    @State private var roomId: String = ""
+    @State private var room: Room?
+    @State private var errorMessage: String?
+    let apiService = ServerComsController()
     
     var body: some View {
-        NavigationStack() {
+        NavigationStack {
             Form {
-                TextField("Stage Id", text: $stageId).autocorrectionDisabled()
-            }.navigationTitle("Join Stage").toolbar {
+                TextField("Room Id", text: $roomId)
+                    .autocorrectionDisabled()
+                
+                if let room = room {
+                    Section("Room Details") {
+                        Text("Host: \(room.host.name)")
+                        Text("Players: \(room.players?.count ?? 0)")
+                        if let status = room.status {
+                            Text("Status: \(status.rawValue)")
+                        }
+                    }
+                }
+                
+                if let errorMessage = errorMessage {
+                    Section("Error") {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                    }
+                }
+            }
+            .navigationTitle("Join Room")
+            .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    Button("Join Stage") {
-                        print("joining \(stageId)...")
-                    }.disabled(stageId.isEmpty)
+                    Button("Join Room") {
+                        fetchRoom()
+                    }
+                    .disabled(roomId.isEmpty)
+                }
+            }
+        }
+    }
+    
+    private func fetchRoom() {
+        apiService.getRoomById(id: roomId) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let fetchedRoom):
+                    room = fetchedRoom
+                    errorMessage = nil
+                case .failure(let error):
+                    room = nil
+                    errorMessage = error.localizedDescription
                 }
             }
         }
