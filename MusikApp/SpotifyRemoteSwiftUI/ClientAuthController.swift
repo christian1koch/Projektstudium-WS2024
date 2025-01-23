@@ -57,5 +57,25 @@ class SpotifyClientAuthController {
     }
     
 }
+//Abruf der Playlist des Nutzers
+extension SpotifyClientAuthController {
+    func fetchUserPlaylists(accessToken: String) async throws -> [Playlist] {
+        let url = URL(string: "https://api.spotify.com/v1/me/playlists")!
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw NSError(domain: "SpotifyAPI", code: 500, userInfo: [NSLocalizedDescriptionKey: "Ungültige Serverantwort"])
+        }
+
+        guard (200...299).contains(httpResponse.statusCode) else {
+            throw NSError(domain: "SpotifyAPI", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "Fehler beim Abrufen der Playlists"])
+        }
+
+        let decodedResponse = try JSONDecoder().decode(PlaylistsResponse.self, from: data)
+        return decodedResponse.items
+    }
+}
  
 

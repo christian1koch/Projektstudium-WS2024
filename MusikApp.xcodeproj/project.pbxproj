@@ -125,7 +125,6 @@
 		2D57B69E2CE4B0F1005F1408 /* Spotify */ = {
 			isa = PBXGroup;
 			children = (
-				2D57B69C2CE4B0E5005F1408 /* ClientAuthController.swift */,
 				51F06C1B2D37C1B500C5A812 /* _Depricated_SpotifyController.swift */,
 				51F06C1D2D37C1CD00C5A812 /* SpotifyApiController.swift */,
 			);
@@ -135,6 +134,7 @@
 		2D6848532D37DDA800E33022 /* SpotifyRemoteSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				2D57B69C2CE4B0E5005F1408 /* ClientAuthController.swift */,
 				2D68484D2D37DDA800E33022 /* SpotifyControllerView.swift */,
 				2D68484E2D37DDA800E33022 /* SpotifyTestView.swift */,
 				2D6848502D37DDA800E33022 /* SpotifyRemoteSwiftUI-Bridging-Header.h */,
@@ -468,7 +468,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MusikApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 79KTTT76RY;
+				DEVELOPMENT_TEAM = L49WRAQ7TS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MusikApp/Info.plist;
@@ -498,7 +498,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MusikApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 79KTTT76RY;
+				DEVELOPMENT_TEAM = L49WRAQ7TS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MusikApp/Info.plist;

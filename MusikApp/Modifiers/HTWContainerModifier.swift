@@ -11,88 +11,87 @@ import SwiftUI
 /**
  Drop Down Modifiers
  */
-struct  DropDownMenu: View {
+struct DropDownMenu: View {
+    let options: [String]
+    var menuWidth: CGFloat = 300
+    var buttonHeight: CGFloat = 60
+    var maxItemDisplayed: Int = 3
 
-let options: [String]
+    @Binding var selectedOptionIndex: Int
+    @Binding var showDropdown: Bool
 
-var menuWdith: CGFloat  =  300
-var buttonHeight: CGFloat  =  60
-var maxItemDisplayed: Int  =  3
+    @State private var scrollPosition: Int?
 
-@Binding  var selectedOptionIndex: Int
-@Binding  var showDropdown: Bool
+    var body: some View {
+        VStack {
+            VStack(spacing: 0) {
+                // Selected item
+                Button(action: {
+                    guard !options.isEmpty else { return } // Verhindert Interaktion, wenn Optionen leer sind
+                    withAnimation {
+                        showDropdown.toggle()
+                    }
+                }, label: {
+                    HStack(spacing: nil) {
+                        Text(options.isEmpty ? "Keine Optionen" : options[safe: selectedOptionIndex] ?? "Unbekannt")
+                        Spacer()
+                        Image(systemName: "chevron.down")
+                            .rotationEffect(.degrees(showDropdown ? -180 : 0))
+                    }
+                })
+                .padding(.horizontal, 20)
+                .frame(width: menuWidth, height: buttonHeight, alignment: .leading)
 
-@State  private  var scrollPosition: Int?
+                // Selection menu
+                if showDropdown {
+                    let scrollViewHeight: CGFloat = options.count > maxItemDisplayed
+                        ? buttonHeight * CGFloat(maxItemDisplayed)
+                        : buttonHeight * CGFloat(options.count)
 
-var body: some  View {
-VStack {
-
-VStack(spacing: 0) {
-// selected item
-Button(action: {
-withAnimation {
-showDropdown.toggle()
+                    ScrollView {
+                        LazyVStack(spacing: 0) {
+                            ForEach(options.indices, id: \.self) { index in
+                                Button(action: {
+                                    withAnimation {
+                                        selectedOptionIndex = index
+                                        showDropdown.toggle()
+                                    }
+                                }, label: {
+                                    HStack {
+                                        Text(options[index])
+                                        Spacer()
+                                        if index == selectedOptionIndex {
+                                            Image(systemName: "checkmark.circle.fill")
+                                        }
+                                    }
+                                })
+                                .padding(.horizontal, 20)
+                                .frame(width: menuWidth, height: buttonHeight, alignment: .leading)
+                            }
+                        }
+                        .scrollTargetLayout()
+                    }
+                    .scrollPosition(id: $scrollPosition)
+                    .scrollDisabled(options.count <= maxItemDisplayed)
+                    .frame(height: scrollViewHeight)
+                    .onAppear {
+                        scrollPosition = selectedOptionIndex
+                    }
+                }
+            }
+            .foregroundStyle(Color.black)
+            .background(RoundedRectangle(cornerRadius: 16).fill(Color(UIColor.systemGray6)))
+        }
+        .frame(width: menuWidth, height: buttonHeight, alignment: .top)
+        .zIndex(100)
+    }
 }
-}, label: {
-HStack(spacing: nil) {
-Text(options[selectedOptionIndex])
-Spacer()
-Image(systemName: "chevron.down")
-.rotationEffect(.degrees((showDropdown ?  -180 : 0)))
-}
-})
-.padding(.horizontal, 20)
-.frame(width: menuWdith, height: buttonHeight, alignment: .leading)
 
-
-// selection menu
-if (showDropdown) {
-let scrollViewHeight: CGFloat  = options.count > maxItemDisplayed ? (buttonHeight*CGFloat(maxItemDisplayed)) : (buttonHeight*CGFloat(options.count))
-ScrollView {
-LazyVStack(spacing: 0) {
-ForEach(0..<options.count, id: \.self) { index in
-Button(action: {
-withAnimation {
-selectedOptionIndex = index
-showDropdown.toggle()
-}
-
-}, label: {
-HStack {
-Text(options[index])
-Spacer()
-if (index == selectedOptionIndex) {
-Image(systemName: "checkmark.circle.fill")
-
-}
-}
-
-})
-.padding(.horizontal, 20)
-.frame(width: menuWdith, height: buttonHeight, alignment: .leading)
-
-}
-}
-.scrollTargetLayout()
-}
-.scrollPosition(id: $scrollPosition)
-.scrollDisabled(options.count <=  3)
-.frame(height: scrollViewHeight)
-.onAppear {
-scrollPosition = selectedOptionIndex
-}
-
-}
-
-}
-.foregroundStyle(Color.black)
-.background(RoundedRectangle(cornerRadius: 16).fill(Color(UIColor.systemGray6)))
-
-}
-.frame(width: menuWdith, height: buttonHeight, alignment: .top)
-.zIndex(100)
-
-}
+// Safe Indexing Helper
+extension Array {
+    subscript(safe index: Int) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
 }
 
 /**
