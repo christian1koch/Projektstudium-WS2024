@@ -16,14 +16,13 @@ struct PublicJoinView: View {
     var body: some View {
         NavigationStack {
             List(rooms, id: \.id, selection: $selectedRoomId) { room in
-                VStack(alignment: .leading) {
-                    Text(room.id ?? "Unknown Room")
-                    Text("Host: \(room.host.name)")
-                    Text("Players: \(room.players?.count ?? 0)")
-                    if let status = room.status {
-                        Text("Status: \(status.rawValue)")
-                    }
-                }
+                Text("Host: \(room.id) Players: \(room.players?.count ?? 0)")
+            }
+            .onAppear {
+                startPeriodicFetching()
+            }
+            .onDisappear {
+                stopPeriodicFetching()
             }
             .navigationTitle("Rooms (public)")
             .toolbar {
@@ -35,15 +34,11 @@ struct PublicJoinView: View {
                 }
             }
         }
-        .onAppear {
-            startPeriodicFetching()
-        }
-        .onDisappear {
-            stopPeriodicFetching()
-        }
+        
     }
     
     private func startPeriodicFetching() {
+        print("fetching rooms...")
         fetchRooms()
         timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
             fetchRooms()
@@ -61,8 +56,9 @@ struct PublicJoinView: View {
                 switch result {
                 case .success(let fetchedRooms):
                     rooms = fetchedRooms
+                    print("success", fetchedRooms);
                 case .failure(let error):
-                    print("Rooms fetch error: \(error.localizedDescription)")
+                    print("Rooms fetch error: \(error)")
                 }
             }
         }
