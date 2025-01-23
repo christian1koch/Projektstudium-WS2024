@@ -38,9 +38,20 @@ class GameController {
     let roomDiscoveryFrequency = 0.2
     
     /*
+     The timer that performs the room discovery. Will be nil if the user is in a room.
+     */
+    private var roomDiscoveryTimer: Timer?
+    
+    /*
      The frequency with which the active room is refreshed in seconds
      */
     let activeRoomRefreshFrequency = 0.2
+
+    /*
+     The timer that refreshes the active room. Will be nil if the user is not playing.
+     */
+    private var roomRefreshTimer: Timer?
+
     
     /*
      The room that the user is currently in. Will be nil if the user is not in a room.
@@ -60,42 +71,74 @@ class GameController {
 
     
     // MARK: - Methods
-    
+
     /*
-     Requests all rooms from the server continuously while not in a room and updates the joinableRooms list
-     */
+    Requests all rooms from the server continuously while not in a room and updates the joinableRooms list.
+    */
     func runRoomDiscovery() {
-        while !gameRunning {
-            Timer.scheduledTimer(withTimeInterval: self.roomDiscoveryFrequency, repeats: true) { timer in
-                self.serverComsController.getAllRooms(completion: { result in
-                    switch result {
-                    case .success(let rooms):
-                        self.joinableRooms = rooms
-                    case .failure(let error):
-                        print(error)
-                    }
-                })
+        // Invalidate any existing timer before starting a new one
+        stopRoomDiscovery()
+        
+        // Start a new timer
+        roomDiscoveryTimer = Timer.scheduledTimer(withTimeInterval: self.roomDiscoveryFrequency, repeats: true) { [weak self] timer in
+            guard let self = self, !self.gameRunning else {
+                timer.invalidate()
+                return
             }
+            
+            self.serverComsController.getAllRooms(completion: { result in
+                switch result {
+                case .success(let rooms):
+                    self.joinableRooms = rooms
+                case .failure(let error):
+                    print(error)
+                }
+            })
         }
     }
+        
+    /*
+    Stops the room discovery process.
+    */
+    func stopRoomDiscovery() {
+        roomDiscoveryTimer?.invalidate()
+        roomDiscoveryTimer = nil
+    }
+    
     
     /*
      Updates the active room continuously while playing by requesting the room from the server.
      This is neccessary to obtain info about the game state (time left, answers of other players, ready state of players, etc.)
      */
     func startRoomRefreshLoop(id: String) {
-        while gameRunning {
-            Timer.scheduledTimer(withTimeInterval: self.activeRoomRefreshFrequency, repeats: true) { timer in
-                self.serverComsController.getRoomById(id: id, completion: { result in
-                    switch result {
-                    case .success(let room):
-                        self.activeRoom = room
-                    case .failure(let error):
-                        print(error)
-                    }
-                })
+        
+        // Stop any existing timer before starting a new one
+        stopRoomRefreshLoop()
+        
+        // Start a new timer
+        roomRefreshTimer = Timer.scheduledTimer(withTimeInterval: self.activeRoomRefreshFrequency, repeats: true) { [weak self] timer in
+            guard let self = self, self.gameRunning else {
+                timer.invalidate()
+                return
             }
+            
+            self.serverComsController.getRoomById(id: id, completion: { result in
+                switch result {
+                case .success(let room):
+                    self.activeRoom = room
+                case .failure(let error):
+                    print(error)
+                }
+            })
         }
+    }
+        
+    /*
+     Stops the room refresh loop.
+     */
+    func stopRoomRefreshLoop() {
+        roomRefreshTimer?.invalidate()
+        roomRefreshTimer = nil
     }
     
     /*
