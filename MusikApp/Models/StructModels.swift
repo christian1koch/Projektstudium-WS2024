@@ -6,7 +6,7 @@
 //
 
 struct Guess: Codable {
-    let player : String
+    let playerId : String
     let guesses : [String]
 }
 
@@ -38,7 +38,7 @@ enum Status: String, Codable {
 struct Room: Codable {
     var id: String?
     var host: Player
-    var players: Set<Player>?
+    var players: [Player]?
     var rounds: [Round]?
     var settings: Settings
     var status: Status?
