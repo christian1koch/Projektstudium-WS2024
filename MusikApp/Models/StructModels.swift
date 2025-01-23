@@ -44,6 +44,10 @@ struct Room: Codable {
     var status: Status?
     var activeRound: Int?
 }
+struct RoomCreateRequest: Codable {
+    var host: Player
+    var settings: Settings
+}
 
 enum Mode: String, Codable {
     case FASTEST_STOPS = "FASTEST_STOPS"

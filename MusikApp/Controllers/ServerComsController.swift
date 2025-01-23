@@ -121,7 +121,7 @@ class ServerComsController {
     The given room needs to contain at least the host player.
     The completion handler will return the created room with the id set, the status set to OPEN, and the list of players containing the host player.
     */
-    func createRoom(room: Room, completion: @escaping (Result<Room, Error>) -> Void) {
+    func createRoom(room: RoomCreateRequest, completion: @escaping (Result<Room, Error>) -> Void) {
         guard let url = URL(string: "\(baseUrl)/room") else { return }
         
         var request = URLRequest(url: url)
