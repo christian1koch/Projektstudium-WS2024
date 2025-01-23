@@ -31,9 +31,9 @@ struct GameOverView: View {
                         }
                         .padding(.bottom, 5)
                         
-                        ForEach(viewModel.players) { player in
+                        ForEach(Array(viewModel.players.enumerated()), id: \.offset) { index, player in
                             HStack {
-                                Text(player.id)
+                                Text(player.name ?? "unnamed player")
                                 Spacer()
                                 Text("\(player.points)")
                             }

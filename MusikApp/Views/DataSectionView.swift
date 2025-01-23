@@ -35,7 +35,7 @@ struct DataSectionView: View {
     }
 
     func increaseScore(forName name: String) {
-        if let index = players.firstIndex(where: { $0.id == name }) {
+        if let index = players.firstIndex(where: { $0.name == name }) {
             players[index].points += 1
         } else {
             print("Player with name \(name) not found.")

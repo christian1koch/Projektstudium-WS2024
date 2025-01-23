@@ -24,7 +24,6 @@
 		2D68486D2D42A45A00E33022 /* StructModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D68486A2D42A45A00E33022 /* StructModels.swift */; };
 		2D6848712D42A47A00E33022 /* DataSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D68486E2D42A47A00E33022 /* DataSectionViewModel.swift */; };
 		2D6848722D42A47A00E33022 /* GameOverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D68486F2D42A47A00E33022 /* GameOverViewModel.swift */; };
-		2D6848732D42A47A00E33022 /* ShazamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848702D42A47A00E33022 /* ShazamViewModel.swift */; };
 		2D6848772D42A49100E33022 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848762D42A49100E33022 /* GameOverView.swift */; };
 		2D6848782D42A49100E33022 /* DataSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848742D42A49100E33022 /* DataSectionView.swift */; };
 		2D6848792D42A49100E33022 /* EvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848752D42A49100E33022 /* EvaluationView.swift */; };
@@ -67,7 +66,6 @@
 		2D68486A2D42A45A00E33022 /* StructModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructModels.swift; sourceTree = "<group>"; };
 		2D68486E2D42A47A00E33022 /* DataSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSectionViewModel.swift; sourceTree = "<group>"; };
 		2D68486F2D42A47A00E33022 /* GameOverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewModel.swift; sourceTree = "<group>"; };
-		2D6848702D42A47A00E33022 /* ShazamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamViewModel.swift; sourceTree = "<group>"; };
 		2D6848742D42A49100E33022 /* DataSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSectionView.swift; sourceTree = "<group>"; };
 		2D6848752D42A49100E33022 /* EvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationView.swift; sourceTree = "<group>"; };
 		2D6848762D42A49100E33022 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
@@ -241,7 +239,6 @@
 			children = (
 				2D68486E2D42A47A00E33022 /* DataSectionViewModel.swift */,
 				2D68486F2D42A47A00E33022 /* GameOverViewModel.swift */,
-				2D6848702D42A47A00E33022 /* ShazamViewModel.swift */,
 				2D97061E2CD97CA600946FF3 /* MainViewModel.swift */,
 			);
 			path = ViewModels;
@@ -376,7 +373,6 @@
 				2D6848792D42A49100E33022 /* EvaluationView.swift in Sources */,
 				2D6848712D42A47A00E33022 /* DataSectionViewModel.swift in Sources */,
 				2D6848722D42A47A00E33022 /* GameOverViewModel.swift in Sources */,
-				2D6848732D42A47A00E33022 /* ShazamViewModel.swift in Sources */,
 				51F06C1C2D37C1B500C5A812 /* _Depricated_SpotifyController.swift in Sources */,
 				2D2DB4632CEFC61700F1E790 /* RadarDiagrammPreviewView.swift in Sources */,
 			);
