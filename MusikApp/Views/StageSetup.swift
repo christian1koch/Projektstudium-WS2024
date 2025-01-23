@@ -10,13 +10,23 @@ import SwiftUI
 
 
 struct StageSetupContainerPreviewView: View {
-    let setlist = ["Setlist", "Lieblingssongs", "TOP-50 Deutschland", "UK Drill Musik", "Deutschrap Brandneu"]
+    @State private var selectedPlaylist: String? = nil
+    @State private var isLoading = false
+    @State private var showErrorAlert = false
+    @State private var errorMessage: String? = nil
+    @State private var navigateToLineUp = false
+    @State private var isCreateStagePressed: Bool = false
+    @State private var isPrivateStage: Bool? = nil
+    @State private var selectedSongCount: Int? = nil
+    @State private var selectedTimeLimit: Int? = nil
+
+    let setlistoptions = ["Setlist", "Lieblingssongs", "TOP-50 Deutschland", "UK Drill Musik", "Deutschrap Brandneu"]
     @State  private  var selectedOptionIndex =  0
     @State  private  var showDropdown =  false
     var body : some View {
         VStack {
             VStack {
-                DropDownMenu(options: setlist, selectedOptionIndex: $selectedOptionIndex, showDropdown: $showDropdown)
+                DropDownMenu(options: setlistoptions, selectedOptionIndex: $selectedOptionIndex, showDropdown: $showDropdown)
             }
                 .onTapGesture {
                     withAnimation {
@@ -30,21 +40,13 @@ struct StageSetupContainerPreviewView: View {
             }
             .padding()
             HStack {
-                Button("05") {
-                    
-                }.buttonStyle(.htwSecondary)
-                
-                Button("09") {
-                    
-                }.buttonStyle(.htwSecondary)
-                Button("13") {
-                    
-                }.buttonStyle(.htwSecondary)
-                
-                Button("21"){
-                    
-                }.buttonStyle(.htwSecondary)
-                
+                ForEach([05, 09, 13, 21], id: \.self) {
+                    count in Button(action: {
+                        selectedSongCount = count
+                    }) {
+                        Text(String(format: "%02d", count))
+                    }.buttonStyle(.htwLittle(isSelected: selectedSongCount == count)) // Überprüft, ob der Button ausgewählt ist
+                }
             }.padding()
         }.htwContainerStyle()
         
@@ -54,30 +56,22 @@ struct StageSetupContainerPreviewView: View {
             }
             .padding()
             HStack {
-                Button("10") {
-                    
-                }.buttonStyle(.htwSecondary)
-                
-                Button("30") {
-                    
-                }.buttonStyle(.htwSecondary)
-                Button("60") {
-                    
-                }.buttonStyle(.htwSecondary)
-                
-                Button("90"){
-                    
-                }.buttonStyle(.htwSecondary)
-                
+                ForEach([10, 30, 60, 90], id: \.self) {
+                    limit in Button(action: {
+                        selectedTimeLimit = limit
+                    }) {
+                        Text("\(limit)")
+                    }                  .buttonStyle(.htwLittle(isSelected: selectedTimeLimit == limit)) // Überprüft, ob der Button ausgewählt ist
+                }
             }.padding()
         }.htwContainerStyle()
         
         
         VStack {
             HStack {
-                Button("private stage") {
+                Button("Private Stage") { isPrivateStage = true
                     
-                }.buttonStyle(.htwLong)
+                }.buttonStyle(.htwPressed(isSelected: isPrivateStage == true))
                 
 
                 
@@ -85,18 +79,92 @@ struct StageSetupContainerPreviewView: View {
         }
         VStack {
             HStack {
-                Button("public stage") {
-                    
-                }.buttonStyle(.htwLong)
+                Button("Public Stage") { isPrivateStage = false
+                }.buttonStyle(.htwPressed(isSelected: isPrivateStage == false))
                 
 
                 
             }.padding()
         }
         
-    }
-    
+        VStack {
+            HStack {
+                Button("Create Stage") {
+                    guard validateInputs() else {
+                        showErrorAlert = true
+                        errorMessage = "Bitte fülle alle Felder aus, bevor du vortfährst."
+                        return
+                    }
+                    createRoomAndNavigate()
+                }
+                .disabled(!validateInputs()) //Button deaktiviert wenn Felder unvollständig
+                .buttonStyle(.htwPressed(isSelected: isCreateStagePressed))
+                .alert(isPresented: $showErrorAlert) {
+                Alert(title: Text("Fehler"), message: Text(errorMessage ?? ""), dismissButton: .default(Text("OK")))}
+                
+                /**
+                 Navigation zu LineUp Screen, wenn vorhanden
+                //NavigationLink(
+                //destination: LineUpView(),
+                //isActive: $navigateToLineUp)*/
+                EmptyView()
+            }.padding()
+        }
 }
+                             
+    // Funktion zum Abrufen der Playlists von der API
+       func fetchPlaylists() {
+           // Simulierte Server-Abfrage (später mit ServerComsController verbinden)
+           DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+               setlistoptions // Beispiel-Daten
+           }
+       }
+    
+    // Validiert die Eingaben
+        private func validateInputs() -> Bool {
+        //Playlist fehlt
+            selectedSongCount != nil &&
+            selectedTimeLimit != nil &&
+            isPrivateStage != nil
+        }
+
+        // Raum erstellen und navigieren
+        private func createRoomAndNavigate() {
+            isLoading = true
+            
+            let settings = Settings(
+                mode: .FIXED_TIME,
+            maxPlayers: 10,
+            isPublic: isPrivateStage == false)
+
+            /**
+             let room = Room(
+                id: nil,
+                host: Player(name: nil, points: 0, ready: false),
+                players: nil,
+                rounds: nil,
+                settings: settings,
+                status: open,
+                activeRound: nil
+            )
+
+            let serverComsController = ServerComsController()
+            serverComsController.createRoom(room: room) { result in
+                DispatchQueue.main.async {
+                    isLoading = false
+                    switch result {
+                    case .success:
+                        navigateToLineUp = true
+                    case .failure(let error):
+                        showErrorAlert = true
+                        errorMessage = "Fehler beim Erstellen des Raums: \(error.localizedDescription)"
+                    }
+                }
+            }*/
+        }
+}
+
+
 
 #Preview {
     StageSetupContainerPreviewView()

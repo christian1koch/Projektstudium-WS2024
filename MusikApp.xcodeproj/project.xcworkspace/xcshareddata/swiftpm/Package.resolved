@@ -1,0 +1,24 @@
+{
+  "originHash" : "5e143d5dc37711f1fb1939d06f2f910cba229414e16d32695d6fa4343e21c065",
+  "pins" : [
+    {
+      "identity" : "ddspiderchart",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dadalar/DDSpiderChart",
+      "state" : {
+        "revision" : "9bc65be4415068bff3c65622a9690902a866411a",
+        "version" : "0.6.0"
+      }
+    },
+    {
+      "identity" : "ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/spotify/ios-sdk",
+      "state" : {
+        "branch" : "master",
+        "revision" : "af71ec0bcf3baa7ec88c72119b7fdf65eb91fd67"
+      }
+    }
+  ],
+  "version" : 3
+}

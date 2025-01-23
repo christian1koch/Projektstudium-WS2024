@@ -188,19 +188,38 @@ struct HTWDestructiveButtonStyle: ButtonStyle {
   }
 }
 
-struct HTWLongButtonStyle: ButtonStyle {
+struct HTWPressedButtonStyle: ButtonStyle {
+    var isSelected: Bool // Zustand des Buttons
     var menuWdith: CGFloat  =  600
     var buttonHeight: CGFloat  =  60
   func makeBody(configuration: Configuration) -> some View {
     configuration.label
           .padding()
-          .background(Color(UIColor.systemGray6))
+          .background(isSelected ? Color.teal.opacity(0.6) :
+            configuration.isPressed ? Color.teal : Color(UIColor.systemGray6))
           .foregroundColor(.black)
           .cornerRadius(10)
           .shadow(radius: 5)
+          .scaleEffect(configuration.isPressed ? 0.95 : 1.0) // Leichtes Schrumpfen
+          .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
           .frame(width: menuWdith, height: buttonHeight, alignment: .center)
   }
 }
+
+struct HTWLittleButtonStyle: ButtonStyle {
+    var isSelected: Bool // Zustand des Buttons
+  func makeBody(configuration: Configuration) -> some View {
+    configuration.label
+          .padding()
+          .background(isSelected ? Color.teal.opacity(0.6): configuration.isPressed ? Color.teal : Color.gray)
+          .foregroundColor(.white)
+          .cornerRadius(10)
+          .scaleEffect(configuration.isPressed ? 0.95 : 1.0) // Leichtes Schrumpfen
+          .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+          .shadow(radius: 5)
+  }
+}
+
 
 extension ButtonStyle where Self == HTWPrimaryButtonStyle {
     static var htwPrimary: HTWPrimaryButtonStyle {
@@ -217,9 +236,14 @@ extension ButtonStyle where Self == HTWDestructiveButtonStyle {
         HTWDestructiveButtonStyle()
     }
 }
-extension ButtonStyle where Self == HTWLongButtonStyle {
-    static var htwLong: HTWLongButtonStyle {
-        HTWLongButtonStyle()
+extension ButtonStyle where Self == HTWPressedButtonStyle {
+    static func htwPressed(isSelected: Bool) -> HTWPressedButtonStyle {
+        HTWPressedButtonStyle(isSelected: isSelected)
+    }
+}
+extension ButtonStyle where Self == HTWLittleButtonStyle {
+    static func htwLittle(isSelected: Bool) -> HTWLittleButtonStyle {
+        HTWLittleButtonStyle(isSelected: isSelected)
     }
 }
 
