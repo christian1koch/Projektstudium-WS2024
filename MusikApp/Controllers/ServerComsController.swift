@@ -211,19 +211,19 @@ class ServerComsController {
         }.resume()
     }
     
-    /*
+    /*	
     Takes a guess (submit answers) by performing a POST-Request and calls the completion handler with the result.
     */
     // TODO: functionality of receiving points is not yet implemented
-    func takeAGuess(roomId: String, playerId: String, guesses: [String], completion: @escaping (Result<Void, Error>) -> Void) {
-        guard let url = URL(string: "\(baseUrl)/room/\(roomId)/\(playerId)") else { return }
-        
+    func submitAnswers(roomId: String, playerId: String, round: Int, guess: [String],completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let url = URL(string: "\(baseUrl)/room/\(roomId)/\(playerId)/\(round)") else { return }
+            
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
-            let jsonData = try JSONEncoder().encode(guesses)
+            let jsonData = try JSONEncoder().encode(guess)
             request.httpBody = jsonData
         } catch {
             completion(.failure(error))
