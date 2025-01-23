@@ -28,6 +28,7 @@
 		2D6848772D42A49100E33022 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848762D42A49100E33022 /* GameOverView.swift */; };
 		2D6848782D42A49100E33022 /* DataSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848742D42A49100E33022 /* DataSectionView.swift */; };
 		2D6848792D42A49100E33022 /* EvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848752D42A49100E33022 /* EvaluationView.swift */; };
+		2D68487C2D42A5F400E33022 /* StringMetric in Frameworks */ = {isa = PBXBuildFile; productRef = 2D68487B2D42A5F400E33022 /* StringMetric */; };
 		2D9706092CD977EC00946FF3 /* MusikAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9706082CD977EC00946FF3 /* MusikAppApp.swift */; };
 		2D97060B2CD977EC00946FF3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D97060A2CD977EC00946FF3 /* MainView.swift */; };
 		2D97060D2CD977EF00946FF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D97060C2CD977EF00946FF3 /* Assets.xcassets */; };
@@ -98,6 +99,7 @@
 			files = (
 				2DC7ED032CEFBF5300776DAE /* DDSpiderChart in Frameworks */,
 				2D68485D2D37DE1700E33022 /* SpotifyiOS in Frameworks */,
+				2D68487C2D42A5F400E33022 /* StringMetric in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +284,7 @@
 			packageProductDependencies = (
 				2DC7ED022CEFBF5300776DAE /* DDSpiderChart */,
 				2D68485C2D37DE1700E33022 /* SpotifyiOS */,
+				2D68487B2D42A5F400E33022 /* StringMetric */,
 			);
 			productName = MusikApp;
 			productReference = 2D9706052CD977EC00946FF3 /* MusikApp.app */;
@@ -314,6 +317,7 @@
 			packageReferences = (
 				2DC7ED012CEFBF5300776DAE /* XCRemoteSwiftPackageReference "DDSpiderChart" */,
 				2D68485B2D37DE1700E33022 /* XCRemoteSwiftPackageReference "ios-sdk" */,
+				2D68487A2D42A5F400E33022 /* XCRemoteSwiftPackageReference "StringMetric.swift" */,
 			);
 			productRefGroup = 2D9706062CD977EC00946FF3 /* Products */;
 			projectDirPath = "";
@@ -592,6 +596,14 @@
 				kind = branch;
 			};
 		};
+		2D68487A2D42A5F400E33022 /* XCRemoteSwiftPackageReference "StringMetric.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/autozimu/StringMetric.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.2;
+			};
+		};
 		2DC7ED012CEFBF5300776DAE /* XCRemoteSwiftPackageReference "DDSpiderChart" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dadalar/DDSpiderChart";
@@ -607,6 +619,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2D68485B2D37DE1700E33022 /* XCRemoteSwiftPackageReference "ios-sdk" */;
 			productName = SpotifyiOS;
+		};
+		2D68487B2D42A5F400E33022 /* StringMetric */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2D68487A2D42A5F400E33022 /* XCRemoteSwiftPackageReference "StringMetric.swift" */;
+			productName = StringMetric;
 		};
 		2DC7ED022CEFBF5300776DAE /* DDSpiderChart */ = {
 			isa = XCSwiftPackageProductDependency;
