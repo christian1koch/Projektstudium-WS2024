@@ -18,6 +18,16 @@
 		2D6848582D37DDA800E33022 /* SpotifyControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D68484D2D37DDA800E33022 /* SpotifyControllerView.swift */; };
 		2D68485D2D37DE1700E33022 /* SpotifyiOS in Frameworks */ = {isa = PBXBuildFile; productRef = 2D68485C2D37DE1700E33022 /* SpotifyiOS */; };
 		2D6848652D3A4D3200E33022 /* SpotifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848642D3A4D3200E33022 /* SpotifyController.swift */; };
+		2D6848672D42A44A00E33022 /* DataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848662D42A44A00E33022 /* DataEntry.swift */; };
+		2D68486B2D42A45A00E33022 /* AudioRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848682D42A45A00E33022 /* AudioRecognizer.swift */; };
+		2D68486C2D42A45A00E33022 /* DataSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848692D42A45A00E33022 /* DataSection.swift */; };
+		2D68486D2D42A45A00E33022 /* StructModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D68486A2D42A45A00E33022 /* StructModels.swift */; };
+		2D6848712D42A47A00E33022 /* DataSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D68486E2D42A47A00E33022 /* DataSectionViewModel.swift */; };
+		2D6848722D42A47A00E33022 /* GameOverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D68486F2D42A47A00E33022 /* GameOverViewModel.swift */; };
+		2D6848732D42A47A00E33022 /* ShazamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848702D42A47A00E33022 /* ShazamViewModel.swift */; };
+		2D6848772D42A49100E33022 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848762D42A49100E33022 /* GameOverView.swift */; };
+		2D6848782D42A49100E33022 /* DataSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848742D42A49100E33022 /* DataSectionView.swift */; };
+		2D6848792D42A49100E33022 /* EvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6848752D42A49100E33022 /* EvaluationView.swift */; };
 		2D9706092CD977EC00946FF3 /* MusikAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9706082CD977EC00946FF3 /* MusikAppApp.swift */; };
 		2D97060B2CD977EC00946FF3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D97060A2CD977EC00946FF3 /* MainView.swift */; };
 		2D97060D2CD977EF00946FF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D97060C2CD977EF00946FF3 /* Assets.xcassets */; };
@@ -50,6 +60,16 @@
 		2D6848512D37DDA800E33022 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2D68485E2D37E23C00E33022 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2D6848642D3A4D3200E33022 /* SpotifyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyController.swift; sourceTree = "<group>"; };
+		2D6848662D42A44A00E33022 /* DataEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntry.swift; sourceTree = "<group>"; };
+		2D6848682D42A45A00E33022 /* AudioRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecognizer.swift; sourceTree = "<group>"; };
+		2D6848692D42A45A00E33022 /* DataSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSection.swift; sourceTree = "<group>"; };
+		2D68486A2D42A45A00E33022 /* StructModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructModels.swift; sourceTree = "<group>"; };
+		2D68486E2D42A47A00E33022 /* DataSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSectionViewModel.swift; sourceTree = "<group>"; };
+		2D68486F2D42A47A00E33022 /* GameOverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewModel.swift; sourceTree = "<group>"; };
+		2D6848702D42A47A00E33022 /* ShazamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShazamViewModel.swift; sourceTree = "<group>"; };
+		2D6848742D42A49100E33022 /* DataSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSectionView.swift; sourceTree = "<group>"; };
+		2D6848752D42A49100E33022 /* EvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationView.swift; sourceTree = "<group>"; };
+		2D6848762D42A49100E33022 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		2D9706052CD977EC00946FF3 /* MusikApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusikApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D9706082CD977EC00946FF3 /* MusikAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusikAppApp.swift; sourceTree = "<group>"; };
 		2D97060A2CD977EC00946FF3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -189,6 +209,9 @@
 		2D9706162CD9783000946FF3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2D6848742D42A49100E33022 /* DataSectionView.swift */,
+				2D6848752D42A49100E33022 /* EvaluationView.swift */,
+				2D6848762D42A49100E33022 /* GameOverView.swift */,
 				838343BE2D427F9D0061CBF6 /* LineUpView.swift */,
 				838343BC2D427DC20061CBF6 /* GuessView.swift */,
 				9ECF20202D2AF82000B674DE /* StageSetup.swift */,
@@ -201,6 +224,10 @@
 		2D9706172CD9783B00946FF3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2D6848682D42A45A00E33022 /* AudioRecognizer.swift */,
+				2D6848692D42A45A00E33022 /* DataSection.swift */,
+				2D68486A2D42A45A00E33022 /* StructModels.swift */,
+				2D6848662D42A44A00E33022 /* DataEntry.swift */,
 				514BA70A2D38071800B0C5B7 /* StructModels.swift */,
 				2D9706202CD97CC800946FF3 /* User.swift */,
 			);
@@ -210,6 +237,9 @@
 		2D9706182CD9784000946FF3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				2D68486E2D42A47A00E33022 /* DataSectionViewModel.swift */,
+				2D68486F2D42A47A00E33022 /* GameOverViewModel.swift */,
+				2D6848702D42A47A00E33022 /* ShazamViewModel.swift */,
 				2D97061E2CD97CA600946FF3 /* MainViewModel.swift */,
 			);
 			path = ViewModels;
@@ -317,10 +347,14 @@
 				9ECF20212D2AF82000B674DE /* StageSetup.swift in Sources */,
 				2D6848652D3A4D3200E33022 /* SpotifyController.swift in Sources */,
 				2D97060B2CD977EC00946FF3 /* MainView.swift in Sources */,
+				2D6848672D42A44A00E33022 /* DataEntry.swift in Sources */,
 				838343BD2D427DC70061CBF6 /* GuessView.swift in Sources */,
 				2D57B69D2CE4B0E5005F1408 /* ClientAuthController.swift in Sources */,
 				2D3900D02D0B03F4007FF2AB /* HTWContainerModifier.swift in Sources */,
 				51F06C202D37C1DA00C5A812 /* ServerComsController.swift in Sources */,
+				2D68486B2D42A45A00E33022 /* AudioRecognizer.swift in Sources */,
+				2D68486C2D42A45A00E33022 /* DataSection.swift in Sources */,
+				2D68486D2D42A45A00E33022 /* StructModels.swift in Sources */,
 				2D191DAF2D1DEC67009B410F /* PrivateJoinView.swift in Sources */,
 				838343BF2D427FA60061CBF6 /* LineUpView.swift in Sources */,
 				514BA70B2D38072100B0C5B7 /* StructModels.swift in Sources */,
@@ -333,6 +367,12 @@
 				2D9706092CD977EC00946FF3 /* MusikAppApp.swift in Sources */,
 				2D97061F2CD97CA600946FF3 /* MainViewModel.swift in Sources */,
 				514BA7092D38062000B0C5B7 /* GameController.swift in Sources */,
+				2D6848772D42A49100E33022 /* GameOverView.swift in Sources */,
+				2D6848782D42A49100E33022 /* DataSectionView.swift in Sources */,
+				2D6848792D42A49100E33022 /* EvaluationView.swift in Sources */,
+				2D6848712D42A47A00E33022 /* DataSectionViewModel.swift in Sources */,
+				2D6848722D42A47A00E33022 /* GameOverViewModel.swift in Sources */,
+				2D6848732D42A47A00E33022 /* ShazamViewModel.swift in Sources */,
 				51F06C1C2D37C1B500C5A812 /* _Depricated_SpotifyController.swift in Sources */,
 				2D2DB4632CEFC61700F1E790 /* RadarDiagrammPreviewView.swift in Sources */,
 			);
