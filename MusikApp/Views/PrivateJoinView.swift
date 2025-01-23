@@ -67,6 +67,6 @@ struct PrivateJoinView: View {
 }
 
 #Preview {
-    PrivateJoinView(stages: stagesMock)
+    PrivateJoinView()
 }
 
