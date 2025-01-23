@@ -13,7 +13,7 @@ struct MainView: View {
         
         VStack {
            Text("Welcome to Music App")
-            PublicJoinView()
+           StageSetupView()
         }
         .padding()
     }

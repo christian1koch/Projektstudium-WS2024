@@ -66,14 +66,17 @@ extension SpotifyClientAuthController {
 
         let (data, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
+            print("ungultige bl bla")
             throw NSError(domain: "SpotifyAPI", code: 500, userInfo: [NSLocalizedDescriptionKey: "Ungültige Serverantwort"])
         }
 
         guard (200...299).contains(httpResponse.statusCode) else {
+            print("another error")
             throw NSError(domain: "SpotifyAPI", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "Fehler beim Abrufen der Playlists"])
         }
 
         let decodedResponse = try JSONDecoder().decode(PlaylistsResponse.self, from: data)
+        print("comes here", decodedResponse.items);
         return decodedResponse.items
     }
 }

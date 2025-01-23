@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct StageSetupView: View {
-    let setlist = ["Setlist", "Lieblingssongs", "TOP-50 Deutschland", "UK Drill Musik", "Deutschrap Brandneu"]
+    //let setlist = ["Setlist", "Lieblingssongs", "TOP-50 Deutschland", "UK Drill Musik", "Deutschrap Brandneu"]
     @State private var spotifyAuthController = SpotifyClientAuthController()
     @State private var playlists: [Playlist] = []
     @State private var selectedPlaylist: Playlist? = nil
@@ -66,7 +66,7 @@ struct StageSetupView: View {
                     }
                 }.padding()
             }.htwContainerStyle()
-            
+             
             VStack {
                 VStack {
                     Text("Zeitlimit").htwTitleStyle()
@@ -119,33 +119,16 @@ struct StageSetupView: View {
                     .disabled(!validateInputs()) //Button deaktiviert wenn Felder unvollständig
                     .buttonStyle(.htwPressed(isSelected: isCreateStagePressed))
                     
-                    
-                    /**
-                     Navigation zu LineUp Screen, wenn vorhanden
+    
+                     //Navigation zu LineUp Screen, wenn vorhanden
                      //NavigationLink(
                      //destination: LineUpView(),
-                     //isActive: $navigateToLineUp)*/
+                     //isActive: $navigateToLineUp)
                     EmptyView()
                 }.padding()
             }
         }
     
-    /**Funktion zum Abrufen der Playlists von der API
-     private func fetchPlaylists() {
-     isLoading = true
-     spotifyController.fetchUserPlaylists { result in
-     DispatchQueue.main.async {
-     isLoading = false
-     switch result {
-     case .success(let fetchedPlaylists):
-     playlists = fetchedPlaylists // Muss [Playlist] sein
-     case .failure(let error):
-     showErrorAlert = true
-     errorMessage = "Fehler beim Laden der Playlists: \(error.localizedDescription)"
-     }
-     }
-     }
-     }*/
     
     // Validiert die Eingaben
     private func validateInputs() -> Bool {
