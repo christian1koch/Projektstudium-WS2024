@@ -35,5 +35,5 @@ struct LineUpView: View {
 }
 
 #Preview {
-    LineUpView(room: Room(id: "1234", host: Player(name: "Host"), players: Set([Player(name: "Klaus"), Player(name: "Gabi")]), rounds: nil, settings: Settings(mode: .FASTEST_STOPS, maxPlayers: 2, isPublic: false), status: nil, activeRound: nil))
+    LineUpView(room: Room(id: "1234", host: Player(name: "Host"), players: [Player(name: "Klaus"), Player(name: "Gabi")], rounds: nil, settings: Settings(mode: .FASTEST_STOPS, maxPlayers: 2, isPublic: false), status: nil, activeRound: nil))
 }
