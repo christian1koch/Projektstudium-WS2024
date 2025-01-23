@@ -8,14 +8,11 @@
 import SwiftUI
 
 struct GuessView: View {
-    @State private var year: Double = 1983
+    @State private var year: Double = 0
     @State private var titleText: String = ""
     @State private var artistText: String = ""
     @State private var albumText: String = ""
     @State private var isMuted: Bool = false  // TODO: add logic
-    
-    // TODO: remove when perform btn logic is implemented
-    @Environment(\.dismiss) var dismiss // To go back to the previous view
 
     var body: some View {
         // Current year to get maximum for guess year slider
@@ -98,15 +95,30 @@ struct GuessView: View {
             }
             .padding()
 
-            // Submit and evaluate results
+            // Submit guess and evaluate results
             Button("Perform") {
                 // TODO: Add logic
-                dismiss()
+                if isComplete() {
+                    // #TODO: Add logic
+                    // save guess
+                    let guess = Guess(playerId: "", guesses: [titleText, artistText, albumText, String(year)])
+                    // send guess to server
+                    // evaluate guess
+                    // open EvaluationView
+                    print("Perform")
+                } else {
+                    print("Please fill out all fields")
+                }
             }
             .buttonStyle(.htwPrimary)
         }
         .padding()
         .htwContainerStyle()
+    }
+    
+    // checks if all answer were given
+    private func isComplete() -> Bool {
+        return !titleText.isEmpty && !artistText.isEmpty && !albumText.isEmpty && year != 0
     }
 }
 
