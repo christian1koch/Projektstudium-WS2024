@@ -27,10 +27,21 @@ struct PublicJoinView: View {
             .navigationTitle("Rooms (public)")
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    Button("Join Room") {
-                        print("joining \(selectedRoomId ?? "NO_SELECTED_ROOM")...")
+                    if (selectedRoomId == nil) {
+                        Button("Join Room") {
+                            
+                        }.disabled(true)
                     }
-                    .disabled(selectedRoomId == nil)
+                    else {
+                        NavigationLink {
+                            LineUpView(roomId: selectedRoomId!).onAppear()
+                        } label: {
+                            Text("Join Room")
+                                .bold()
+                                .frame(maxWidth: .infinity, minHeight: 44)
+                        }
+                    }
+                    
                 }
             }
         }
