@@ -36,7 +36,7 @@ enum Status: String, Codable {
 }
 
 struct Room: Codable {
-    var id: String?
+    var id: String
     var host: Player
     var players: [Player]?
     var rounds: [Round]?
