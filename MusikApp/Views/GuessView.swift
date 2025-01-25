@@ -12,10 +12,10 @@ struct GuessView: View {
     @State private var titleText: String = ""
     @State private var artistText: String = ""
     @State private var albumText: String = ""
-    @State private var isMuted: Bool = false  // TODO: add logic
-    @State private var navigateToEvaluation = false     // State to trigger navigation to Evaluation
     
-    // game controller
+    @State private var isMuted: Bool = false  // TODO: add logic
+    @State private var navigateToEvaluation = false
+    
     private var gameController: GameController = GameController.shared
     
     var body: some View {
@@ -65,26 +65,26 @@ struct GuessView: View {
                     // Song title input card
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Title").htwTitleStyle()
-                        TextField("Freitext...", text: $titleText)
+                        TextField("Your answer...", text: $titleText)
                             .padding()
-                            .htwContainerStyle()
                     }
+                    .htwContainerStyle()
                     
                     // Artist input card
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Artist").htwTitleStyle()
-                        TextField("Freitext...", text: $artistText)
+                        TextField("Your answer...", text: $artistText)
                             .padding()
-                            .htwContainerStyle()
                     }
+                    .htwContainerStyle()
                     
                     // Album input card
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Album").htwTitleStyle()
-                        TextField("Freitext...", text: $albumText)
+                        TextField("Your answer...", text: $albumText)
                             .padding()
-                            .htwContainerStyle()
                     }
+                    .htwContainerStyle()
                     
                     // Year input card
                     VStack(alignment: .leading, spacing: 8) {
@@ -94,19 +94,21 @@ struct GuessView: View {
                             Text("\(Int(year))")
                                 .htwSimpleTextStyle()
                                 .monospacedDigit()  // Removes seperator
+                                .padding()
                         }
                     }
+                    .htwContainerStyle()
                 }
                 .padding()
                 
-                // Submit guess and evaluate results
+                // Submits guess, evaluates results and opens EvaluationView
                 Button("Perform") {
                     if isComplete(), let activeRoom = gameController.activeRoom {
                         let roomId = activeRoom.id
-                        let playerId = "playerName"     //TODO: get player id - wo bitte steht die???
+                        let playerId = "playerName"     //TODO: get player id - wo steht die player id?
                         let round = activeRoom.activeRound ?? 0
-                        // let guess = Guess(playerId: "", guesses: [titleText, artistText, albumText, String(year)])   // Guess struct
-                        let guess = [titleText, artistText, albumText, String(year)]                                    // Guess Array
+                        // let guess = Guess(playerId: "", guesses: [titleText, artistText, albumText, String(year)])   // Guess as struct
+                        let guess = [titleText, artistText, albumText, String(year)]                                    // Guess as Array
                         
                         // submit guess
                         gameController.serverComsController.submitAnswers(roomId: roomId, playerId: playerId, round: round, guess: guess, completion: { result in
@@ -124,20 +126,23 @@ struct GuessView: View {
                         
                         // navigate to next view
                         navigateToEvaluation = true  // Trigger navigation
+                        print("Perform")
                         
                     } else {
                         print("Please fill out all fields")
                     }
                 }
                 .buttonStyle(.htwPrimary)
+                .opacity(isComplete() ? 1.0 : 0.5)
+                .disabled(!isComplete())
             }
             .padding()
-            .htwContainerStyle()
             .navigationDestination(isPresented: $navigateToEvaluation) {
                 EvaluationView(tabs: mockDataSections())
             }
         }
     }
+    
     
     // checks if all answer were given, ture = all answers are given
     func isComplete() -> Bool {
