@@ -73,3 +73,7 @@ struct GameOverView: View {
         .padding()
     }
 }
+
+#Preview {
+    GameOverView(viewModel: GameOverViewModel(players: [Player(name: "Dennis", points: 10), Player(name: "Max", points: 5)]))
+}
