@@ -101,12 +101,15 @@ struct GuessView: View {
                 
                 // Submit guess and evaluate results
                 Button("Perform") {
-                    // TODO: Add logic
-                    if isComplete() {
+                    if isComplete(), let activeRoom = gameController.activeRoom {
+                        let roomId = activeRoom.id
+                        let playerId = "playerName"     //TODO: get player id - wo bitte steht die???
+                        let round = activeRoom.activeRound ?? 0
                         // let guess = Guess(playerId: "", guesses: [titleText, artistText, albumText, String(year)])   // Guess struct
                         let guess = [titleText, artistText, albumText, String(year)]                                    // Guess Array
-                        // submit answer
-                        gameController.serverComsController.submitAnswers(roomId: "", playerId: "", round: 2, guess: guess, completion: { result in
+                        
+                        // submit guess
+                        gameController.serverComsController.submitAnswers(roomId: roomId, playerId: playerId, round: round, guess: guess, completion: { result in
                             switch result {
                             case .success(let response):
                                 print("Response: \(response)")
