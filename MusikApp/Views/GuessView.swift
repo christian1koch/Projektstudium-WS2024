@@ -144,7 +144,7 @@ struct GuessView: View {
     }
     
     
-    // checks if all answer were given, ture = all answers are given
+    // checks if all answer were given, true = all answers are given
     func isComplete() -> Bool {
         return !titleText.isEmpty && !artistText.isEmpty && !albumText.isEmpty && year != 0
     }

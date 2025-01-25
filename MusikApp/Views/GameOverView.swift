@@ -5,8 +5,6 @@
 //  Created by Dennis Forster on 23.01.25.
 //
 
-import Foundation
-
 import SwiftUI
 
 struct GameOverView: View {
@@ -15,62 +13,51 @@ struct GameOverView: View {
     var body: some View {
         VStack(spacing: 20) {
             Text("Show is Over\n(Elvis has left the building)")
-                .font(.headline)
+                .htwTitleStyle()
                 .multilineTextAlignment(.center)
             
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.gray, lineWidth: 1)
-                .overlay(
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("Spieler")
-                                .fontWeight(.bold)
-                            Spacer()
-                            Text("Punkte")
-                                .fontWeight(.bold)
-                        }
-                        .padding(.bottom, 5)
+            VStack(alignment: .leading) {
+                            HStack {
+                                Text("Spieler")
+                                    .htwTitleStyle()
+                                Spacer()
+                                Text("Punkte")
+                                    .htwTitleStyle()
+                            }
+                            .padding(.bottom, 5)
                         
-                        ForEach(Array(viewModel.players.enumerated()), id: \.offset) { index, player in
+                        ForEach(Array(viewModel.players.enumerated()), id: \.offset) { _, player in
                             HStack {
                                 Text(player.name ?? "unnamed player")
+                                    .htwSimpleTextStyle()
                                 Spacer()
                                 Text("\(player.points)")
+                                    .htwSimpleTextStyle()
+                                    .monospacedDigit()
                             }
                         }
                     }
                     .padding()
-                )
+                    .htwContainerStyle()
                 .frame(height: 150)
             
             VStack(spacing: 10) {
-                Button(action: {
-                    
-                }) {
-                    Text("restart")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                Button("Restart") {
+                    // Restart action
                 }
+                .buttonStyle(.htwPrimary)
                 
-                Button(action: {
-            
-                }) {
-                    Text("backstage")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                Button("Backstage") {
+                    // Backstage action
                 }
+                .buttonStyle(.htwDestructive)
             }
             .padding(.horizontal)
             
             Spacer()
         }
         .padding()
+        .background(Color.white)
     }
 }
 
