@@ -105,7 +105,7 @@ struct GuessView: View {
                 Button("Perform") {
                     if isComplete(), let activeRoom = gameController.activeRoom {
                         let roomId = activeRoom.id
-                        let playerId = "playerName"     //TODO: get player id - wo steht die player id?
+                        let playerId = gameController.player.name!
                         let round = activeRoom.activeRound ?? 0
                         // let guess = Guess(playerId: "", guesses: [titleText, artistText, albumText, String(year)])   // Guess as struct
                         let guess = [titleText, artistText, albumText, String(year)]                                    // Guess as Array
@@ -133,7 +133,7 @@ struct GuessView: View {
                     }
                 }
                 .buttonStyle(.htwPrimary)
-                .opacity(isComplete() ? 1.0 : 0.5)
+                .opacity(isComplete() ? 1.0 : 0.4)
                 .disabled(!isComplete())
             }
             .padding()
