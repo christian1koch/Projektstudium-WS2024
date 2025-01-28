@@ -14,6 +14,7 @@ struct EvaluationView: View {
     @State private var navigateToGameOver = false
     @State private var viewedTabs: Set<Int> = []
     @State private var selectedTabIndex = 0
+    @State private var gameController = GameController.shared
     
     init(tabs: [DataSection]) {
         self.tabs = tabs
@@ -57,15 +58,15 @@ struct EvaluationView: View {
                 
                 Spacer()
                 
-                
                 //#TODO: differ next round/ endround
                 // #TODO mark player as ready, navigate to next screen when all players are ready
                 // green/ready by default, when clicked grey/waiting
                 // continue when all players are ready
                 Button(action: {
+                    //if gameController.P
                     navigateToGameOver = true
                 }) {
-                    Text("Ready")
+                    Text("Continue")
                 }
                 .buttonStyle(.htwPrimary)
                 .padding()

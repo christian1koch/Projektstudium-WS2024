@@ -9,6 +9,7 @@ struct LineUpView: View {
     
     // Reference to your API controller
     private let serverComsController = ServerComsController()
+    private let gameController = GameController.shared
     
     var body: some View {
         NavigationStack {
@@ -44,7 +45,7 @@ struct LineUpView: View {
                         // #TODO Musik abspielen
                         navigateToGuestView = true
                     }
-                    .disabled(room.players?.count ?? -1 < 1)    // #TODO: set to -1 < 2 again after testing
+                    .disabled(room.players?.count ?? -1 < 1 || room.host != gameController.player && false)    // #TODO: set to -1 < 2 again after testing, rmv false
                     .buttonStyle(.htwPrimary)
                     
                 } else if isFirstLoad {
