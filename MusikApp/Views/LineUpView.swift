@@ -40,12 +40,12 @@ struct LineUpView: View {
                             switch result {
                             case .success:
                                 print("Game started")
+                                navigateToGuestView = true
                             case .failure(let error):
                                 print("Error starting game: \(error)")
                             }
                         })
                         // #TODO Musik abspielen
-                        navigateToGuestView = true
                     }
                     .disabled(room.players?.count ?? -1 < 1 || room.host != gameController.player && false)    // #TODO: set to -1 < 2 again after testing, rmv false
                     .buttonStyle(.htwPrimary)

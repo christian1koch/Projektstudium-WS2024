@@ -9,10 +9,14 @@ import Foundation
 import SwiftUI
 
 struct PublicJoinView: View {
+    let gameController = GameController.shared
     @State private var rooms: [Room] = []
     @State private var selectedRoomId: String?
     @State private var timer: Timer?
+    @State private var navigateToRoom = false
+    @State private var isJoiningRoom = false
     let apiService = ServerComsController()
+    
     var body: some View {
         NavigationStack {
             List(rooms, id: \.id, selection: $selectedRoomId) { room in
@@ -25,23 +29,23 @@ struct PublicJoinView: View {
                 stopPeriodicFetching()
             }
             .navigationTitle("Rooms (public)")
+            .navigationDestination(isPresented: $navigateToRoom){
+                LineUpView(roomId: selectedRoomId ?? "ABCD")
+            }
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    if (selectedRoomId == nil) {
+                    if selectedRoomId == nil || isJoiningRoom {
                         Button("Join Room") {
-                            
-                        }.disabled(true)
-                    }
-                    else {
-                        NavigationLink {
-                            LineUpView(roomId: selectedRoomId!).onAppear()
-                        } label: {
-                            Text("Join Room")
-                                .bold()
-                                .frame(maxWidth: .infinity, minHeight: 44)
+                            // Do nothing when button is disabled
                         }
+                        .disabled(true)
+                    } else {
+                        Button("Join Room") {
+                            joinRoom()
+                        }
+                        .bold()
+                        .frame(maxWidth: .infinity, minHeight: 44)
                     }
-                    
                 }
             }
         }
@@ -74,6 +78,31 @@ struct PublicJoinView: View {
             }
         }
     }
+    private func joinRoom() {
+        guard let selectedRoomId = selectedRoomId else { return }
+        
+        isJoiningRoom = true  // Set the flag to disable the button while joining
+        
+        // Create the player object (using details from your gameController or wherever)
+        let player = gameController.player  // Assuming gameController has the player info
+        
+        apiService.joinRoom(roomId: selectedRoomId, player: player) { result in
+            DispatchQueue.main.async {
+                isJoiningRoom = false  // Reset the flag when the operation is complete
+                
+                switch result {
+                case .success(let updatedRoom):
+                    print("Joined room successfully: \(updatedRoom)")
+                    // Navigate to the LineUpView with the updated room
+                    // You can either pass the updated room or just the ID
+                    navigateToRoom = true;
+                case .failure(let error):
+                    print("Failed to join room: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+
 }
 #Preview {
     PublicJoinView()
