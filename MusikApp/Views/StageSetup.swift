@@ -24,136 +24,147 @@ struct StageSetupView: View {
     @State private var selectedTimeLimit: Int? = nil
     
     
-    @State private var selectedOptionIndex =  0
+    //@State private var selectedOptionIndex =  0
     @State private var selectedMode: Mode = Mode.allCases.first ?? .FIXED_TIME
     @State private var showDropdown =  false
+    @State private var roomId: String? = "BOOM" //nil // Holds the room ID for navigation
     
-    @State private var gamecontroller = GameController.shared
+    @State private var gameController = GameController.shared
+    @State private var serverComsController = ServerComsController()
     
     var body : some View {
-        
-        // select-mode card
-        VStack {
+        NavigationStack {
+            // select-mode card
             VStack {
-                DropDownMenu(
-                    options: Mode.allCases.map {$0.rawValue},
-                    selectedOptionIndex: Binding(
-                        get: {
-                            Mode.allCases.firstIndex(of: selectedMode) ?? 0
-                        },
-                        set: { index in
-                            guard index < Mode.allCases.count else { return }
-                            selectedMode = Mode.allCases[index]
-                        }
-                    ),
-                    showDropdown: $showDropdown
-                )
-            }
-            .onTapGesture {
-                withAnimation {
-                    showDropdown.toggle()}}
-        }.zIndex(100)
-        
-        // select-playlist card
-        VStack {
-            VStack {
-                DropDownMenu(
-                    options: playlists.map { $0.name }, // Dropdown-Optionen
-                    selectedOptionIndex: Binding(
-                        get: {
-                            guard !playlists.isEmpty else { return 0 } // Sicherstellen, dass playlists nicht leer ist
-                            return playlists.firstIndex(where: { $0.id == selectedPlaylist?.id }) ?? 0
-                        },
-                        set: { index in
-                            guard index < playlists.count else { return } // Index prüfen, um Fehler zu vermeiden
-                            selectedPlaylist = playlists[index]
-                        }
-                    ),
-                    showDropdown: $showDropdown
-                )
-            }
-            .onTapGesture {
-                withAnimation {
-                    showDropdown.toggle()}}
-        }.zIndex(100)
-        
-        // select-songcount card
-        VStack {
-            VStack {
-                Text("Anzahl Songs").htwTitleStyle()
-            }
-            .padding()
-            HStack {
-                ForEach([05, 09, 13, 21], id: \.self) {
-                    count in Button(action: {
-                        selectedSongCount = count
-                    }) {
-                        Text(String(format: "%02d", count))
-                    }.buttonStyle(.htwLittle(isSelected: selectedSongCount == count)) // Überprüft, ob der Button ausgewählt ist
+                // Dropdown Menu
+                VStack {
+                    DropDownMenu(
+                        options: Mode.allCases.map {$0.rawValue},
+                        selectedOptionIndex: Binding(
+                            get: {
+                                Mode.allCases.firstIndex(of: selectedMode) ?? 0
+                            },
+                            set: { index in
+                                guard index < Mode.allCases.count else { return }
+                                selectedMode = Mode.allCases[index]
+                            }
+                        ),
+                        showDropdown: $showDropdown
+                    )
                 }
-            }.padding()
-        }.htwContainerStyle()
-        
-        VStack {
+                .onTapGesture {
+                    withAnimation {
+                        showDropdown.toggle()}}
+            }.zIndex(100)
+            
+            // select-playlist card
             VStack {
-                Text("Time Limit").htwTitleStyle()
-            }
-            .padding()
-            HStack {
-                ForEach([10, 30, 60, 90], id: \.self) {
-                    limit in Button(action: {
-                        selectedTimeLimit = limit
-                    }) {
-                        Text("\(limit)")
-                    }                  .buttonStyle(.htwLittle(isSelected: selectedTimeLimit == limit)) // Überprüft, ob der Button ausgewählt ist
+                VStack {
+                    DropDownMenu(
+                        options: playlists.map { $0.name }, // Dropdown-Optionen
+                        selectedOptionIndex: Binding(
+                            get: {
+                                guard !playlists.isEmpty else { return 0 } // Sicherstellen, dass playlists nicht leer ist
+                                return playlists.firstIndex(where: { $0.id == selectedPlaylist?.id }) ?? 0
+                            },
+                            set: { index in
+                                guard index < playlists.count else { return } // Index prüfen, um Fehler zu vermeiden
+                                selectedPlaylist = playlists[index]
+                            }
+                        ),
+                        showDropdown: $showDropdown
+                    )
                 }
-            }.padding()
-        }.htwContainerStyle()
-        
-        // private stage button
-        VStack {
-            HStack {
-                Button("Private Stage") { isPrivateStage = true
-                    
-                }.buttonStyle(.htwPressed(isSelected: isPrivateStage == true))
-                
-                
-            }.padding()
-        }
-        
-        // public stage button
-        VStack {
-            HStack {
-                Button("Public Stage") { isPrivateStage = false
-                }.buttonStyle(.htwPressed(isSelected: isPrivateStage == false))
-                
-                
-                
-            }.padding()
-        }
-        
-        VStack {
-            HStack {
-                Button("Create Stage") {
-                    guard validateInputs() else {
-                        showErrorAlert = true
-                        errorMessage = "All params required to start the game."
-                        return
+                .onTapGesture {
+                    withAnimation {
+                        showDropdown.toggle()}}
+            }.zIndex(100)
+            
+            // select-songcount card
+            VStack {
+                VStack {
+                    Text("Anzahl Songs").htwTitleStyle()
+                }
+                .padding()
+                HStack {
+                    ForEach([05, 09, 13, 21], id: \.self) {
+                        count in Button(action: {
+                            selectedSongCount = count
+                        }) {
+                            Text(String(format: "%02d", count))
+                        }.buttonStyle(.htwLittle(isSelected: selectedSongCount == count)) // Überprüft, ob der Button ausgewählt ist
                     }
-                    createRoomAndNavigate()
+                }.padding()
+            }.htwContainerStyle()
+            
+            VStack {
+                VStack {
+                    Text("Time Limit").htwTitleStyle()
                 }
-                .alert(isPresented: $showErrorAlert) {
-                    Alert(title: Text("Fehler"), message: Text(errorMessage ?? ""), dismissButton: .default(Text("OK")))}
-                .disabled(!validateInputs()) //Button deaktiviert wenn Felder unvollständig
-                .buttonStyle(.htwPressed(isSelected: isCreateStagePressed))
-                
-                
-                //Navigation zu LineUp Screen, wenn vorhanden
-                //NavigationLink(
-                //destination: LineUpView(),
-                //isActive: $navigateToLineUp)
-                EmptyView()
-            }.padding()
+                .padding()
+                HStack {
+                    ForEach([10, 30, 60, 90], id: \.self) {
+                        limit in Button(action: {
+                            selectedTimeLimit = limit
+                        }) {
+                            Text("\(limit)")
+                        }                  .buttonStyle(.htwLittle(isSelected: selectedTimeLimit == limit)) // Überprüft, ob der Button ausgewählt ist
+                    }
+                }.padding()
+            }.htwContainerStyle()
+            
+            // private stage button
+            VStack {
+                HStack {
+                    Button("Private Stage") { isPrivateStage = true
+                        
+                    }.buttonStyle(.htwPressed(isSelected: isPrivateStage == true))
+                    
+                    
+                }.padding()
+            }
+            
+            // public stage button
+            VStack {
+                HStack {
+                    Button("Public Stage") { isPrivateStage = false
+                    }.buttonStyle(.htwPressed(isSelected: isPrivateStage == false))
+                    
+                    
+                    
+                }.padding()
+            }
+            
+            // create stage button
+            VStack {
+                HStack {
+                    Button("Create Stage") {
+                        guard validateInputs() else {
+                            showErrorAlert = true
+                            errorMessage = "All params required to start the game."
+                            return
+                        }
+                        createRoomAndNavigate()
+                    }
+                    .alert(isPresented: $showErrorAlert) {
+                        Alert(title: Text("Fehler"), message: Text(errorMessage ?? ""), dismissButton: .default(Text("OK")))}
+                    .disabled(!validateInputs()) //Button deaktiviert wenn Felder unvollständig
+                    .buttonStyle(.htwPressed(isSelected: isCreateStagePressed))
+                    
+                    // create room auf serverComsController aufrufen (async, returns room)
+                    // ifsuccessfull
+                    // id.b: setupscreen:
+                    //createRoom auf Servers aufrufen -> bei positivem Resultat GameController roomRefreshLoop auf raum ID starten
+                    // & gameController.gameRunning auf true setzen
+                    // (da ein Raum erfolgreich erstellt wurde und wir uns in diesem befinden)
+                    //Navigation zu LineUp Screen, wenn vorhanden
+                    
+
+                }
+                .padding()
+                .navigationDestination(isPresented: $navigateToLineUp) {
+                    LineUpView(roomId: roomId!)}
+            }
         }
     }
     
@@ -176,30 +187,23 @@ struct StageSetupView: View {
             rounds: selectedSongCount!,
             isPublic: isPrivateStage == false)
         
-        /**
-         let room = Room(
-         id: nil,
-         host: Player(name: nil, points: 0, ready: false),
-         players: nil,
-         rounds: nil,
-         settings: settings,
-         status: open,
-         activeRound: nil
-         )
+        
+        let room = RoomCreateRequest(
+            host: gameController.player,
+            settings: settings)
          
-         let serverComsController = ServerComsController()
-         serverComsController.createRoom(room: room) { result in
-         DispatchQueue.main.async {
-         isLoading = false
-         switch result {
-         case .success:
-         navigateToLineUp = true
-         case .failure(let error):
-         showErrorAlert = true
-         errorMessage = "Fehler beim Erstellen des Raums: \(error.localizedDescription)"
-         }
-         }
-         }*/
+        serverComsController.createRoom(room: room) { result in
+            DispatchQueue.main.async {
+                isLoading = false
+                switch result {
+                case .success:
+                    navigateToLineUp = true
+                case .failure(let error):
+                    showErrorAlert = true
+                    errorMessage = "Fehler beim Erstellen des Raums: \(error.localizedDescription)"
+                }
+            }
+        }
     }
     
   
