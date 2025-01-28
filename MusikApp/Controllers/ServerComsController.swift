@@ -131,7 +131,7 @@ class ServerComsController {
         do {
             let jsonData = try JSONEncoder().encode(room)
             request.httpBody = jsonData
-            //print("Request: \(String(data: jsonData, encoding: .utf8) ?? "nil")")
+            print("Request: \(String(data: jsonData, encoding: .utf8) ?? "nil")")
 
         } catch {
             completion(.failure(error))
@@ -142,15 +142,19 @@ class ServerComsController {
             if let error = error {
                 completion(.failure(error))
             } else if let data = data {
+                print("Server Response: \(String(data: data, encoding: .utf8) ?? "nil")")
                 do {
                     let createdRoom = try JSONDecoder().decode(Room.self, from: data)
                     completion(.success(createdRoom))
                 } catch {
                     completion(.failure(error))
-                    //print("Server Response: \(String(data: data, encoding: .utf8) ?? "nil")")
+                    print("Decoding error: \(error)")
                 }
+            } else {
+                completion(.failure(NSError(domain: "No data received", code: -1, userInfo: nil)))
             }
         }.resume()
+
     }
     
     /*

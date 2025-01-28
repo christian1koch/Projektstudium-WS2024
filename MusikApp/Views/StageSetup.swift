@@ -55,7 +55,7 @@ struct StageSetupView: View {
                     //                    withAnimation {
                     //                        showDropdown.toggle()}}
                     Picker("Mode", selection: $selectedMode) {
-                        ForEach(Mode.allCases) { mode in
+                        ForEach(Mode.allCases, id: \.self) { mode in
                             Text(mode.rawValue)
                         }
                     }
@@ -200,11 +200,12 @@ struct StageSetupView: View {
             DispatchQueue.main.async {
                 isLoading = false
                 switch result {
-                case .success:
+                case .success(let createdRoom):
+                    roomId = createdRoom.id
                     navigateToLineUp = true
                 case .failure(let error):
                     showErrorAlert = true
-                    errorMessage = "Fehler beim Erstellen des Raums: \(error.localizedDescription)"
+                    errorMessage = "Fehler beim Erstellen des Raums: \(error)"
                 }
             }
         }

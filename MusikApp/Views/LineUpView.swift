@@ -6,15 +6,16 @@ struct LineUpView: View {
     @State private var errorMessage: String?
     @State private var isFirstLoad = true
     @State private var navigateToGuestView = false
-    
+    @State private var timer: Timer?
     // Reference to your API controller
     private let serverComsController = ServerComsController()
     private let gameController = GameController.shared
-    
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 50) {
                 if let room = room {
+                    
                     // Display room details
                     VStack {
                         Text(room.id)
@@ -25,6 +26,7 @@ struct LineUpView: View {
                     Spacer()
                     ForEach(Array(room.players ?? []), id: \.self) { player in
                         HStack {
+                            
                             Text(player.name ?? "Unknown")
                         }
                         .padding(EdgeInsets(top: 0, leading: 50, bottom: 0, trailing: 50))
@@ -65,46 +67,51 @@ struct LineUpView: View {
             .navigationDestination(isPresented: $navigateToGuestView){
                 GuessView()
             }
-            
-            
             .onAppear {
-                startFetchingRoom()
-            }
+                            startFetchingRoom() // Start fetching when the view appears
+                        }
+                        .onDisappear {
+                            stopFetchingRoom() // Stop fetching when the view disappears
+                        }
         }
     }
         
-        /// Continuously fetch the room details in a loop
-        private func startFetchingRoom() {
-            Task {
-                while true {
-                    await fetchRoom()
-                    try? await Task.sleep(nanoseconds: 5_000_000_000) // Fetch every 5 seconds
-                }
-            }
+    /// Start periodic fetching of room details every 5 seconds
+    private func startFetchingRoom() {
+        stopFetchingRoom() // Ensure previous timer is stopped before starting a new one
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+            fetchRoom()
         }
+    }
+
+    /// Stop the timer when the view disappears
+    private func stopFetchingRoom() {
+        timer?.invalidate()
+        timer = nil
+    }
+
         
         /// Fetch a specific room's details using `ServerComsController`
-        private func fetchRoom() async {
+        private func fetchRoom() {
             if isFirstLoad { isFirstLoad = true } // Show loading indicator only during the first fetch
             
-            await withCheckedContinuation { continuation in
-                serverComsController.getRoomById(id: roomId) { result in
-                    DispatchQueue.main.async {
-                        switch result {
-                        case .success(let fetchedRoom):
-                            self.room = fetchedRoom
-                            self.errorMessage = nil
-                            self.isFirstLoad = false
-                        case .failure(let error):
-                            self.errorMessage = error.localizedDescription
-                            self.room = nil
-                            self.isFirstLoad = false
+            serverComsController.getRoomById(id: roomId) { result in
+                        DispatchQueue.main.async {
+                            switch result {
+                            case .success(let fetchedRoom):
+                                print("fetchedRoom:", fetchedRoom)
+                                self.room = fetchedRoom
+                                self.errorMessage = nil
+                                self.isFirstLoad = false
+                            case .failure(let error):
+                                self.errorMessage = error.localizedDescription
+                                self.room = nil
+                                self.isFirstLoad = false
+                            }
                         }
-                        continuation.resume()
                     }
                 }
-            }
-        }
     }
 
 
