@@ -57,19 +57,16 @@ struct EvaluationView: View {
                 
                 Spacer()
                 
+                
+                //#TODO: differ next round/ endround
+                // #TODO mark player as ready, navigate to next screen when all players are ready
+                // green/ready by default, when clicked grey/waiting
+                // continue when all players are ready
                 Button(action: {
                     navigateToGameOver = true
                 }) {
-                    Text("Encore")
-                        //.frame(maxWidth: .infinity)
-                        //.padding()
-                        //.background(
-                        //    viewedTabs.count == tabs.count ? Color.blue.opacity(0.8) : Color.gray.opacity(0.6)
-                        //)
-                        //.foregroundColor(.white)
-                        //.cornerRadius(8)
+                    Text("Ready")
                 }
-                .disabled(viewedTabs.count != tabs.count)       
                 .buttonStyle(.htwPrimary)
                 .padding()
                 .navigationDestination(isPresented: $navigateToGameOver) {

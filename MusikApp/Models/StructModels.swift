@@ -13,6 +13,7 @@ struct Guess: Codable {
 struct Round: Codable {
     let guesses : [Guess]
     let song : SongData
+    //#TODO add remaning time
 }
 
 struct SongData: Codable {

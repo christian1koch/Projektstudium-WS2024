@@ -15,13 +15,18 @@ struct GuessView: View {
     
     @State private var isMuted: Bool = false  // TODO: add logic
     @State private var navigateToEvaluation = false
+    @State private var answersSubmitted  = false
     
     private var gameController: GameController = GameController.shared
+    
+    // Timer to periodically check if it's ready to advance
+    @State private var timer: Timer?
+    @State private var canAdvanceToEvaluation = false
     
     var body: some View {
         // Current year to get maximum for guess year slider
         let currentYear = Double(Calendar.current.component(.year, from: Date()))
-        NavigationStack {
+        return NavigationStack {
             VStack(spacing: 16) {
                 HStack {
                     
@@ -120,13 +125,16 @@ struct GuessView: View {
                             }
                         })
                         
-                        // evaluate guess
-                        
-                        // create dataSection
+                        // wait for end of round (all players ready or fastest stop)
+                        // check if  remaining time is > 0 (methode in gamecontroller) (has to always run in background)
+                        //
+                        // when time is up, create datasection and navigate to next screen
+                        // move parts out of the button
                         
                         // navigate to next view
                         navigateToEvaluation = true  // Trigger navigation
                         print("Perform")
+                        answersSubmitted = true
                         
                     } else {
                         print("Please fill out all fields")
@@ -134,65 +142,91 @@ struct GuessView: View {
                 }
                 .buttonStyle(.htwPrimary)
                 .opacity(isComplete() ? 1.0 : 0.4)
-                .disabled(!isComplete())
+                .disabled(!isComplete() && answersSubmitted)
             }
             .padding()
             .navigationDestination(isPresented: $navigateToEvaluation) {
                 EvaluationView(tabs: mockDataSections())
             }
+            
+            .onAppear{
+                startTimer()
+            }
+            
+            .onDisappear{
+                timer?.invalidate()
+                
+            }
         }
-    }
-    
-    
-    // checks if all answer were given, true = all answers are given
-    func isComplete() -> Bool {
-        return !titleText.isEmpty && !artistText.isEmpty && !albumText.isEmpty && year != 0
-    }
-    
-    // Mock data for EvaluationView TODO: REMOVE
-    func mockDataSections() -> [DataSection] {
-        return [
-            DataSection(
-                title: "Title",
-                correctValue: "Thriller",
-                entries: [
-                    DataEntry(name: "Player 1", value: "Thriller"),
-                    DataEntry(name: "Player 2", value: "Billie Jean"),
-                    DataEntry(name: "Player 3", value: "Beat It")
-                ]
-            ),
-            DataSection(
-                title: "Artist",
-                correctValue: "Michael Jackson",
-                entries: [
-                    DataEntry(name: "Player 1", value: "Michael Jackson"),
-                    DataEntry(name: "Player 2", value: "Prince"),
-                    DataEntry(name: "Player 3", value: "Madonna")
-                ]
-            ),
-            DataSection(
-                title: "Album",
-                correctValue: "Thriller",
-                entries: [
-                    DataEntry(name: "Player 1", value: "Thriller"),
-                    DataEntry(name: "Player 2", value: "Bad"),
-                    DataEntry(name: "Player 3", value: "Dangerous")
-                ]
-            ),
-            DataSection(
-                title: "Year",
-                correctValue: "1982",
-                entries: [
-                    DataEntry(name: "Player 1", value: "1982"),
-                    DataEntry(name: "Player 2", value: "1982"),
-                    DataEntry(name: "Player 3", value: "1984")
-                ]
-            )
-        ]
-    }
-
-}
         
+        // Timer to periodically check if it's ready to advance
+        func startTimer() {
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                checkReadyToAdvance()
+            }
+        }
+        
+        // Checks if all answers were given, true = all answers are given// Function to check if it's ready to advance to the next view
+        func checkReadyToAdvance() {
+            if gameController.readyToAdvanceToEvaluation() {
+                canAdvanceToEvaluation = true
+            } else {
+                canAdvanceToEvaluation = false
+            }
+        }
+        
+        
+        // checks if all answer were given, true = all answers are given
+        func isComplete() -> Bool {
+            return !titleText.isEmpty && !artistText.isEmpty && !albumText.isEmpty && year != 0
+        }
+        
+        
+        // Mock data for EvaluationView TODO: REMOVE
+        func mockDataSections() -> [DataSection] {
+            return [
+                DataSection(
+                    title: "Title",
+                    correctValue: "Thriller",
+                    entries: [
+                        DataEntry(name: "Player 1", value: "Thriller"),
+                        DataEntry(name: "Player 2", value: "Billie Jean"),
+                        DataEntry(name: "Player 3", value: "Beat It")
+                    ]
+                ),
+                DataSection(
+                    title: "Artist",
+                    correctValue: "Michael Jackson",
+                    entries: [
+                        DataEntry(name: "Player 1", value: "Michael Jackson"),
+                        DataEntry(name: "Player 2", value: "Prince"),
+                        DataEntry(name: "Player 3", value: "Madonna")
+                    ]
+                ),
+                DataSection(
+                    title: "Album",
+                    correctValue: "Thriller",
+                    entries: [
+                        DataEntry(name: "Player 1", value: "Thriller"),
+                        DataEntry(name: "Player 2", value: "Bad"),
+                        DataEntry(name: "Player 3", value: "Dangerous")
+                    ]
+                ),
+                DataSection(
+                    title: "Year",
+                    correctValue: "1982",
+                    entries: [
+                        DataEntry(name: "Player 1", value: "1982"),
+                        DataEntry(name: "Player 2", value: "1982"),
+                        DataEntry(name: "Player 3", value: "1984")
+                    ]
+                )
+            ]
+        }
+        
+    }
+}
+
 #Preview {
     GuessView()
 }

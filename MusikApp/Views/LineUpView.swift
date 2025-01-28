@@ -33,6 +33,7 @@ struct LineUpView: View {
                     // TODO: Add action
                 }
                 .disabled(room.players?.count ?? -1 < 2)
+                .buttonStyle(.htwPrimary)
                 
             } else if isFirstLoad {
                 // Show loading view during the first fetch
@@ -88,5 +89,5 @@ struct LineUpView: View {
 }
 
 #Preview {
-    LineUpView(roomId: "4X88")
+    LineUpView(roomId: "UK3F")
 }
