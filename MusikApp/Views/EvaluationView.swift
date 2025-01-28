@@ -11,7 +11,7 @@ import SwiftUI
 struct EvaluationView: View {
     let tabs: [DataSection]
     @State var players: [Player]
-    @State var navigateToGameOver = false
+    @State private var navigateToGameOver = false
     @State private var viewedTabs: Set<Int> = []
     @State private var selectedTabIndex = 0
     
@@ -57,25 +57,24 @@ struct EvaluationView: View {
                 
                 Spacer()
                 
-                NavigationLink(
-                    destination: GameOverView(viewModel: GameOverViewModel(players: players)),
-                    isActive: $navigateToGameOver
-                ) {
-                    EmptyView()
-                }
                 Button(action: {
                     navigateToGameOver = true
                 }) {
                     Text("Encore")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(
-                            viewedTabs.count == tabs.count ? Color.blue.opacity(0.8) : Color.gray.opacity(0.6)
-                        )
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
+                        //.frame(maxWidth: .infinity)
+                        //.padding()
+                        //.background(
+                        //    viewedTabs.count == tabs.count ? Color.blue.opacity(0.8) : Color.gray.opacity(0.6)
+                        //)
+                        //.foregroundColor(.white)
+                        //.cornerRadius(8)
                 }
-                .disabled(viewedTabs.count != tabs.count)
+                .disabled(viewedTabs.count != tabs.count)       
+                .buttonStyle(.htwPrimary)
+                .padding()
+                .navigationDestination(isPresented: $navigateToGameOver) {
+                                    GameOverView(viewModel: GameOverViewModel(players: players))
+                                }
             }
             .navigationTitle("Evaluation")
             .navigationBarHidden(true)
