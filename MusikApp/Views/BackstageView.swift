@@ -36,11 +36,7 @@ struct BackstageView: View {
                     if isUserNameValid() {
                         let player = Player(name: playerName, points: 0, ready: false)
                         gameController.player = player
-                        
-                        // navigate to stage setup
                         navigateToStageSetup = true
-                        NavigationLink(destination: StageSetupView()) {     //FIX This
-                        }
                     }
                 }
                 .buttonStyle(.htwPrimary)
@@ -51,10 +47,7 @@ struct BackstageView: View {
                     if isUserNameValid() {
                         let player = Player(name: playerName, points: 0, ready: false)
                         gameController.player = player
-                        // navigate to private stage
                         navigateToPrivateStage = true
-                        NavigationLink(destination: PrivateJoinView()) {    //FIX This
-                        }
                     }
                 }
                 .buttonStyle(.htwPrimary)
@@ -65,30 +58,23 @@ struct BackstageView: View {
                     if isUserNameValid() {
                         let player = Player(name: playerName, points: 0, ready: false)
                         gameController.player = player
-                        
-                        // navigate to private stage
                         navigateToPublicStage = true
-                        NavigationLink(destination: PublicJoinView()) {     //FIX This
-                        }
                     }
                 }
                 .buttonStyle(.htwPrimary)
                 .disabled(!isUserNameValid())
-                
-                // Navigation Links (triggered by state changes)
-                NavigationLink(destination: StageSetupView(), isActive: $navigateToStageSetup) {
-                    EmptyView()
-                }
-                NavigationLink(destination: PrivateJoinView(), isActive: $navigateToPrivateStage) {
-                    EmptyView()
-                }
-                NavigationLink(destination: PublicJoinView(), isActive: $navigateToPublicStage) {
-                    EmptyView()
-                }
             }
             .padding()
+            .navigationDestination(isPresented: $navigateToStageSetup) {
+                StageSetupView()
+            }
+            .navigationDestination(isPresented: $navigateToPrivateStage) {
+                PrivateJoinView()
+            }
+            .navigationDestination(isPresented: $navigateToPublicStage) {
+                PublicJoinView()
+            }
         }
-        
     }
     
     // checks if user name is valide
@@ -96,7 +82,6 @@ struct BackstageView: View {
         return !playerName.isEmpty
     }
 }
-
 
 #Preview {
     BackstageView()
