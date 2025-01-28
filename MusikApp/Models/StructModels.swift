@@ -11,8 +11,10 @@ struct Guess: Codable {
 }
 
 struct Round: Codable {
-    let guesses : [Guess]
+    var guesses : [Guess]
     let song : SongData
+    let index: Int
+    var remainingTime: Int
     //#TODO add remaning time
 }
 
@@ -41,9 +43,9 @@ struct Room: Codable {
     var host: Player
     var players: [Player]?
     var rounds: [Round]?
+    var currentRoundNumber: Int?
     var settings: Settings
     var status: Status?
-    var activeRound: Int?
 }
 struct RoomCreateRequest: Codable {
     var host: Player
@@ -58,12 +60,13 @@ enum Mode: String, Codable {
 struct Settings: Codable {
     let mode: Mode
     let maxPlayers : Int
+    let rounds: Int // in [3, 20]
     let isPublic: Bool
-    // ... additional settings
     
     enum CodingKeys: String, CodingKey {
                 case mode
                 case maxPlayers
+                case rounds
                 case isPublic = "public"
         }
 }
