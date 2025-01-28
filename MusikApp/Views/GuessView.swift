@@ -14,14 +14,12 @@ struct GuessView: View {
     @State private var albumText: String = ""
     
     @State private var isMuted: Bool = false  // TODO: add logic
+    @State private var timer: Timer?
     @State private var navigateToEvaluation = false
     @State private var answersSubmitted  = false
+    @State private var canAdvanceToEvaluation = false
     
     private var gameController: GameController = GameController.shared
-    
-    // Timer to periodically check if it's ready to advance
-    @State private var timer: Timer?
-    @State private var canAdvanceToEvaluation = false
     
     var body: some View {
         // Current year to get maximum for guess year slider
@@ -108,7 +106,7 @@ struct GuessView: View {
                 
                 // Submits guess, evaluates results and opens EvaluationView
                 Button("Perform") {
-                    if isComplete(), let activeRoom = gameController.activeRoom {
+                    if isComplete(), !answersSubmitted, let activeRoom = gameController.activeRoom {
                         let roomId = activeRoom.id
                         let playerId = gameController.player.name!
                         let round = activeRoom.activeRound ?? 0
@@ -124,17 +122,7 @@ struct GuessView: View {
                                 print("Error: \(error)")
                             }
                         })
-                        
-                        // wait for end of round (all players ready or fastest stop)
-                        // check if  remaining time is > 0 (methode in gamecontroller) (has to always run in background)
-                        //
-                        // when time is up, create datasection and navigate to next screen
-                        // move parts out of the button
-                        
-                        // navigate to next view
-                        navigateToEvaluation = true  // Trigger navigation
-                        print("Perform")
-                        answersSubmitted = true
+                        answersSubmitted = true  
                         
                     } else {
                         print("Please fill out all fields")
@@ -162,7 +150,9 @@ struct GuessView: View {
         // Timer to periodically check if it's ready to advance
         func startTimer() {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                checkReadyToAdvance()
+                if canAdvanceToEvaluation {
+                    navigateToEvaluation = true  // Trigger navigation
+                }
             }
         }
         
