@@ -52,9 +52,10 @@ struct RoomCreateRequest: Codable {
     var settings: Settings
 }
 
-enum Mode: String, Codable, CaseIterable {
-    case FASTEST_STOPS = "FASTEST_STOPS"
-    case FIXED_TIME = "FIXED_TIME"
+enum Mode: String, Codable, CaseIterable, Identifiable {
+    case FASTEST_STOPS = "Fastest Stop"
+    case FIXED_TIME = "Fixed Time"
+    var id: Self { self }
 }
 
 struct Settings: Codable {
