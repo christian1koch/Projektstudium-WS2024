@@ -5,12 +5,13 @@ struct LineUpView: View {
     @State private var room: Room? // Store the fetched room details
     @State private var errorMessage: String?
     @State private var isFirstLoad = true
+    @State private var navigateToGuestView = false
     
     // Reference to your API controller
     private let serverComsController = ServerComsController()
     
     var body: some View {
-     
+        NavigationStack {
             VStack(spacing: 50) {
                 if let room = room {
                     // Display room details
@@ -31,9 +32,19 @@ struct LineUpView: View {
                     }
                     Spacer()
                     Button("showtime") {
-                        // TODO: Add action
+                        // API call startGame()
+                        serverComsController.startGame(roomId: roomId, completion: { result in
+                            switch result {
+                            case .success:
+                                print("Game started")
+                            case .failure(let error):
+                                print("Error starting game: \(error)")
+                            }
+                        })
+                        // #TODO Musik abspielen
+                        navigateToGuestView = true
                     }
-                    .disabled(room.players?.count ?? -1 < 2)
+                    .disabled(room.players?.count ?? -1 < 1)    // #TODO: set to -1 < 2 again after testing
                     .buttonStyle(.htwPrimary)
                     
                 } else if isFirstLoad {
@@ -50,10 +61,16 @@ struct LineUpView: View {
             }
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .navigationDestination(isPresented: $navigateToGuestView){
+                GuessView()
+            }
+            
+            
             .onAppear {
                 startFetchingRoom()
             }
         }
+    }
         
         /// Continuously fetch the room details in a loop
         private func startFetchingRoom() {

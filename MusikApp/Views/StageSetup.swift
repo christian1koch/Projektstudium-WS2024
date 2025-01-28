@@ -27,7 +27,7 @@ struct StageSetupView: View {
     //@State private var selectedOptionIndex =  0
     @State private var selectedMode: Mode = Mode.allCases.first ?? .FIXED_TIME
     @State private var showDropdown =  false
-    @State private var roomId: String? = "BOOM" //nil // Holds the room ID for navigation
+    @State private var roomId: String? = "FB1S" //nil // Holds the room ID for navigation
     
     @State private var gameController = GameController.shared
     @State private var serverComsController = ServerComsController()
