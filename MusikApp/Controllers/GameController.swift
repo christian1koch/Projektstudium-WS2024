@@ -159,7 +159,7 @@ class GameController {
      */
     func noRoundsLeftToPlay() -> Bool {
         guard let rounds = activeRoom?.rounds else { return false }
-        return (activeRoom?.activeRound!)! == rounds.count
+        return (activeRoom?.currentRoundNumber!)! == rounds.count
     }
     
     /*
@@ -167,7 +167,7 @@ class GameController {
      */
     func allPlayersAnswered() -> Bool {
         guard let rounds = activeRoom?.rounds else { return false }
-        let activeRound = rounds[(activeRoom?.activeRound!)!]
+        let activeRound = rounds[(activeRoom?.currentRoundNumber!)!]
         return activeRound.guesses.count >= (activeRoom?.players!.count)! // >= for the eventuality that a player leaves the game
     }
     
@@ -176,7 +176,7 @@ class GameController {
      */
     func atLeastOnePlayerAnswered() -> Bool {
         guard let rounds = activeRoom?.rounds else { return false }
-        let activeRound = rounds[(activeRoom?.activeRound!)!]
+        let activeRound = rounds[(activeRoom?.currentRoundNumber!)!]
         return activeRound.guesses.count > 0
     }
     

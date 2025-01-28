@@ -38,6 +38,7 @@
 		2DC7ED032CEFBF5300776DAE /* DDSpiderChart in Frameworks */ = {isa = PBXBuildFile; productRef = 2DC7ED022CEFBF5300776DAE /* DDSpiderChart */; };
 		514BA7092D38062000B0C5B7 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514BA7082D38061A00B0C5B7 /* GameController.swift */; };
 		514BA70B2D38072100B0C5B7 /* StructModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514BA70A2D38071800B0C5B7 /* StructModels.swift */; };
+		5197336F2D48FCCE008904C7 /* DataSectionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5197336E2D48FCC7008904C7 /* DataSectionBuilder.swift */; };
 		51F06C1C2D37C1B500C5A812 /* _Depricated_SpotifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F06C1B2D37C1B500C5A812 /* _Depricated_SpotifyController.swift */; };
 		51F06C1E2D37C1CD00C5A812 /* SpotifyApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F06C1D2D37C1CD00C5A812 /* SpotifyApiController.swift */; };
 		51F06C202D37C1DA00C5A812 /* ServerComsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F06C1F2D37C1DA00C5A812 /* ServerComsController.swift */; };
@@ -80,6 +81,7 @@
 		2DC7ECFF2CEFB4CB00776DAE /* RadarDiagrammView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarDiagrammView.swift; sourceTree = "<group>"; };
 		514BA7082D38061A00B0C5B7 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		514BA70A2D38071800B0C5B7 /* StructModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructModels.swift; sourceTree = "<group>"; };
+		5197336E2D48FCC7008904C7 /* DataSectionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSectionBuilder.swift; sourceTree = "<group>"; };
 		51F06C1B2D37C1B500C5A812 /* _Depricated_SpotifyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Depricated_SpotifyController.swift; sourceTree = "<group>"; };
 		51F06C1D2D37C1CD00C5A812 /* SpotifyApiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyApiController.swift; sourceTree = "<group>"; };
 		51F06C1F2D37C1DA00C5A812 /* ServerComsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerComsController.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 		2D57B69B2CE4B034005F1408 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5197336E2D48FCC7008904C7 /* DataSectionBuilder.swift */,
 				514BA7082D38061A00B0C5B7 /* GameController.swift */,
 				51F06C1F2D37C1DA00C5A812 /* ServerComsController.swift */,
 				51F06C212D37C4F400C5A812 /* ServerComsTest.playground */,
@@ -377,6 +380,7 @@
 				2D6848792D42A49100E33022 /* EvaluationView.swift in Sources */,
 				2D6848712D42A47A00E33022 /* DataSectionViewModel.swift in Sources */,
 				2D6848722D42A47A00E33022 /* GameOverViewModel.swift in Sources */,
+				5197336F2D48FCCE008904C7 /* DataSectionBuilder.swift in Sources */,
 				51F06C1C2D37C1B500C5A812 /* _Depricated_SpotifyController.swift in Sources */,
 				2D2DB4632CEFC61700F1E790 /* RadarDiagrammPreviewView.swift in Sources */,
 			);
