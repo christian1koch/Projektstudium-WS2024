@@ -173,6 +173,7 @@ struct StageSetupView: View {
         let settings = Settings(
             mode: .FIXED_TIME,
             maxPlayers: 10,
+            rounds: selectedSongCount!,
             isPublic: isPrivateStage == false)
         
         /**

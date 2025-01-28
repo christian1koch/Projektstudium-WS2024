@@ -109,7 +109,7 @@ struct GuessView: View {
                     if isComplete(), !answersSubmitted, let activeRoom = gameController.activeRoom {
                         let roomId = activeRoom.id
                         let playerId = gameController.player.name!
-                        let round = activeRoom.activeRound ?? 0
+                        let round = activeRoom.currentRoundNumber ?? 0
                         // let guess = Guess(playerId: "", guesses: [titleText, artistText, albumText, String(year)])   // Guess as struct
                         let guess = [titleText, artistText, albumText, String(year)]                                    // Guess as Array
                         
