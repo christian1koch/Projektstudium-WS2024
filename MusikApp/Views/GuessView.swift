@@ -10,7 +10,7 @@ import SwiftUI
 let IS_ON_REAL_DEVICE = true;
 struct GuessView: View {
     
-    var spotifyController =  SpotifyController()
+    @EnvironmentObject var sptConnector: SPTConnector
     
     @State private var year: Double = 0
     @State private var titleText: String = ""
@@ -35,6 +35,8 @@ struct GuessView: View {
             }
             return nil
     }
+    
+    @State var lastCurrentTrackId: String? = "";
     
     var body: some View {
         // Current year to get maximum for guess year slider
@@ -181,6 +183,12 @@ struct GuessView: View {
         // Timer to periodically check if it's ready to advance
         func startTimer() {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                
+                if (currentTrackId != lastCurrentTrackId) {
+                    playSpotifyTrack();
+                    lastCurrentTrackId = currentTrackId
+                    
+                }
                 if gameController.readyToAdvanceToEvaluation() {
                     if answersSubmitted == false {
                         
@@ -213,8 +221,7 @@ struct GuessView: View {
         
         func playSpotifyTrack() {
             if (IS_ON_REAL_DEVICE && currentTrackId != nil) {
-                spotifyController.connect(playURI: "spotify:track:\(currentTrackId!)")
-            }
+                sptConnector.appRemote.playerAPI?.play("spotify:track:\(currentTrackId!)")        }
         }
         
         

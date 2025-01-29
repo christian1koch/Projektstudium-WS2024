@@ -89,7 +89,7 @@ struct LineUpView: View {
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationDestination(isPresented: $navigateToGuestView){
-                GuessView()
+                SpotifyIntermediateView()
             }
             .onAppear {
                 startFetchingRoom() // Start fetching when the view appears

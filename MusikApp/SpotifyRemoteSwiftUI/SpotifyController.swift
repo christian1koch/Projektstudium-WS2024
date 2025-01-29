@@ -53,6 +53,12 @@ class SpotifyController: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerState
     }()
     
     func connect(playURI: String) {
-        self.appRemote.authorizeAndPlayURI(playURI)
+        let stringScopes = [
+                    "app-remote-control",       // Allows control over playback
+                    "streaming",              // Allows streaming
+                    "user-modify-playback-state", // Allows modifying playback state (pause, play)
+                    "user-read-playback-state"   // Allows reading playback state (current track, status)
+                ]
+        self.appRemote.authorizeAndPlayURI(playURI, asRadio: false, additionalScopes: stringScopes)
     }
 }
