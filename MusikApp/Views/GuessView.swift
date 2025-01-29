@@ -26,126 +26,130 @@ struct GuessView: View {
         let currentYear = Double(Calendar.current.component(.year, from: Date()))
         return NavigationStack {
             VStack(spacing: 16) {
-                HStack {
+                ScrollView {
                     
-                    // Guess counter
-                    let roundNumber = gameController.activeRoom?.currentRoundNumber ?? 0
-                    Text(String(roundNumber))
-                        .htwContainerStyle()
-                        .frame(width: 50, height: 50)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
                     
-                    Spacer()
-                    
-                    // Song is playing
-                    Image(systemName: "music.note")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50)
-                        .htwContainerStyle()
-                    
-                    Spacer()
-                    
-                    // Mute Button
-                    Button(action: {
-                        isMuted.toggle()
-                    }) {
-                        Image(systemName: isMuted ? "speaker.slash.fill" : "speaker.3.fill")
+                    HStack {
+                        
+                        // Guess counter
+                        let roundNumber = gameController.activeRoom?.currentRoundNumber ?? 0
+                        Text(String(roundNumber))
+                            .htwContainerStyle()
+                            .frame(width: 50, height: 50)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                        
+                        Spacer()
+                        
+                        // Song is playing
+                        Image(systemName: "music.note")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 50, height: 50)
                             .htwContainerStyle()
-                            .foregroundColor(isMuted ? .red : .primary)
+                        
+                        Spacer()
+                        
+                        // Mute Button
+                        Button(action: {
+                            isMuted.toggle()
+                        }) {
+                            Image(systemName: isMuted ? "speaker.slash.fill" : "speaker.3.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50, height: 50)
+                                .htwContainerStyle()
+                                .foregroundColor(isMuted ? .red : .primary)
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
-                }
-                .padding()
-                
-                // User input cards
-                VStack(spacing: 16) {
-                    // Song title input card
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Title").htwTitleStyle()
-                        TextField("Your answer...", text: $titleText)
-                            .padding()
-                    }
-                    .htwContainerStyle()
+                    .padding()
                     
-                    // Artist input card
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Artist").htwTitleStyle()
-                        TextField("Your answer...", text: $artistText)
-                            .padding()
-                    }
-                    .htwContainerStyle()
-                    
-                    // Album input card
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Album").htwTitleStyle()
-                        TextField("Your answer...", text: $albumText)
-                            .padding()
-                    }
-                    .htwContainerStyle()
-                    
-                    // Year input card
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Year").htwTitleStyle()
-                        HStack {
-                            Slider(value: $year, in: 1950...currentYear, step: 1)  //TODO: discuss limits
-                            Text("\(Int(year))")
-                                .htwSimpleTextStyle()
-                                .monospacedDigit()  // Removes seperator
+                    // User input cards
+                    VStack(spacing: 16) {
+                        // Song title input card
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Title").htwTitleStyle()
+                            TextField("Your answer...", text: $titleText)
                                 .padding()
                         }
+                        .htwContainerStyle()
+                        
+                        // Artist input card
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Artist").htwTitleStyle()
+                            TextField("Your answer...", text: $artistText)
+                                .padding()
+                        }
+                        .htwContainerStyle()
+                        
+                        // Album input card
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Album").htwTitleStyle()
+                            TextField("Your answer...", text: $albumText)
+                                .padding()
+                        }
+                        .htwContainerStyle()
+                        
+                        // Year input card
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Year").htwTitleStyle()
+                            HStack {
+                                Slider(value: $year, in: 1950...currentYear, step: 1)  //TODO: discuss limits
+                                Text("\(Int(year))")
+                                    .htwSimpleTextStyle()
+                                    .monospacedDigit()  // Removes seperator
+                                    .padding()
+                            }
+                        }
+                        .htwContainerStyle()
                     }
-                    .htwContainerStyle()
+                    .padding()
+                    
+                    // Submits guess, evaluates results and opens EvaluationView
+                    Button("Perform") {
+                        print(isComplete(), !answersSubmitted, gameController.activeRoom?.id ?? "No active room")
+                        
+                        if isComplete(), !answersSubmitted, let activeRoom = gameController.activeRoom {
+                            let roomId = activeRoom.id
+                            let playerId = gameController.player.name!
+                            let round = activeRoom.currentRoundNumber ?? 0
+                            let guess = [titleText, artistText, albumText, String(year)]                                    // Guess as Array
+                            
+                            // submit guess
+                            gameController.serverComsController.submitAnswers(roomId: roomId!, playerId: playerId, round: round, guess: guess, completion: { result in
+                                switch result {
+                                case .success(let response):
+                                    print("Response: \(response)")
+                                case .failure(let error):
+                                    print("Error: \(error)")
+                                }
+                            })
+                            answersSubmitted = true
+                            
+                        } else {
+                            print("Please fill out all fields")
+                        }
+                    }
+                    .buttonStyle(.htwPrimary)
+                    .opacity(isComplete() ? 1.0 : 0.4)
+                    .disabled(!isComplete() && answersSubmitted)
                 }
                 .padding()
-                
-                // Submits guess, evaluates results and opens EvaluationView
-                Button("Perform") {
-                    print(isComplete(), !answersSubmitted, gameController.activeRoom?.id ?? "No active room")
-                    
-                    if isComplete(), !answersSubmitted, let activeRoom = gameController.activeRoom {
-                        let roomId = activeRoom.id
-                        let playerId = gameController.player.name!
-                        let round = activeRoom.currentRoundNumber ?? 0
-                        let guess = [titleText, artistText, albumText, String(year)]                                    // Guess as Array
-                        
-                        // submit guess
-                        gameController.serverComsController.submitAnswers(roomId: roomId!, playerId: playerId, round: round, guess: guess, completion: { result in
-                            switch result {
-                            case .success(let response):
-                                print("Response: \(response)")
-                            case .failure(let error):
-                                print("Error: \(error)")
-                            }
-                        })
-                        answersSubmitted = true
-                        
-                    } else {
-                        print("Please fill out all fields")
-                    }
+                .navigationDestination(isPresented: $navigateToEvaluation) {
+                    EvaluationView(tabs: mockDataSections())
                 }
-                .buttonStyle(.htwPrimary)
-                .opacity(isComplete() ? 1.0 : 0.4)
-                .disabled(!isComplete() && answersSubmitted)
-            }
-            .padding()
-            .navigationDestination(isPresented: $navigateToEvaluation) {
-                EvaluationView(tabs: mockDataSections())
-            }
-            
-            .onAppear{
-                startTimer()
-            }
-            
-            .onDisappear{
-                timer?.invalidate()
                 
+                .onAppear{
+                    startTimer()
+                }
+                
+                .onDisappear{
+                    timer?.invalidate()
+                    
+                }
             }
         }
         
