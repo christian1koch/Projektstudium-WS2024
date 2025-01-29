@@ -157,7 +157,8 @@ struct GuessView: View {
                 .padding()
                 .navigationDestination(isPresented: $navigateToEvaluation) {
                     // TODO: insert actual dataSections
-                    EvaluationView(tabs: buildSections())
+                    EvaluationView(tabs: buildSections()).environmentObject(sptConnector)
+                        
                 }
                 .onAppear{
                     startTimer()

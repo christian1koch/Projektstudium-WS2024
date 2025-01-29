@@ -17,6 +17,7 @@ struct EvaluationView: View {
     @State private var selectedTabIndex = 0
     @State private var gameController = GameController.shared
     @State private var serverComsController = ServerComsController()
+    @EnvironmentObject var sptConnector: SPTConnector
     
     init(tabs: [DataSection]) {
         self.tabs = tabs
@@ -71,7 +72,7 @@ struct EvaluationView: View {
                     GameOverView(viewModel: GameOverViewModel(players: players))
                 }
                 .navigationDestination(isPresented: $navigateToGuess) {
-                    GuessView()
+                    GuessView().environmentObject(sptConnector)
                 }
             }
             .navigationTitle("Evaluation")
