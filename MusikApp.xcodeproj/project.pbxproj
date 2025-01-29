@@ -82,6 +82,7 @@
 		514BA7082D38061A00B0C5B7 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		514BA70A2D38071800B0C5B7 /* StructModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructModels.swift; sourceTree = "<group>"; };
 		5197336E2D48FCC7008904C7 /* DataSectionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSectionBuilder.swift; sourceTree = "<group>"; };
+		519733702D4A1B62008904C7 /* joinTest.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = joinTest.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		51F06C1B2D37C1B500C5A812 /* _Depricated_SpotifyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Depricated_SpotifyController.swift; sourceTree = "<group>"; };
 		51F06C1D2D37C1CD00C5A812 /* SpotifyApiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyApiController.swift; sourceTree = "<group>"; };
 		51F06C1F2D37C1DA00C5A812 /* ServerComsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerComsController.swift; sourceTree = "<group>"; };
@@ -143,6 +144,7 @@
 				514BA7082D38061A00B0C5B7 /* GameController.swift */,
 				51F06C1F2D37C1DA00C5A812 /* ServerComsController.swift */,
 				51F06C212D37C4F400C5A812 /* ServerComsTest.playground */,
+				519733702D4A1B62008904C7 /* joinTest.playground */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

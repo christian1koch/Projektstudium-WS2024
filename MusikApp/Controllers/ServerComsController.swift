@@ -201,6 +201,9 @@ class ServerComsController {
             if let error = error {
                 completion(.failure(error))
             } else if let data = data {
+                if let jsonString = String(data: data, encoding: .utf8) {
+                            print("Raw API Response:", jsonString) // ✅ Check if "id" is missing
+                        }
                 do {
                     let room = try JSONDecoder().decode(Room.self, from: data)
                     completion(.success(room))

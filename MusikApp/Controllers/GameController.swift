@@ -67,7 +67,7 @@ class GameController {
     /*
      The player that is currently playing the game.
      */
-    var player: Player = Player(name: nil, points: 0, ready: false)
+    var player: Player = Player(name: "DEFAULT", points: 0, ready: false)
 
     
     // MARK: - Methods
