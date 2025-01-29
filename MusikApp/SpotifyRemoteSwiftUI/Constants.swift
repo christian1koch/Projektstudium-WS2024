@@ -23,7 +23,7 @@ let scopes: SPTScope = [
                             .playlistReadCollaborative, .playlistModifyPublic, .playlistReadPrivate, .playlistModifyPrivate,
                             .userLibraryModify, .userLibraryRead,
                             .userTopRead, .userReadPlaybackState, .userReadCurrentlyPlaying,
-                            .userFollowRead, .userFollowModify,
+                            .userFollowRead, .userFollowModify
                         ]
 let stringScopes = [
                         "user-read-email", "user-read-private",
