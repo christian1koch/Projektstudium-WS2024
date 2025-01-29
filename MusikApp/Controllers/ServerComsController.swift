@@ -161,8 +161,8 @@ class ServerComsController {
     Start a game by performing a POST-Request and calls the completion handler with the result.
     The completion handler will return the updated room with the status set to ACTIVE.
     */
-    func startGame(roomId: String, completion: @escaping (Result<Room, Error>) -> Void) {
-        guard let url = URL(string: "\(baseUrl)/room/\(roomId)/NONE/start") else { return }
+    func startGame(roomId: String, player: String, completion: @escaping (Result<Room, Error>) -> Void) {
+        guard let url = URL(string: "\(baseUrl)/room/\(roomId)/\(player)/start") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
