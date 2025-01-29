@@ -12,9 +12,11 @@ struct EvaluationView: View {
     let tabs: [DataSection]
     @State var players: [Player]
     @State private var navigateToGameOver = false
+    @State private var navigateToGuess = false
     @State private var viewedTabs: Set<Int> = []
     @State private var selectedTabIndex = 0
     @State private var gameController = GameController.shared
+    @State private var serverComsController = ServerComsController()
     
     init(tabs: [DataSection]) {
         self.tabs = tabs
@@ -58,27 +60,46 @@ struct EvaluationView: View {
                 
                 Spacer()
                 
-                //#TODO: differ next round/ endround
-                // #TODO mark player as ready, navigate to next screen when all players are ready
-                // green/ready by default, when clicked grey/waiting
-                // continue when all players are ready
                 Button(action: {
-                    //if gameController.P
-                    navigateToGameOver = true
+                    setDestinationNavigation()
                 }) {
-                    Text("Continue")
+                    Text("Ready Up!")
                 }
                 .buttonStyle(.htwPrimary)
                 .padding()
                 .navigationDestination(isPresented: $navigateToGameOver) {
-                                    GameOverView(viewModel: GameOverViewModel(players: players))
-                                }
+                    GameOverView(viewModel: GameOverViewModel(players: players))
+                }
+                .navigationDestination(isPresented: $navigateToGuess) {
+                    GuessView()
+                }
             }
             .navigationTitle("Evaluation")
             .navigationBarHidden(true)
         }
     }
+    
+    func setDestinationNavigation(){
+        let playerId = gameController.player.name!
+        let roomId = gameController.activeRoom!.id
+        serverComsController.markPlayerReady(roomId: roomId!, playerId: playerId) { result in
+            switch result {
+            case .success(let room):
+                print("Player is ready")
+                if gameController.readyToAdvanceToNextRound(){
+                    navigateToGuess = true
+                } else if gameController.noRoundsLeftToPlay(){
+                    navigateToGameOver = true
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+        
+    }
 }
+
+
 
 struct EvaluationView_Previews: PreviewProvider {
     static var previews: some View {

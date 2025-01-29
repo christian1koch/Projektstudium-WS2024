@@ -19,11 +19,20 @@ struct PublicJoinView: View {
     
     var body: some View {
         NavigationStack {
-            List(rooms, id: \.id, selection: $selectedRoomId) { room in
-                HStack {
-                    Text("Host: \(room.host.name ?? "???")")
-                    Spacer(minLength: 20) // Abstand zur nächsten Spalte
-                    Text("Players: \(room.players?.count ?? 0)")
+            List {
+                ForEach(rooms, id: \.id) { room in
+                    HStack {
+                        Text("Host: \(room.host.name ?? "???")")
+                        Spacer(minLength: 20)
+                        Text("Players: \(room.players?.count ?? 0)")
+                    }
+                    .contentShape(Rectangle()) // ✅ Makes the whole row tappable
+                    .onTapGesture {
+                        selectedRoomId = room.id // ✅ Update selected room ID manually
+                    }
+                    .background(
+                        room.id == selectedRoomId ? Color.blue.opacity(0.2) : Color.clear // ✅ Highlight selection
+                    )
                 }
             }
             .onAppear {
