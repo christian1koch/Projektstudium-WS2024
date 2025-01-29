@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-let setlist = ["TOP-50 Deutschland", "UK Drill Musik", "Deutschrap Brandneu"]
+let setlist = ["TOP-100 Deutschland"]
 
 struct StageSetupView: View {
     @State private var spotifyAuthController = SpotifyClientAuthController()

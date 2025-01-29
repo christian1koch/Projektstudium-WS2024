@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
-
+// To ask for spotify, but only works on real devices
+let IS_ON_REAL_DEVICE = true;
 struct GuessView: View {
+    
+    var spotifyController =  SpotifyController()
+    
     @State private var year: Double = 0
     @State private var titleText: String = ""
     @State private var artistText: String = ""
@@ -20,12 +24,21 @@ struct GuessView: View {
     @State private var canAdvanceToEvaluation = false
     
     private var gameController: GameController = GameController.shared
+    private var currentTrackId: String? {
+        if let currentRoundNumber = gameController.activeRoom?.currentRoundNumber,
+               let rounds = gameController.activeRoom?.rounds,
+               currentRoundNumber > 0, // Ensure it's a valid index
+               currentRoundNumber - 1 < rounds.count { // Prevent out-of-bounds access
+            return rounds[currentRoundNumber - 1].song.id
+            }
+            return nil
+    }
     
     var body: some View {
         // Current year to get maximum for guess year slider
         let currentYear = Double(Calendar.current.component(.year, from: Date()))
         return NavigationStack {
-            VStack(spacing: 16) {
+            VStack(spacing: 16) { 
                 ScrollView {
                     
                     
@@ -174,6 +187,12 @@ struct GuessView: View {
         // checks if all answer were given, true = all answers are given
         func isComplete() -> Bool {
             return !titleText.isEmpty && !artistText.isEmpty && !albumText.isEmpty && year != 0
+        }
+        
+        func playSpotifyTrack() {
+            if (IS_ON_REAL_DEVICE && currentTrackId != nil) {
+                spotifyController.connect(playURI: "spotify:track:\(currentTrackId!)")
+            }
         }
         
         
