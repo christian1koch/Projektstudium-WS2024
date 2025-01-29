@@ -204,4 +204,8 @@ class GameController {
             return allPlayersAnswered()
         }
     }
+    
+    func readyfirstGues() -> Bool {
+        return activeRoom?.status == .active && activeRoom?.currentRoundNumber == 0
+    }
 }

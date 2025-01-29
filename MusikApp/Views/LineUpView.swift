@@ -100,6 +100,10 @@ struct LineUpView: View {
         
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
             fetchRoom()
+            if room?.status == .active && room?.currentRoundNumber == 0 {
+                navigateToGuestView = true
+                stopFetchingRoom()
+            }
         }
     }
     
