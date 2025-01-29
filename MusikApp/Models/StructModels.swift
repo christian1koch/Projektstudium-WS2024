@@ -61,12 +61,14 @@ struct Settings: Codable {
     let mode: Mode
     let maxPlayers : Int
     let rounds: Int // in [3, 20]
+    let maxRoundTime: Int
     let isPublic: Bool
     
     enum CodingKeys: String, CodingKey {
                 case mode
                 case maxPlayers
                 case rounds
+                case maxRoundTime = "maxRoundTime"
                 case isPublic = "public"
         }
 }

@@ -189,6 +189,7 @@ struct StageSetupView: View {
             mode: .FIXED_TIME,
             maxPlayers: 10,
             rounds: selectedSongCount!,
+            maxRoundTime: selectedTimeLimit!,
             isPublic: isPrivateStage == false)
         
         
