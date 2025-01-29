@@ -121,7 +121,7 @@ class GameController {
                 switch result {
                 case .success(let room):
                     self.activeRoom = room
-                    print("reasigning active room")
+                    //print("reasigning active room")
                 case .failure(let error):
                     print(error)
                 }
@@ -194,14 +194,13 @@ class GameController {
      Returns true if all conditions are met to advance to the evaluation of the current round.
      */
     func readyToAdvanceToEvaluation() -> Bool {
-        /*
+        
         if activeRoom?.settings.mode == .FASTEST_STOPS {
             return atLeastOnePlayerAnswered() || timeIsOver()
         } else {
-            return allPlayersAnswered()
+            return allPlayersAnswered() || timeIsOver()
         }
-         */
         // check if current round has no time left
-        return timeIsOver() || allPlayersAnswered()
+        //return timeIsOver() || allPlayersAnswered()
     }
 }
