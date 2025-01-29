@@ -52,9 +52,16 @@ struct LineUpView: View {
                     
                     Spacer()
                     
-                    Button("showtime") {
-                        // API call startGame()
-                        serverComsController.startGame(roomId: roomId,player: gameController.player.name!, completion: { result in
+                    Button("Ready Up!") {
+                        serverComsController.markPlayerReady(roomId: roomId, playerId: gameController.player.name!) { result in
+                            switch result {
+                            case .success:
+                                print("Player marked as ready")
+                            case .failure(let error):
+                                print("Error marking player as ready: \(error)")
+                            }
+                        }
+                        serverComsController.startGame(roomId: roomId, completion: { result in
                             switch result {
                             case .success:
                                 print("Game started")

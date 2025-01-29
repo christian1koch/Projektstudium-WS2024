@@ -20,18 +20,18 @@ struct PublicJoinView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(rooms, id: \.id) { room in
+                ForEach(rooms, id: \.id) { room in      // replace by ForEach(rooms.filter { $0.status == .open }, id: \.id) { room in
                     HStack {
                         Text("Host: \(room.host.name ?? "???")")
                         Spacer(minLength: 20)
                         Text("Players: \(room.players?.count ?? 0)")
                     }
-                    .contentShape(Rectangle()) // ✅ Makes the whole row tappable
+                    .contentShape(Rectangle())
                     .onTapGesture {
-                        selectedRoomId = room.id // ✅ Update selected room ID manually
+                        selectedRoomId = room.id
                     }
                     .background(
-                        room.id == selectedRoomId ? Color.blue.opacity(0.2) : Color.clear // ✅ Highlight selection
+                        room.id == selectedRoomId ? Color.blue.opacity(0.2) : Color.clear
                     )
                 }
             }
