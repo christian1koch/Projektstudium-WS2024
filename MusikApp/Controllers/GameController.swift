@@ -116,16 +116,12 @@ class GameController {
         stopRoomRefreshLoop()
         
         // Start a new timer
-        roomRefreshTimer = Timer.scheduledTimer(withTimeInterval: self.activeRoomRefreshFrequency, repeats: true) { [weak self] timer in
-            guard let self = self, self.gameRunning else {
-                timer.invalidate()
-                return
-            }
-            
+        roomRefreshTimer = Timer.scheduledTimer(withTimeInterval: self.activeRoomRefreshFrequency, repeats: true) {_ in 
             self.serverComsController.getRoomById(id: id, completion: { result in
                 switch result {
                 case .success(let room):
                     self.activeRoom = room
+                    print("reasigning active room")
                 case .failure(let error):
                     print(error)
                 }
