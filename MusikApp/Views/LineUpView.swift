@@ -105,7 +105,7 @@ struct LineUpView: View {
     private func startFetchingRoom() {
         stopFetchingRoom() // Ensure previous timer is stopped before starting a new one
         
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
             fetchRoom()
             if room?.status == .active {
                 navigateToGuestView = true
@@ -129,7 +129,7 @@ struct LineUpView: View {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let fetchedRoom):
-                    print("fetchedRoom:", fetchedRoom)
+                    //print("fetchedRoom:", fetchedRoom)
                     self.room = fetchedRoom
                     self.errorMessage = nil
                     self.isFirstLoad = false
