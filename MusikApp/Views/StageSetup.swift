@@ -26,7 +26,7 @@ struct StageSetupView: View {
     //@State private var selectedOptionIndex =  0
     @State private var selectedMode: Mode = Mode.allCases.first ?? .FIXED_TIME
     @State private var showDropdown =  false
-    @State private var roomId: String? = "FB1S" //nil // Holds the room ID for navigation
+    @State private var roomId: String? = "FB1S" //nil // #TODO: set to nill //Holds the room ID for navigation
     
     @State private var gameController = GameController.shared
     @State private var serverComsController = ServerComsController()
@@ -59,7 +59,9 @@ struct StageSetupView: View {
                             Text(mode.rawValue)
                         }
                     }
-                }.zIndex(100)
+                }
+                .zIndex(100)
+                .htwContainerStyle()
             }
             VStack {
                 Picker("Playlist", selection: $selectedPlaylist) {
@@ -67,6 +69,7 @@ struct StageSetupView: View {
                         Text(playlist)
                     }
                 }
+                .htwContainerStyle()
             }
             
             // select-playlist card
