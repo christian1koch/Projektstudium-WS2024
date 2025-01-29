@@ -107,8 +107,9 @@ struct LineUpView: View {
         
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
             fetchRoom()
-            if room?.status == .active && room?.currentRoundNumber == 0 {
+            if room?.status == .active {
                 navigateToGuestView = true
+                print("Game started" + String(navigateToGuestView))
                 stopFetchingRoom()
             }
         }
