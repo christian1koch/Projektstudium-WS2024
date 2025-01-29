@@ -108,10 +108,10 @@ struct LineUpView: View {
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
             fetchRoom()
             if room?.status == .active {
-                navigateToGuestView = true
                 print("Game started" + String(navigateToGuestView))
                 stopFetchingRoom()
                 gameController.startRoomRefreshLoop(id: roomId)
+                navigateToGuestView = true
             }
         }
     }

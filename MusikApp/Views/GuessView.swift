@@ -107,7 +107,7 @@ struct GuessView: View {
                 
                 // Submits guess, evaluates results and opens EvaluationView
                 Button("Perform") {
-                    print(isComplete(), !answersSubmitted, gameController.activeRoom!)
+                    print(isComplete(), !answersSubmitted, gameController.activeRoom?.id ?? "No active room")
                     
                     if isComplete(), !answersSubmitted, let activeRoom = gameController.activeRoom {
                         let roomId = activeRoom.id
