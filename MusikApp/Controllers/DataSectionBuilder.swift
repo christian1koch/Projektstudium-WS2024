@@ -12,7 +12,7 @@ class DataSectionBuilder {
     func createDataSections(room: Room) -> [DataSection] {
         var dataSections: [DataSection] = []
         let headers = ["Artist", "Title", "Album", "Year"]
-        let rIndex = room.currentRoundNumber!
+        let rIndex = room.currentRoundNumber! - 1 // (is -1 correct?)
         
         // correct values
         let correctValues: [String] = [room.rounds![rIndex].song.artists.first!, room.rounds![rIndex].song.title,

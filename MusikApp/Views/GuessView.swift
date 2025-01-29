@@ -139,17 +139,25 @@ struct GuessView: View {
                 }
                 .padding()
                 .navigationDestination(isPresented: $navigateToEvaluation) {
-                    EvaluationView(tabs: mockDataSections())
+                    // TODO: insert actual dataSections
+                    EvaluationView(tabs: buildSections())
                 }
-                
                 .onAppear{
                     startTimer()
                 }
-                
                 .onDisappear{
                     timer?.invalidate()
-                    
                 }
+            }
+        }
+        
+        func buildSections() -> [DataSection] {
+            if navigateToEvaluation == true {
+                print(gameController.activeRoom?.id ?? "No active room")
+                let dataSectionBuilder = DataSectionBuilder()
+                return dataSectionBuilder.createDataSections(room: gameController.activeRoom!)
+            } else {
+                return mockDataSections()
             }
         }
         
