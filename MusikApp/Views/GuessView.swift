@@ -144,6 +144,8 @@ struct GuessView: View {
                 }
                 .onAppear{
                     startTimer()
+                    print("here!")
+                    print(gameController.activeRoom?.currentRoundNumber ?? "No active room")
                 }
                 .onDisappear{
                     timer?.invalidate()

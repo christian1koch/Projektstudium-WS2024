@@ -151,7 +151,7 @@ struct LineUpView: View {
                 switch result {
                 case .success(let updatedRoom):
                     print("Player marked as ready, updated room:", updatedRoom)
-                    self.room = updatedRoom  // Update room details
+                    //self.room = updatedRoom  // Update room details
                 case .failure(let error):
                     print("Error marking player as ready:", error)
                     // Handle error (e.g., show an alert)

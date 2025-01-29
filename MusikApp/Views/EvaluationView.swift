@@ -82,9 +82,12 @@ struct EvaluationView: View {
     func setDestinationNavigation(){
         let playerId = gameController.player.name!
         let roomId = gameController.activeRoom!.id
+        
+        print("Host: \(gameController.activeRoom!.host.ready)") // debugging
+        
         serverComsController.markPlayerReady(roomId: roomId!, playerId: playerId) { result in
             switch result {
-            case .success(let room):
+            case .success(_):
                 print("Player is ready")
                 if gameController.readyToAdvanceToNextRound(){
                     navigateToGuess = true
