@@ -65,7 +65,6 @@ struct LineUpView: View {
                             switch result {
                             case .success:
                                 print("Game started")
-                                navigateToGuestView = true
                             case .failure(let error):
                                 print("Error starting game: \(error)")
                             }
@@ -97,6 +96,7 @@ struct LineUpView: View {
             }
             .onDisappear {
                 stopFetchingRoom() // Stop fetching when the view disappears
+                gameController.startRoomRefreshLoop(id: roomId)
             }
         }
     }
@@ -110,7 +110,6 @@ struct LineUpView: View {
             if room?.status == .active {
                 print("Game started" + String(navigateToGuestView))
                 stopFetchingRoom()
-                gameController.startRoomRefreshLoop(id: roomId)
                 navigateToGuestView = true
             }
         }
