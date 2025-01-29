@@ -20,7 +20,11 @@ struct PublicJoinView: View {
     var body: some View {
         NavigationStack {
             List(rooms, id: \.id, selection: $selectedRoomId) { room in
-                Text("Host: \(room.id) Players: \(room.players?.count ?? 0)")
+                HStack {
+                    Text("Host: \(room.host.name ?? "???")")
+                    Spacer(minLength: 20) // Abstand zur nächsten Spalte
+                    Text("Players: \(room.players?.count ?? 0)")
+                }
             }
             .onAppear {
                 startPeriodicFetching()
