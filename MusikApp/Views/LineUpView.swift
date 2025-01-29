@@ -111,6 +111,7 @@ struct LineUpView: View {
                 navigateToGuestView = true
                 print("Game started" + String(navigateToGuestView))
                 stopFetchingRoom()
+                gameController.startRoomRefreshLoop(id: roomId)
             }
         }
     }

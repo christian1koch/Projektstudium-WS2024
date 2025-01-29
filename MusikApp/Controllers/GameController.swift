@@ -184,7 +184,7 @@ class GameController {
      Returns true if the time for the current round is over. Indicates if the round can end and the game can advance.
      */
     func timeIsOver() -> Bool {
-        return false // TODO: implement
+        return activeRoom?.rounds![(activeRoom?.currentRoundNumber!)!].remainingTime == 0
     }
     
     /*
@@ -198,10 +198,14 @@ class GameController {
      Returns true if all conditions are met to advance to the evaluation of the current round.
      */
     func readyToAdvanceToEvaluation() -> Bool {
+        /*
         if activeRoom?.settings.mode == .FASTEST_STOPS {
             return atLeastOnePlayerAnswered() || timeIsOver()
         } else {
             return allPlayersAnswered()
         }
+         */
+        // check if current round has no time left
+        return timeIsOver() || allPlayersAnswered()
     }
 }
