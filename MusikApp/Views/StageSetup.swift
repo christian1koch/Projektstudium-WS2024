@@ -189,7 +189,7 @@ struct StageSetupView: View {
         isLoading = true
         
         let settings = Settings(
-            mode: .FIXED_TIME,
+            mode: selectedMode,
             maxPlayers: 10,
             rounds: selectedSongCount!,
             maxRoundTime: selectedTimeLimit!,
