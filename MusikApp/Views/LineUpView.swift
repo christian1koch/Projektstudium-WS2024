@@ -61,7 +61,7 @@ struct LineUpView: View {
                                 print("Error marking player as ready: \(error)")
                             }
                         }
-                        serverComsController.startGame(roomId: roomId, completion: { result in
+                        serverComsController.startGame(roomId: roomId, player: gameController.player.name!, completion: { result in
                             switch result {
                             case .success:
                                 print("Game started")
