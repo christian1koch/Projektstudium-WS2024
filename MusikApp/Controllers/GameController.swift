@@ -172,7 +172,7 @@ class GameController {
      */
     func atLeastOnePlayerAnswered() -> Bool {
         guard let rounds = activeRoom?.rounds else { return false }
-        let activeRound = rounds[(activeRoom?.currentRoundNumber!)!]
+        let activeRound = rounds[(activeRoom?.currentRoundNumber!)! - 1]
         return activeRound.guesses.count > 0
     }
     
