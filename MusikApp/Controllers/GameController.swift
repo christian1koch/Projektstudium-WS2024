@@ -105,7 +105,6 @@ class GameController {
         roomDiscoveryTimer = nil
     }
     
-    
     /*
      Updates the active room continuously while playing by requesting the room from the server.
      This is neccessary to obtain info about the game state (time left, answers of other players, ready state of players, etc.)
@@ -144,8 +143,8 @@ class GameController {
     /*
      Returns true if all players in the active room are ready. Indicates if the game can start or advance to the next round.
      */
-    func allPlayersReady() -> Bool {
-        guard let players = activeRoom?.players else { return false }
+    func allPlayersReady(activeRoom: Room) -> Bool {
+        guard let players = activeRoom.players else { return false }
         for player in players {
             if !player.ready {
                 return false
@@ -157,55 +156,51 @@ class GameController {
     /*
      Returns true if the active room has rounds left to play. Indicates if the game can advance to the next round or end.
      */
-    func noRoundsLeftToPlay() -> Bool {
-        guard let rounds = activeRoom?.rounds else { return false }
-        return (activeRoom?.currentRoundNumber!)! == rounds.count
+    func noRoundsLeftToPlay(activeRoom: Room) -> Bool {
+        guard let rounds = activeRoom.rounds else { return false }
+        return (activeRoom.currentRoundNumber!) == rounds.count
     }
     
     /*
      Returns true if all players have submitted a guess for the current round. Indicates if the round can end and the game can advance
      */
-    func allPlayersAnswered() -> Bool {
-        guard let rounds = activeRoom?.rounds else { return false }
-        let activeRound = rounds[(activeRoom?.currentRoundNumber!)!]
-        return activeRound.guesses.count >= (activeRoom?.players!.count)! // >= for the eventuality that a player leaves the game
+    func allPlayersAnswered(activeRoom: Room) -> Bool {
+        guard let rounds = activeRoom.rounds else { return false }
+        let activeRound = rounds[(activeRoom.currentRoundNumber!)]
+        return activeRound.guesses.count >= (activeRoom.players!.count) // >= for the eventuality that a player leaves the game
     }
     
     /*
      Returns true if at least one player has submitted a guess for the current round. Indicates if the round can end if the mode is FASTEST_STOPS.
      */
-    func atLeastOnePlayerAnswered() -> Bool {
-        guard let rounds = activeRoom?.rounds else { return false }
-        let activeRound = rounds[(activeRoom?.currentRoundNumber!)!]
+    func atLeastOnePlayerAnswered(activeRoom: Room) -> Bool {
+        guard let rounds = activeRoom.rounds else { return false }
+        let activeRound = rounds[(activeRoom.currentRoundNumber!)]
         return activeRound.guesses.count > 0
     }
     
     /*
      Returns true if the time for the current round is over. Indicates if the round can end and the game can advance.
      */
-    func timeIsOver() -> Bool {
+    func timeIsOver(activeRoom: Room) -> Bool {
         return false // TODO: implement
     }
     
     /*
      Returns true if all conditions are met to advance to the next round of the game.
      */
-    func readyToAdvanceToNextRound() -> Bool {
-        return allPlayersReady() && !noRoundsLeftToPlay()
+    func readyToAdvanceToNextRound(activeRoom: Room) -> Bool {
+        return allPlayersReady(activeRoom: activeRoom) && !noRoundsLeftToPlay(activeRoom: activeRoom)
     }
     
     /*
      Returns true if all conditions are met to advance to the evaluation of the current round.
      */
-    func readyToAdvanceToEvaluation() -> Bool {
-        if activeRoom?.settings.mode == .FASTEST_STOPS {
-            return atLeastOnePlayerAnswered() || timeIsOver()
+    func readyToAdvanceToEvaluation(activeRoom: Room) -> Bool {
+        if activeRoom.settings.mode == .FASTEST_STOPS {
+            return atLeastOnePlayerAnswered(activeRoom: activeRoom) || timeIsOver(activeRoom: activeRoom)
         } else {
-            return allPlayersAnswered()
+            return allPlayersAnswered(activeRoom: activeRoom)
         }
-    }
-    
-    func readyfirstGues() -> Bool {
-        return activeRoom?.status == .active && activeRoom?.currentRoundNumber == 0
     }
 }

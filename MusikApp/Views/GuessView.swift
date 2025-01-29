@@ -150,18 +150,9 @@ struct GuessView: View {
         // Timer to periodically check if it's ready to advance
         func startTimer() {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                if canAdvanceToEvaluation {
+                if gameController.readyToAdvanceToEvaluation() {
                     navigateToEvaluation = true  // Trigger navigation
                 }
-            }
-        }
-        
-        // Checks if all answers were given, true = all answers are given// Function to check if it's ready to advance to the next view
-        func checkReadyToAdvance() {
-            if gameController.readyToAdvanceToEvaluation() {
-                canAdvanceToEvaluation = true
-            } else {
-                canAdvanceToEvaluation = false
             }
         }
         
