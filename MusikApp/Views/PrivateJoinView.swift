@@ -79,7 +79,7 @@ struct PrivateJoinView: View {
     private func joinPlayerToRoom(room: Room) {
         let player = gameController.player  // Assuming gameController has the player info
         
-        apiService.joinRoom(roomId: room.id, player: player) { result in
+        apiService.joinRoom(roomId: room.id!, player: player) { result in
             DispatchQueue.main.async {
                 self.isJoiningRoom = false  // Re-enable the button after operation completes
                 

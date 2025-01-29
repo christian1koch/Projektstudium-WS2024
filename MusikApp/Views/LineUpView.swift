@@ -18,7 +18,7 @@ struct LineUpView: View {
                     
                     // Display room details
                     VStack {
-                        Text(room.id)
+                        Text(room.id!)
                             .htwTitleStyle()
                             .padding(EdgeInsets(top: 10, leading: 50, bottom: 10, trailing: 50))
                     }.htwContainerStyle().frame(minWidth: 200)

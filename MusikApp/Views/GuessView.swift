@@ -114,7 +114,7 @@ struct GuessView: View {
                         let guess = [titleText, artistText, albumText, String(year)]                                    // Guess as Array
                         
                         // submit guess
-                        gameController.serverComsController.submitAnswers(roomId: roomId, playerId: playerId, round: round, guess: guess, completion: { result in
+                        gameController.serverComsController.submitAnswers(roomId: roomId!, playerId: playerId, round: round, guess: guess, completion: { result in
                             switch result {
                             case .success(let response):
                                 print("Response: \(response)")

@@ -39,7 +39,7 @@ enum Status: String, Codable {
 }
 
 struct Room: Codable {
-    var id: String
+    var id: String?
     var host: Player
     var players: [Player]?
     var rounds: [Round]?
@@ -68,7 +68,7 @@ struct Settings: Codable {
                 case mode
                 case maxPlayers
                 case rounds
-                case maxRoundTime = "maxRoundTime"
+                case maxRoundTime
                 case isPublic = "public"
         }
 }
