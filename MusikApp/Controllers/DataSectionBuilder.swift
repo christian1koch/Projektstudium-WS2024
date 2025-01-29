@@ -11,11 +11,11 @@ class DataSectionBuilder {
     
     func createDataSections(room: Room) -> [DataSection] {
         var dataSections: [DataSection] = []
-        let headers = ["Artist", "Title", "Album", "Year"]
+        let headers = ["Title", "Artist", "Album", "Year"]
         let rIndex = room.currentRoundNumber! - 1 // (is -1 correct?)
         
         // correct values
-        let correctValues: [String] = [room.rounds![rIndex].song.artists.first!, room.rounds![rIndex].song.title,
+        let correctValues: [String] = [room.rounds![rIndex].song.title, room.rounds![rIndex].song.artists.first!,
                                        room.rounds![rIndex].song.album, String(room.rounds![rIndex].song.releaseYear)]
         
         // guesses of players

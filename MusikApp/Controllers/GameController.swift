@@ -163,7 +163,7 @@ class GameController {
      */
     func allPlayersAnswered() -> Bool {
         guard let rounds = activeRoom?.rounds else { return false }
-        let activeRound = rounds[(activeRoom?.currentRoundNumber!)!]
+        let activeRound = rounds[(activeRoom?.currentRoundNumber!)! - 1]
         return activeRound.guesses.count >= (activeRoom?.players!.count)! // >= for the eventuality that a player leaves the game
     }
     
@@ -180,7 +180,7 @@ class GameController {
      Returns true if the time for the current round is over. Indicates if the round can end and the game can advance.
      */
     func timeIsOver() -> Bool {
-        return activeRoom?.rounds![(activeRoom?.currentRoundNumber!)!].remainingTime == 0
+        return activeRoom?.rounds![(activeRoom?.currentRoundNumber!)! - 1].remainingTime == 0
     }
     
     /*

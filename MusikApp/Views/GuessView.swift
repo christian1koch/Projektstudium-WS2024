@@ -24,6 +24,8 @@ struct GuessView: View {
     @State private var canAdvanceToEvaluation = false
     
     private var gameController: GameController = GameController.shared
+    private let serverComsController: ServerComsController = ServerComsController()
+    
     private var currentTrackId: String? {
         if let currentRoundNumber = gameController.activeRoom?.currentRoundNumber,
                let rounds = gameController.activeRoom?.rounds,
@@ -132,7 +134,7 @@ struct GuessView: View {
                             let guess = [titleText, artistText, albumText, String(year)]                                    // Guess as Array
                             
                             // submit guess
-                            gameController.serverComsController.submitAnswers(roomId: roomId!, playerId: playerId, round: round, guess: guess, completion: { result in
+                            serverComsController.submitAnswers(roomId: roomId!, playerId: playerId, round: round, guess: guess, completion: { result in
                                 switch result {
                                 case .success(let response):
                                     print("Response: \(response)")
@@ -180,6 +182,24 @@ struct GuessView: View {
         func startTimer() {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 if gameController.readyToAdvanceToEvaluation() {
+                    if answersSubmitted == false {
+                        
+                        let activeRoom = gameController.activeRoom!
+                        let roomId = activeRoom.id
+                        let playerId = gameController.player.name!
+                        let round = activeRoom.currentRoundNumber ?? 0
+                        let guess = ["", "", "", ""]
+                        
+                        serverComsController.submitAnswers(roomId: roomId!, playerId: playerId, round: round, guess: guess, completion: { result in
+                            switch result {
+                            case .success(let response):
+                                print("Response: \(response)")
+                            case .failure(let error):
+                                print("Error: \(error)")
+                            }
+                        })
+                    }
+                        
                     navigateToEvaluation = true  // Trigger navigation
                 }
             }
