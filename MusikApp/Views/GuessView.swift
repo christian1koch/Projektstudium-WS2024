@@ -29,7 +29,8 @@ struct GuessView: View {
                 HStack {
                     
                     // Guess counter
-                    Text("13")
+                    let roundNumber = gameController.activeRoom?.currentRoundNumber ?? 0
+                    Text(String(roundNumber))
                         .htwContainerStyle()
                         .frame(width: 50, height: 50)
                         .overlay(
@@ -110,7 +111,6 @@ struct GuessView: View {
                         let roomId = activeRoom.id
                         let playerId = gameController.player.name!
                         let round = activeRoom.currentRoundNumber ?? 0
-                        // let guess = Guess(playerId: "", guesses: [titleText, artistText, albumText, String(year)])   // Guess as struct
                         let guess = [titleText, artistText, albumText, String(year)]                                    // Guess as Array
                         
                         // submit guess
@@ -122,7 +122,7 @@ struct GuessView: View {
                                 print("Error: \(error)")
                             }
                         })
-                        answersSubmitted = true  
+                        answersSubmitted = true
                         
                     } else {
                         print("Please fill out all fields")

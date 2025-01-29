@@ -13,12 +13,12 @@ struct MainView: View {
         
         VStack {
            Text("Welcome to Music App")
-           StageSetupView()
+            BackstageView()
         }
         .padding()
     }
 }
 
 #Preview {
-    MainView()
+    BackstageView()
 }

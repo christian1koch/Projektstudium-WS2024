@@ -157,6 +157,7 @@ extension Text {
  */
 
 struct HTWPrimaryButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
   func makeBody(configuration: Configuration) -> some View {
     configuration.label
           .padding()
@@ -164,6 +165,7 @@ struct HTWPrimaryButtonStyle: ButtonStyle {
           .foregroundColor(.white)
           .cornerRadius(10)
           .shadow(radius: 5)
+          .opacity(isEnabled ? 1.0 : 0.5)
   }
 }
 struct HTWSecondaryButtonStyle: ButtonStyle {

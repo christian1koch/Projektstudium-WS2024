@@ -9,26 +9,18 @@ import Foundation
 import SwiftUI
 
 struct PublicJoinView: View {
+    let gameController = GameController.shared
     @State private var rooms: [Room] = []
     @State private var selectedRoomId: String?
     @State private var timer: Timer?
-    @State private var isNavigating = false
-    @State private var joinError: String?
-    
+    @State private var navigateToRoom = false
+    @State private var isJoiningRoom = false
     let apiService = ServerComsController()
     
     var body: some View {
         NavigationStack {
             List(rooms, id: \.id, selection: $selectedRoomId) { room in
-                HStack {
-                    Text("Host: \(room.host.name ?? "???")")
-                    Spacer(minLength: 20)
-                    Text("Players: \(room.players!.count)")
-                }
-                .contentShape(Rectangle()) // Makes row fully tappable
-                .onTapGesture {
-                    selectedRoomId = room.id
-                }
+                Text("Host: \(room.id) Players: \(room.players?.count ?? 0)")
             }
             .onAppear {
                 startPeriodicFetching()
@@ -37,52 +29,31 @@ struct PublicJoinView: View {
                 stopPeriodicFetching()
             }
             .navigationTitle("Rooms (public)")
+            .navigationDestination(isPresented: $navigateToRoom){
+                LineUpView(roomId: selectedRoomId ?? "ABCD")
+            }
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    Button("Join Room") {
-                        joinSelectedRoom()
+                    if selectedRoomId == nil || isJoiningRoom {
+                        Button("Join Room") {
+                            // Do nothing when button is disabled
+                        }
+                        .disabled(true)
+                    } else {
+                        Button("Join Room") {
+                            joinRoom()
+                        }
+                        .bold()
+                        .frame(maxWidth: .infinity, minHeight: 44)
                     }
-                    .disabled(selectedRoomId == nil)
                 }
             }
-            .navigationDestination(isPresented: $isNavigating) {
-                            if let roomId = selectedRoomId {
-                                LineUpView(roomId: roomId)
-                            }
-                        }
-            
-            if let error = joinError {
-                Text(error)
-                    .foregroundColor(.red)
-            }
         }
-    }
-    
-    private func joinSelectedRoom() {
-        guard let roomId = selectedRoomId else { return }
-        apiService.joinRoom(roomId: roomId, player: GameController.shared.player) { result in
-            DispatchQueue.main.async {
-                        switch result {
-                        case .success:
-                            print("Successfully joined room")
-                            isNavigating = true  // Trigger navigation ONLY after successful join
-                            joinError = nil      // Clear any previous error
-
-                        case .failure(let error):
-                            print("Error joining room: \(error)")
-                            joinError = "Failed to join room: \(error.localizedDescription)"
-                            
-                            // Automatically clear error after 2 seconds
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                joinError = nil
-                            }
-                        }
-                    }
-        }
+        
     }
     
     private func startPeriodicFetching() {
-        print("Fetching rooms...")
+        print("fetching rooms...")
         fetchRooms()
         timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
             fetchRooms()
@@ -100,13 +71,38 @@ struct PublicJoinView: View {
                 switch result {
                 case .success(let fetchedRooms):
                     rooms = fetchedRooms
-                    print("Rooms fetched successfully:", fetchedRooms)
+                    print("success", fetchedRooms);
                 case .failure(let error):
-                    print("Rooms fetch error:", error)
+                    print("Rooms fetch error: \(error)")
                 }
             }
         }
     }
+    private func joinRoom() {
+        guard let selectedRoomId = selectedRoomId else { return }
+        
+        isJoiningRoom = true  // Set the flag to disable the button while joining
+        
+        // Create the player object (using details from your gameController or wherever)
+        let player = gameController.player  // Assuming gameController has the player info
+        
+        apiService.joinRoom(roomId: selectedRoomId, player: player) { result in
+            DispatchQueue.main.async {
+                isJoiningRoom = false  // Reset the flag when the operation is complete
+                
+                switch result {
+                case .success(let updatedRoom):
+                    print("Joined room successfully: \(updatedRoom)")
+                    // Navigate to the LineUpView with the updated room
+                    // You can either pass the updated room or just the ID
+                    navigateToRoom = true;
+                case .failure(let error):
+                    print("Failed to join room: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+
 }
 #Preview {
     PublicJoinView()

@@ -131,7 +131,7 @@ class ServerComsController {
         do {
             let jsonData = try JSONEncoder().encode(room)
             request.httpBody = jsonData
-            //print("Request: \(String(data: jsonData, encoding: .utf8) ?? "nil")")
+            print("Request: \(String(data: jsonData, encoding: .utf8) ?? "nil")")
 
         } catch {
             completion(.failure(error))
@@ -142,15 +142,19 @@ class ServerComsController {
             if let error = error {
                 completion(.failure(error))
             } else if let data = data {
+                print("Server Response: \(String(data: data, encoding: .utf8) ?? "nil")")
                 do {
                     let createdRoom = try JSONDecoder().decode(Room.self, from: data)
                     completion(.success(createdRoom))
                 } catch {
                     completion(.failure(error))
-                    //print("Server Response: \(String(data: data, encoding: .utf8) ?? "nil")")
+                    print("Decoding error: \(error)")
                 }
+            } else {
+                completion(.failure(NSError(domain: "No data received", code: -1, userInfo: nil)))
             }
         }.resume()
+
     }
     
     /*
@@ -158,7 +162,7 @@ class ServerComsController {
     The completion handler will return the updated room with the status set to ACTIVE.
     */
     func startGame(roomId: String, completion: @escaping (Result<Room, Error>) -> Void) {
-        guard let url = URL(string: "\(baseUrl)/room/\(roomId)/start") else { return }
+        guard let url = URL(string: "\(baseUrl)/room/\(roomId)/NONE/start") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -168,10 +172,14 @@ class ServerComsController {
             if let error = error {
                 completion(.failure(error))
             } else if let data = data {
+                // Log the raw response data to check the structure
+                print("Server Response: \(String(data: data, encoding: .utf8) ?? "nil")")
+                
                 do {
                     let room = try JSONDecoder().decode(Room.self, from: data)
                     completion(.success(room))
                 } catch {
+                    print("Decoding Error: \(error)")  // Print the decoding error for better debugging
                     completion(.failure(error))
                 }
             }
@@ -241,5 +249,29 @@ class ServerComsController {
             }
         }.resume()
     }
+    
+    func markPlayerReady(roomId: String, playerId: String, completion: @escaping (Result<Room, Error>) -> Void) {
+        guard let url = URL(string: "\(baseUrl)/room/\(roomId)/\(playerId)/ready") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"  // Using POST instead of PUT
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // No need for a body, so we can skip encoding any data
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+            } else if let data = data {
+                do {
+                    let room = try JSONDecoder().decode(Room.self, from: data)
+                    completion(.success(room))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }.resume()
+    }
+
     
 }
