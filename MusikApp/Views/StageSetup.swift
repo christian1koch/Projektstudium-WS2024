@@ -34,102 +34,103 @@ struct StageSetupView: View {
     var body : some View {
         NavigationStack {
             // select-mode card
-            VStack {
-                // Dropdown Menu
+            ScrollView {
                 VStack {
-                    //                    DropDownMenu(
-                    //                        options: Mode.allCases.map {$0.rawValue},
-                    //                        selectedOptionIndex: Binding(
-                    //                            get: {
-                    //                                Mode.allCases.firstIndex(of: selectedMode) ?? 0
-                    //                            },
-                    //                            set: { index in
-                    //                                guard index < Mode.allCases.count else { return }
-                    //                                                    selectedMode = Mode.allCases[index]
-                    //                            }
-                    //                        ),
-                    //                        showDropdown: $showDropdown
-                    //                    )
-                    //                }
-                    //                .onTapGesture {
-                    //                    withAnimation {
-                    //                        showDropdown.toggle()}}
-                    Picker("Mode", selection: $selectedMode) {
-                        ForEach(Mode.allCases, id: \.self) { mode in
-                            Text(mode.rawValue)
+                    // Dropdown Menu
+                    VStack {
+                        //                    DropDownMenu(
+                        //                        options: Mode.allCases.map {$0.rawValue},
+                        //                        selectedOptionIndex: Binding(
+                        //                            get: {
+                        //                                Mode.allCases.firstIndex(of: selectedMode) ?? 0
+                        //                            },
+                        //                            set: { index in
+                        //                                guard index < Mode.allCases.count else { return }
+                        //                                                    selectedMode = Mode.allCases[index]
+                        //                            }
+                        //                        ),
+                        //                        showDropdown: $showDropdown
+                        //                    )
+                        //                }
+                        //                .onTapGesture {
+                        //                    withAnimation {
+                        //                        showDropdown.toggle()}}
+                        Picker("Mode", selection: $selectedMode) {
+                            ForEach(Mode.allCases, id: \.self) { mode in
+                                Text(mode.rawValue)
+                            }
                         }
                     }
+                    .zIndex(100)
+                    .htwContainerStyle()
                 }
-                .zIndex(100)
-                .htwContainerStyle()
-            }
-            VStack {
-                Picker("Playlist", selection: $selectedPlaylist) {
-                    ForEach(setlist, id: \.self) { playlist in
-                        Text(playlist)
-                    }
-                }
-                .htwContainerStyle()
-            }
-            
-            // select-playlist card
-            //            VStack {
-            //                VStack {
-            //                    DropDownMenu(
-            //                        options: playlists.map { $0.name }, // Dropdown-Optionen
-            //                        selectedOptionIndex: Binding(
-            //                            get: {
-            //                                guard !playlists.isEmpty else { return 0 } // Sicherstellen, dass playlists nicht leer ist
-            //                                return playlists.firstIndex(where: { $0.id == selectedPlaylist?.id }) ?? 0
-            //                            },
-            //                            set: { index in
-            //                                guard index < playlists.count else { return } // Index prüfen, um Fehler zu vermeiden
-            //                                selectedPlaylist = playlists[index]
-            //                            }
-            //                        ),
-            //                        showDropdown: $showDropdown
-            //                    )
-            //                }
-            //                .onTapGesture {
-            //                    withAnimation {
-            //                        showDropdown.toggle()}}
-            //            }.zIndex(100)
-            
-            
-            
-            // select-songcount card
-            VStack {
                 VStack {
-                    Text("Anzahl Songs").htwTitleStyle()
-                }
-                .padding()
-                HStack {
-                    ForEach([05, 09, 13, 21], id: \.self) {
-                        count in Button(action: {
-                            selectedSongCount = count
-                        }) {
-                            Text(String(format: "%02d", count))
-                        }.buttonStyle(.htwLittle(isSelected: selectedSongCount == count)) // Überprüft, ob der Button ausgewählt ist
+                    Picker("Playlist", selection: $selectedPlaylist) {
+                        ForEach(setlist, id: \.self) { playlist in
+                            Text(playlist)
+                        }
                     }
-                }.padding()
-            }.htwContainerStyle()
-            
-            VStack {
+                    .htwContainerStyle()
+                }
+                
+                // select-playlist card
+                //            VStack {
+                //                VStack {
+                //                    DropDownMenu(
+                //                        options: playlists.map { $0.name }, // Dropdown-Optionen
+                //                        selectedOptionIndex: Binding(
+                //                            get: {
+                //                                guard !playlists.isEmpty else { return 0 } // Sicherstellen, dass playlists nicht leer ist
+                //                                return playlists.firstIndex(where: { $0.id == selectedPlaylist?.id }) ?? 0
+                //                            },
+                //                            set: { index in
+                //                                guard index < playlists.count else { return } // Index prüfen, um Fehler zu vermeiden
+                //                                selectedPlaylist = playlists[index]
+                //                            }
+                //                        ),
+                //                        showDropdown: $showDropdown
+                //                    )
+                //                }
+                //                .onTapGesture {
+                //                    withAnimation {
+                //                        showDropdown.toggle()}}
+                //            }.zIndex(100)
+                
+                
+                
+                // select-songcount card
                 VStack {
-                    Text("Time Limit").htwTitleStyle()
-                }
-                .padding()
-                HStack {
-                    ForEach([10, 30, 60, 90], id: \.self) {
-                        limit in Button(action: {
-                            selectedTimeLimit = limit
-                        }) {
-                            Text("\(limit)")
-                        }                  .buttonStyle(.htwLittle(isSelected: selectedTimeLimit == limit)) // Überprüft, ob der Button ausgewählt ist
+                    VStack {
+                        Text("Anzahl Songs").htwTitleStyle()
                     }
-                }.padding()
-            }.htwContainerStyle()
-            ScrollView {
+                    .padding()
+                    HStack {
+                        ForEach([05, 09, 13, 21], id: \.self) {
+                            count in Button(action: {
+                                selectedSongCount = count
+                            }) {
+                                Text(String(format: "%02d", count))
+                            }.buttonStyle(.htwLittle(isSelected: selectedSongCount == count)) // Überprüft, ob der Button ausgewählt ist
+                        }
+                    }.padding()
+                }.htwContainerStyle()
+                
+                VStack {
+                    VStack {
+                        Text("Time Limit").htwTitleStyle()
+                    }
+                    .padding()
+                    HStack {
+                        ForEach([10, 30, 60, 90], id: \.self) {
+                            limit in Button(action: {
+                                selectedTimeLimit = limit
+                            }) {
+                                Text("\(limit)")
+                            }                  .buttonStyle(.htwLittle(isSelected: selectedTimeLimit == limit)) // Überprüft, ob der Button ausgewählt ist
+                        }
+                    }.padding()
+                }.htwContainerStyle()
+                
                 VStack {
                     Button("Private Stage") { isPrivateStage = true
                         
