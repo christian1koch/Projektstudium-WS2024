@@ -129,50 +129,52 @@ struct StageSetupView: View {
                     }
                 }.padding()
             }.htwContainerStyle()
-            VStack {
-                Button("Private Stage") { isPrivateStage = true
+            ScrollView {
+                VStack {
+                    Button("Private Stage") { isPrivateStage = true
+                        
+                    }.buttonStyle(.htwPressed(isSelected: isPrivateStage == true))
                     
-                }.buttonStyle(.htwPressed(isSelected: isPrivateStage == true))
-                
-                
-                // public stage button
-                
-                Button("Public Stage") { isPrivateStage = false
-                }.buttonStyle(.htwPressed(isSelected: isPrivateStage == false))
-                
-                
-                Button("Create Stage") {
-                    guard validateInputs() else {
-                        showErrorAlert = true
-                        errorMessage = "All params required to start the game."
-                        return
+                    
+                    // public stage button
+                    
+                    Button("Public Stage") { isPrivateStage = false
+                    }.buttonStyle(.htwPressed(isSelected: isPrivateStage == false))
+                    
+                    
+                    Button("Create Stage") {
+                        guard validateInputs() else {
+                            showErrorAlert = true
+                            errorMessage = "All params required to start the game."
+                            return
+                        }
+                        createRoomAndNavigate()
                     }
-                    createRoomAndNavigate()
+                    .alert(isPresented: $showErrorAlert) {
+                        Alert(title: Text("Fehler"), message: Text(errorMessage ?? ""), dismissButton: .default(Text("OK")))}
+                    .disabled(!validateInputs()) //Button deaktiviert wenn Felder unvollständig
+                    .buttonStyle(.htwPrimary)
+                    
+                    
+                    
+                    // create room auf serverComsController aufrufen (async, returns room)
+                    // ifsuccessfull
+                    // id.b: setupscreen:
+                    //createRoom auf Servers aufrufen -> bei positivem Resultat GameController roomRefreshLoop auf raum ID starten
+                    // & gameController.gameRunning auf true setzen
+                    // (da ein Raum erfolgreich erstellt wurde und wir uns in diesem befinden)
+                    //Navigation zu LineUp Screen, wenn vorhanden
                 }
-                .alert(isPresented: $showErrorAlert) {
-                    Alert(title: Text("Fehler"), message: Text(errorMessage ?? ""), dismissButton: .default(Text("OK")))}
-                .disabled(!validateInputs()) //Button deaktiviert wenn Felder unvollständig
-                .buttonStyle(.htwPrimary)
+                // private stage button
                 
                 
                 
-                // create room auf serverComsController aufrufen (async, returns room)
-                // ifsuccessfull
-                // id.b: setupscreen:
-                //createRoom auf Servers aufrufen -> bei positivem Resultat GameController roomRefreshLoop auf raum ID starten
-                // & gameController.gameRunning auf true setzen
-                // (da ein Raum erfolgreich erstellt wurde und wir uns in diesem befinden)
-                //Navigation zu LineUp Screen, wenn vorhanden
+                
             }
-            // private stage button
-            
-            
-            
-            
+            .padding()
+            .navigationDestination(isPresented: $navigateToLineUp) {
+                LineUpView(roomId: roomId!)}
         }
-        .padding()
-        .navigationDestination(isPresented: $navigateToLineUp) {
-            LineUpView(roomId: roomId!)}
     }
     
     
