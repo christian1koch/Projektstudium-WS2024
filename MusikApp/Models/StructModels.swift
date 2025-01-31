@@ -18,7 +18,7 @@ struct Guess: Codable {
 /**
     Represents a round in the game.
     
-    A `Round` has a song, index, remaining time, and a list of guesses.
+    A `Round` has a list of guesses, a song data to be guessed, an index, and the remaining time.
     */
 struct Round: Codable {
     var guesses : [Guess]
@@ -79,9 +79,9 @@ struct Room: Codable {
 }
 
 /**
-    Represents a data entry in the game.
+    Represents room creation request.
     
-    A `DataEntry` has a name and a value.
+    A `RoomCreateRequest` has a host and settings.
     */
 struct RoomCreateRequest: Codable {
     var host: Player
@@ -89,9 +89,9 @@ struct RoomCreateRequest: Codable {
 }
 
 /**
-    Represents a data entry in the game.
+    Represents the game mode.
     
-    A `DataEntry` has a name and a value.
+    A `Mode` can be FASTEST_STOPS or FIXED_TIME.
     */
 enum Mode: String, Codable, CaseIterable {
     case FASTEST_STOPS = "FASTEST_STOPS"
@@ -99,9 +99,9 @@ enum Mode: String, Codable, CaseIterable {
 }
 
 /**
-    Represents a data entry in the game.
+    Represents the game settings.
     
-    A `DataEntry` has a name and a value.
+    A `Settings` has a mode, max players, rounds, max round time, and a public state.
     */
 struct Settings: Codable {
     let mode: Mode
