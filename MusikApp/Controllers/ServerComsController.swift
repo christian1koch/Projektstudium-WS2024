@@ -7,19 +7,25 @@
 import Foundation
 
 
-/*
-The ServerComsController is responsible for handling all communication with the server.
-It provides methods to retrieve rooms, create rooms, update rooms, close rooms, start games, join rooms and submit answers.
-*/
+/**
+    The ServerComsController is responsible for handling all communication with the server.
+ 
+    It provides methods to retrieve rooms, create rooms, update rooms, close rooms, start games, join rooms and submit answers.
+    */
 class ServerComsController {
 
-    /*
-     URL of the server.
-     */
+    /**
+        The base URL of the server.
+     
+        This URL is used as the base for all requests to the server.
+        */
     private let baseUrl: String = "http://84.173.203.12:8888"
 
-    /*
-    Performs a GET-Request to retrieve all rooms from the server and calls the completion handler with the result.
+    /**
+    The shared instance of the ServerComsController.
+     
+    This instance is used to access the ServerComsController from other classes.
+    it performs a GET-Request to retrieve all rooms from the server and calls the completion handler with the result.
     The completion handler will return a list of all rooms that are currently open.
     */
     func getAllRooms(completion: @escaping (Result<[Room], Error>) -> Void) {
@@ -39,9 +45,9 @@ class ServerComsController {
         }.resume()
     }
 
-    /*
+    /**
     Performs a GET-Request to retrieve a room by its id and calls the completion handler with the result.
-    The completion handler will return the room with the given id.
+    The completion handler will return the room with the given id
     */
     func getRoomById(id: String, completion: @escaping (Result<Room,Error>) -> Void) {
         guard let url = URL(string: "\(baseUrl)/room/\(id)") else { return }
@@ -62,7 +68,7 @@ class ServerComsController {
         }.resume()
     }
 
-    /*
+    /**
     Updates a room by performing a PUT-Request and calls the completion handler with the result.
     The given room will overwrite the existing room with the same id.
     The completion handler will return the updated room.
@@ -97,7 +103,7 @@ class ServerComsController {
         }.resume()
     }
 
-    /*
+    /**
     Closes a room by performing a DELETE-Request and calls the completion handler with the result.
     The status of the room will change to CLOSED and hence the room will not be displayed in the list of rooms anymore.
     */
@@ -116,7 +122,7 @@ class ServerComsController {
         }.resume()
     }
 
-    /*
+    /**
     Create a new room by performing a POST-Request and calls the completion handler with the result.
     The given room needs to contain at least the host player.
     The completion handler will return the created room with the id set, the status set to OPEN, and the list of players containing the host player.
@@ -157,7 +163,7 @@ class ServerComsController {
 
     }
     
-    /*
+    /**
     Start a game by performing a POST-Request and calls the completion handler with the result.
     The completion handler will return the updated room with the status set to ACTIVE.
     */
@@ -186,7 +192,7 @@ class ServerComsController {
         }.resume()
     }
     
-    /*
+    /**
     Join a room by performing a PUT-Request and calls the completion handler with the result.
     The completion handler will return the updated room with the new player added to the list of players.
     */
@@ -222,7 +228,7 @@ class ServerComsController {
         }.resume()
     }
     
-    /*	
+    /**
     Takes a guess (submit answers) by performing a POST-Request and calls the completion handler with the result.
     */
     // TODO: functionality of receiving points is not yet implemented
@@ -250,6 +256,9 @@ class ServerComsController {
         }.resume()
     }
     
+    /**
+    Marks a player as ready by performing a POST-Request and calls the completion handler with the result.
+    */
     func markPlayerReady(roomId: String, playerId: String, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let url = URL(string: "\(baseUrl)/room/\(roomId)/\(playerId)/ready") else { return }
         
@@ -267,6 +276,4 @@ class ServerComsController {
             }
         }.resume()
     }
-
-    
 }
