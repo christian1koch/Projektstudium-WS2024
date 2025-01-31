@@ -6,7 +6,7 @@
 //
 import Foundation
 
-/*
+/**
  Class to controll the main game logic and transitions between game states.
  */
 class GameController {
@@ -22,49 +22,49 @@ class GameController {
     
     // MARK: - Properties
     
-    /*
+    /**
      The server communication controller to handle all communication with the server.
      */
     let serverComsController = ServerComsController()
     
-    /*
+    /**
      A list of all rooms that the user can join. Will be kept up to date while the user is not in a room.
      */
     var joinableRooms: [Room] = []
     
-    /*
+    /**
      The frequency with which the room discovery is performed in seconds.
      */
     let roomDiscoveryFrequency = 0.2
     
-    /*
+    /**
      The timer that performs the room discovery. Will be nil if the user is in a room.
      */
     private var roomDiscoveryTimer: Timer?
     
-    /*
+    /**
      The frequency with which the active room is refreshed in seconds
      */
     let activeRoomRefreshFrequency = 0.2
 
-    /*
+    /**
      The timer that refreshes the active room. Will be nil if the user is not playing.
      */
     private var roomRefreshTimer: Timer?
 
     
-    /*
+    /**
      The room that the user is currently in. Will be nil if the user is not in a room.
      Contains all relevant information about the current game state and will be kept up to date while the user is playing.
      */
     var activeRoom: Room?
     
-    /*
+    /**
      True when the player is currently playing and in an active room.
      */
     var gameRunning: Bool = false
     
-    /*
+    /**
      The player that is currently playing the game.
      */
     var player: Player = Player(name: "DEFAULT", points: 0, ready: false)
@@ -72,7 +72,7 @@ class GameController {
     
     // MARK: - Methods
 
-    /*
+    /**
     Requests all rooms from the server continuously while not in a room and updates the joinableRooms list.
     */
     func runRoomDiscovery() {
@@ -97,7 +97,7 @@ class GameController {
         }
     }
         
-    /*
+    /**
     Stops the room discovery process.
     */
     func stopRoomDiscovery() {
@@ -106,7 +106,7 @@ class GameController {
     }
     
     
-    /*
+    /**
      Updates the active room continuously while playing by requesting the room from the server.
      This is neccessary to obtain info about the game state (time left, answers of other players, ready state of players, etc.)
      */
@@ -129,7 +129,7 @@ class GameController {
         }
     }
         
-    /*
+    /**
      Stops the room refresh loop.
      */
     func stopRoomRefreshLoop() {
@@ -137,7 +137,7 @@ class GameController {
         roomRefreshTimer = nil
     }
     
-    /*
+    /**
      Returns true if all players in the active room are ready. Indicates if the game can start or advance to the next round.
      */
     func allPlayersReady() -> Bool {
@@ -150,7 +150,7 @@ class GameController {
         return true
     }
     
-    /*
+    /**
      Returns true if the active room has rounds left to play. Indicates if the game can advance to the next round or end.
      */
     func noRoundsLeftToPlay() -> Bool {
@@ -158,7 +158,7 @@ class GameController {
         return (activeRoom?.currentRoundNumber!)! == rounds.count
     }
     
-    /*
+    /**
      Returns true if all players have submitted a guess for the current round. Indicates if the round can end and the game can advance
      */
     func allPlayersAnswered() -> Bool {
@@ -167,7 +167,7 @@ class GameController {
         return activeRound.guesses.count >= (activeRoom?.players!.count)! // >= for the eventuality that a player leaves the game
     }
     
-    /*
+    /**
      Returns true if at least one player has submitted a guess for the current round. Indicates if the round can end if the mode is FASTEST_STOPS.
      */
     func atLeastOnePlayerAnswered() -> Bool {
@@ -176,21 +176,21 @@ class GameController {
         return activeRound.guesses.count > 0
     }
     
-    /*
+    /**
      Returns true if the time for the current round is over. Indicates if the round can end and the game can advance.
      */
     func timeIsOver() -> Bool {
         return activeRoom?.rounds![(activeRoom?.currentRoundNumber!)! - 1].remainingTime == 0
     }
     
-    /*
+    /**
      Returns true if all conditions are met to advance to the next round of the game.
      */
     func readyToAdvanceToNextRound() -> Bool {
         return allPlayersReady() && !noRoundsLeftToPlay()
     }
     
-    /*
+    /**
      Returns true if all conditions are met to advance to the evaluation of the current round.
      */
     func readyToAdvanceToEvaluation() -> Bool {
